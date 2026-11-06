@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "$comment": "Palette values must be concrete colors; they cannot refer to other palette colors.",
+  "palette": "mine",
+  "palettes": {
+    "mine": {
+      "brand": "#ff8800",
+      "accent": "brand"
+    }
+  }
+}

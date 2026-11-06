@@ -1,0 +1,18 @@
+{
+  "frame": "RES",
+  "gen": 8,
+  "status": "fresh",
+  "worker_epoch": 41,
+  "left": [
+    "❯ "
+  ],
+  "transient": "❯ ",
+  "observation_seq": 2,
+  "history": {
+    "context_key": "6d61696e",
+    "context_transient": "a\nb",
+    "context_suffix": "  · main",
+    "summary": true,
+    "summary_threshold_ms": 3000
+  }
+}

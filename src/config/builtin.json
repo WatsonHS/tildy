@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "$comment": "Shared base defaults; the selected preset replaces modules and layout. The zero-config preset is pastel-powerline.",
+  "preset": "pastel-powerline",
+  "add_newline": true,
+  "symbols": "auto",
+  "modules": {
+    "cwd": { "type": "directory", "priority": 100, "truncation_length": 4, "truncate_to_repo": false, "style": { "foreground": "blue", "bold": true } },
+    "git": {
+      "type": "git",
+      "priority": 80,
+      "branch_symbol": { "nerd": "", "unicode": "" },
+      "rules": [
+        { "id": "clean", "when": { "field": "git.state", "op": "eq", "value": "clean" }, "style": { "foreground": "green" } },
+        { "id": "dirty", "when": { "field": "git.state", "op": "eq", "value": "dirty" }, "style": { "foreground": "yellow" } },
+        { "id": "conflicted", "when": { "field": "git.state", "op": "eq", "value": "conflicted" }, "style": { "foreground": "red" } },
+        { "id": "not_fresh", "when": { "field": "git.freshness", "op": "in", "value": ["pending", "stale"] }, "style": { "foreground": "grey" } }
+      ]
+    },
+    "changes": { "type": "changes", "priority": 95, "style": { "foreground": "yellow" } },
+    "ssh_host": {
+      "type": "hostname",
+      "priority": 60,
+      "style": { "foreground": "magenta" },
+      "show_when": { "field": "session.ssh", "op": "eq", "value": true }
+    },
+    "docker": { "type": "docker_context", "priority": 30, "style": { "foreground": "blue" } },
+    "c": { "type": "language", "language": "c", "priority": 20, "style": { "foreground": "149" } },
+    "go": { "type": "language", "language": "golang", "priority": 20, "style": { "foreground": "cyan" } },
+    "java": { "type": "language", "language": "java", "priority": 20, "style": { "foreground": "red" } },
+    "node": { "type": "language", "language": "nodejs", "priority": 20, "style": { "foreground": "green" } },
+    "py": { "type": "python", "priority": 30, "style": { "foreground": "yellow" } },
+    "rust": { "type": "language", "language": "rust", "priority": 20, "style": { "foreground": "red" } },
+    "jobs": { "type": "jobs", "priority": 50, "style": { "foreground": "blue" } },
+    "elapsed": {
+      "type": "duration",
+      "priority": 40,
+      "style": { "foreground": "yellow" },
+      "show_when": { "field": "command.duration_ms", "op": "gt", "value": 3000 }
+    },
+    "result": {
+      "type": "exit_status",
+      "priority": 100,
+      "style": { "foreground": "red" },
+      "show_when": { "field": "command.exit", "op": "ne", "value": 0 }
+    }
+  },
+  "layout": {
+    "rows": [
+      { "left": ["cwd", "git", "changes", "ssh_host", "docker", "c", "go", "java", "node", "py", "rust", "jobs"], "right": ["elapsed", "result"] }
+    ]
+  },
+  "history": { "mode": "compact" },
+  "agent": {
+    "$comment": "Opt-in (author decision 2026-10-20): set wrap to true to run these programs through `tildy agent wrap` so their OSC 7501 status can show in an agent_status module placed in the layout. Off by default; TILDY_AGENT_WRAP=0 forces it off per shell.",
+    "wrap": false,
+    "programs": ["claude", "codex", "gemini", "aider", "opencode", "amp", "goose", "copilot", "cursor-agent"]
+  }
+}

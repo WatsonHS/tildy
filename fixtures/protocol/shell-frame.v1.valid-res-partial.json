@@ -1,0 +1,7 @@
+{
+  "frame": "RES",
+  "gen": 7,
+  "status": "partial",
+  "worker_epoch": 3,
+  "left": ["%F{blue}%~%f %F{8}…%f", "%F{green}❯%f "]
+}

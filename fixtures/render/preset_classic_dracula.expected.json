@@ -1,0 +1,151 @@
+{
+  "columns": [
+    0,
+    27,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main ──\n%B%F{#ff5555}>%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 3000
+    },
+    "left": [
+      "",
+      "%K{#44475a}%F{#bd93f9}%B ~/code/tildy %b%F{#50fa7b}%F{#6272a4}|%F{#50fa7b}%F{#50fa7b} main %F{#ffb86c}!2%F{#50fa7b} %F{#8be9fd}?1%F{#50fa7b} %k%f",
+      "%B%F{#ff5555}>%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#ff5555}>%f%b "
+  },
+  "reports": [
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "os",
+      "module_type": "os",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 12,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "~/code/tildy",
+      "visible": true
+    },
+    {
+      "columns": 10,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "main !2 ?1",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:command.exit",
+      "id": "ok",
+      "module_type": "text",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 3,
+      "columns": 5,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "status",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "x 130",
+      "visible": false
+    },
+    {
+      "additional_columns": 3,
+      "columns": 2,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "3s",
+      "visible": false
+    },
+    {
+      "additional_columns": 3,
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "&",
+      "visible": false
+    },
+    {
+      "additional_columns": 3,
+      "columns": 4,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "venv",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "demo",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "context",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 3,
+      "columns": 8,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "14:05:09",
+      "visible": false
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": ">",
+      "visible": true
+    }
+  ]
+}

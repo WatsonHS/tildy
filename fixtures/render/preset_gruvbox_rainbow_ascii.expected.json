@@ -1,0 +1,206 @@
+{
+  "columns": [
+    0,
+    65,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main ──\n%B%F{#98971a}>%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 3000
+    },
+    "left": [
+      "",
+      "%K{#d65d0e}%F{#fbf1c7} u %F{#d65d0e}%K{#d79921}>%F{#fbf1c7} .../tildy %F{#d79921}%K{#689d6a}>%F{#fbf1c7} git main !? %F{#689d6a}%K{#458588}>%F{#fbf1c7} node v22.3.0 %F{#fbf1c7} py v3.12.1 %F{#458588}%K{#3c3836}>%F{#fbf1c7} 14:05 %k%F{#3c3836}>%f",
+      "%B%F{#98971a}>%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#98971a}>%f%b "
+  },
+  "reports": [
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "os",
+      "module_type": "os",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "user",
+      "module_type": "username",
+      "rules_hit": [],
+      "text": "u",
+      "visible": true
+    },
+    {
+      "columns": 9,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": ".../tildy",
+      "visible": true
+    },
+    {
+      "columns": 11,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "git main !?",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "c",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "rust",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "go",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 12,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "node",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "node v22.3.0",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "php",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "java",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "kotlin",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "haskell",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 10,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "py",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "py v3.12.1",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "docker",
+      "module_type": "docker_context",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:env.CONDA_DEFAULT_ENV",
+      "id": "conda",
+      "module_type": "env_var",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 5,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "14:05",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": ">",
+      "visible": true
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "symbols": "nerd",
+  "config": "preset:pastel-powerline",
+  "now": "2026-10-19T14:05:09",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/code/work/ai-notes/services/api",
+      "cols": 40,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 3200,
+      "env": "",
+      "jobs": 1
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": true,
+        "git_dir": "/Users/u/code/work/ai-notes/.git",
+        "worktree_root": "/Users/u/code/work/ai-notes",
+        "worktree_id": "x",
+        "branch": "feature/resize-redraw",
+        "detached": false,
+        "unborn": false,
+        "head_short": "abc1234",
+        "upstream": "origin/feature/resize-redraw",
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 2,
+        "untracked": 1,
+        "conflicted": 0,
+        "renamed": 0,
+        "deleted": 0,
+        "stashed": 0,
+        "incomplete": false,
+        "state": "dirty"
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {
+      "rust": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "go": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "java": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "c": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "elixir": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "elm": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "haskell": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "julia": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "nim": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "node": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "22.3.0",
+          "fields": {
+            "version": "22.3.0"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "py": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "3.12.1",
+          "fields": {
+            "version": "3.12.1",
+            "env": "demo"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "docker": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "colima",
+          "fields": {
+            "context": "colima"
+          },
+          "prerendered": null
+        },
+        "error": null
+      }
+    }
+  }
+}

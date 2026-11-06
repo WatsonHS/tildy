@@ -1,0 +1,5 @@
+{
+  "protocol_version": 1,
+  "state": "idle",
+  "scope": { "kind": "global", "id": "everywhere" }
+}

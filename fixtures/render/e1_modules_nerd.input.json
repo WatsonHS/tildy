@@ -1,0 +1,140 @@
+{
+  "symbols": "nerd",
+  "config": "render/config.v1.valid-e1-modules.json",
+  "now": "2026-10-19T14:05:09",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/Dev/Nix/nixpkgs/pkgs/top-level",
+      "cols": 200,
+      "lines": 40,
+      "last_exit": 127,
+      "last_duration_ms": 0,
+      "env": "SHLVL=2\u001fIN_NIX_SHELL=pure\u001fname=nixpkgs-dev\u001fHOST=mbp.lan",
+      "jobs": 0
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": true,
+        "git_dir": "/Users/u/Dev/Nix/nixpkgs/.git",
+        "worktree_root": "/Users/u/Dev/Nix/nixpkgs",
+        "worktree_id": "x",
+        "branch": "feature/fish-paths",
+        "detached": false,
+        "unborn": false,
+        "head_short": "abc1234",
+        "upstream": "origin/feature/fish-paths",
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0,
+        "conflicted": 0,
+        "renamed": 0,
+        "deleted": 0,
+        "stashed": 0,
+        "incomplete": false,
+        "state": "clean"
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {
+      "gc": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "",
+          "fields": {
+            "tag": "v24.05"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "gm": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "",
+          "fields": {
+            "added": "42",
+            "deleted": "7"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "pkg": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "24.5.0",
+          "fields": {
+            "version": "24.5.0"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "de": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "",
+          "fields": {
+            "rc_path": "/Users/u/Dev/Nix/nixpkgs/.envrc",
+            "allowed": "allowed",
+            "loaded": "true"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "mem": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "21GiB/32GiB",
+          "fields": {
+            "ram": "21GiB/32GiB",
+            "ram_pct": "66%",
+            "pct": "66",
+            "swap": "3GiB/5GiB",
+            "swap_pct": "60%"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "ip": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "192.168.1.13",
+          "fields": {
+            "localipv4": "192.168.1.13"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "su": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "",
+          "fields": {},
+          "prerendered": null
+        },
+        "error": null
+      }
+    }
+  }
+}

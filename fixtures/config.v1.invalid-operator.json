@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "modules": {
+    "git_main": {
+      "type": "git",
+      "rules": [
+        { "id": "r1", "when": { "field": "git.state", "op": "contains", "value": "dirty" }, "style": { "foreground": "yellow" } }
+      ]
+    }
+  },
+  "layout": { "rows": [ { "left": ["git_main"] } ] }
+}

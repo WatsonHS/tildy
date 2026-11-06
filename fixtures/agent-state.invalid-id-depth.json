@@ -1,0 +1,6 @@
+{
+  "protocol_version": 1,
+  "id": "a/b/c/d/e/f/g/h/i",
+  "state": "idle",
+  "scope": { "kind": "global", "id": "*" }
+}

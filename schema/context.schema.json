@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/context/v0",
+  "title": "提示符请求上下文（M0 草案）",
+  "description": "对应 PLAN.md \"上下文与乱序结果\"：结果只有与当前上下文匹配才能被接受。git_dir 与 worktree_id 由后台仓库发现补充，可缺省；缺省时结果只能作用于目录级数据，不得被当作 worktree 级身份。",
+  "type": "object",
+  "required": [
+    "session_id",
+    "worker_epoch",
+    "generation",
+    "cwd",
+    "env_revision",
+    "config_revision",
+    "cols",
+    "lines"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9._:-]+$"
+    },
+    "worker_epoch": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "worker 启动纪元。重启 worker 后递增，旧纪元的回包一律丢弃，即使代次被重用。"
+    },
+    "generation": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "代次。切目录、环境或终端变化时递增。"
+    },
+    "cwd": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[^\\u0000-\\u001F\\u007F]*$"
+    },
+    "git_dir": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[^\\u0000-\\u001F\\u007F]*$",
+      "description": "实际 Git 目录；linked worktree 时指向主仓库内的 worktrees 子目录。可缺省。"
+    },
+    "worktree_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "由本地上下文解析出的 worktree 身份，用于 worktree 作用域的 Agent 状态与缓存。可缺省。"
+    },
+    "env_revision": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9:._-]{1,128}$",
+      "description": "环境修订。仅 provider 声明依赖的环境值变化时才需要使其失效。"
+    },
+    "config_revision": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9:._-]{1,128}$",
+      "description": "配置修订，由实际生效的配置源内容计算。"
+    },
+    "cols": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "lines": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20
+    }
+  }
+}

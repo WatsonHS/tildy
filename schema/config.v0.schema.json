@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/config.v0",
+  "title": "Tildy 配置 schema_version 1（M0 草案）",
+  "description": "对应 PLAN.md \"标准 JSON\" 示例。规则：任意对象可含 $comment（字符串，读写往返保留）；x- 前缀的键为扩展命名空间，其值不做校验；其余未知字段一律报错，以捕获拼写错误。modules 以稳定 ID 为键，layout 只引用这些 ID；引用完整性无法用 JSON Schema 表达，由 fixtures/validate.py 的跨引用检查和 CLI 的 config validate 共同负责。schema_version 只接受 1，更高版本必须拒绝覆盖。字段集合为 M0 草案，M2 确定首版。",
+  "type": "object",
+  "required": ["schema_version", "modules", "layout"],
+  "additionalProperties": false,
+  "properties": {
+    "$comment": { "$ref": "#/$defs/comment" },
+    "schema_version": {
+      "const": 1
+    },
+    "modules": {
+      "type": "object",
+      "description": "模块表，键为稳定 ID。同一 type 允许多个实例。",
+      "propertyNames": {
+        "pattern": "^(\\$comment|x-.*|[a-z][a-z0-9_]{0,63})$"
+      },
+      "patternProperties": {
+        "^\\$comment$": { "$ref": "#/$defs/comment" },
+        "^x-": {}
+      },
+      "additionalProperties": { "$ref": "#/$defs/module" }
+    },
+    "layout": { "$ref": "#/$defs/layout" },
+    "history": { "$ref": "#/$defs/history" }
+  },
+  "patternProperties": {
+    "^x-": {}
+  },
+  "$defs": {
+    "comment": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "moduleId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "module": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "$comment": { "$ref": "#/$defs/comment" },
+        "type": {
+          "type": "string",
+          "enum": ["directory", "git", "hostname", "duration", "command", "starship", "agent_status", "exit_status"]
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "越小越先收缩或隐藏；同优先级按稳定顺序。缺省时使用内置默认值。"
+        },
+        "rules": {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "$ref": "#/$defs/rule" },
+          "description": "样式或内容规则，按数组顺序合并，记录命中的规则 ID。"
+        },
+        "show_when": { "$ref": "#/$defs/condition" },
+        "argv": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": { "type": "string", "minLength": 1, "maxLength": 4096 },
+          "description": "仅 command 模块：以 argv 形式执行，不经过 Shell 解析。"
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60000,
+          "description": "仅 command 模块：超时后终止并回收子进程。"
+        },
+        "cache_ttl_s": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400,
+          "description": "仅 command 模块：缓存时效（秒）。"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "const": "command" } },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["argv", "timeout_ms", "cache_ttl_s"]
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                { "required": ["argv"] },
+                { "required": ["timeout_ms"] },
+                { "required": ["cache_ttl_s"] }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "when", "style"],
+      "additionalProperties": false,
+      "properties": {
+        "$comment": { "$ref": "#/$defs/comment" },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "when": { "$ref": "#/$defs/condition" },
+        "style": { "$ref": "#/$defs/style" }
+      },
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "style": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "$comment": { "$ref": "#/$defs/comment" },
+        "foreground": {
+          "type": "string",
+          "enum": ["default", "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+        },
+        "background": {
+          "type": "string",
+          "enum": ["default", "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+        },
+        "bold": { "type": "boolean" }
+      },
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "condition": {
+      "type": "object",
+      "description": "有限且带类型的条件。field 为 \"<域>.<字段>\"，op 只能是下列操作符之一。",
+      "required": ["field", "op", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "$comment": { "$ref": "#/$defs/comment" },
+        "field": {
+          "type": "string",
+          "pattern": "^[a-z_]+(\\.[a-z0-9_]+)+$"
+        },
+        "op": {
+          "type": "string",
+          "enum": ["eq", "ne", "gt", "ge", "lt", "le"]
+        },
+        "value": {
+          "type": ["string", "number", "boolean"]
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "op": { "enum": ["gt", "ge", "lt", "le"] } },
+            "required": ["op"]
+          },
+          "then": {
+            "properties": { "value": { "type": "number" } }
+          }
+        }
+      ]
+    },
+    "layout": {
+      "type": "object",
+      "required": ["rows"],
+      "additionalProperties": false,
+      "properties": {
+        "$comment": { "$ref": "#/$defs/comment" },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": ["left", "right"],
+            "additionalProperties": false,
+            "properties": {
+              "$comment": { "$ref": "#/$defs/comment" },
+              "left": {
+                "type": "array",
+                "maxItems": 64,
+                "items": { "$ref": "#/$defs/moduleId" }
+              },
+              "right": {
+                "type": "array",
+                "maxItems": 64,
+                "items": { "$ref": "#/$defs/moduleId" }
+              }
+            },
+            "patternProperties": {
+              "^x-": {}
+            }
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      }
+    },
+    "history": {
+      "type": "object",
+      "required": ["mode"],
+      "additionalProperties": false,
+      "properties": {
+        "$comment": { "$ref": "#/$defs/comment" },
+        "mode": {
+          "type": "string",
+          "enum": ["compact", "full"],
+          "description": "提交后的历史提示符形式（M1 Transient prompt 使用）。"
+        }
+      },
+      "patternProperties": {
+        "^x-": {}
+      }
+    }
+  }
+}

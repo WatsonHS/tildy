@@ -1,0 +1,9 @@
+{
+  "frame": "RES",
+  "gen": 7,
+  "status": "fresh",
+  "worker_epoch": 3,
+  "left": ["%F{blue}%~%f %F{yellow}main ±2%f", "%F{green}❯%f "],
+  "right": "%F{8}took 3.2s%f",
+  "transient": "%F{green}❯%f "
+}

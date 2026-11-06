@@ -1,0 +1,195 @@
+{
+  "candidate": {
+    "add_newline": true,
+    "history": {
+      "mode": "compact"
+    },
+    "layout": {
+      "rows": [
+        {
+          "left": [
+            "text1",
+            "cwd",
+            "git",
+            "node",
+            "rust",
+            "go",
+            "php",
+            "time"
+          ],
+          "separator": {
+            "ascii": ">",
+            "nerd": ""
+          },
+          "start": {
+            "ascii": "",
+            "nerd": "░▒▓",
+            "unicode": "░▒▓"
+          },
+          "style": "powerline"
+        },
+        {
+          "left": [
+            "char"
+          ]
+        }
+      ]
+    },
+    "modules": {
+      "char": {
+        "error_style": {
+          "bold": true,
+          "foreground": "red"
+        },
+        "success_style": {
+          "bold": true,
+          "foreground": "green"
+        },
+        "symbol": {
+          "ascii": ">",
+          "unicode": "❯"
+        },
+        "type": "character"
+      },
+      "cwd": {
+        "style": {
+          "background": "#769FF0",
+          "foreground": "#E3E5E5"
+        },
+        "substitutions": {
+          "Documents": {
+            "nerd": "󰈙 "
+          },
+          "Downloads": {
+            "nerd": " "
+          },
+          "Music": {
+            "nerd": " "
+          },
+          "Pictures": {
+            "nerd": " "
+          }
+        },
+        "truncation_length": 3,
+        "truncation_symbol": "…/",
+        "type": "directory"
+      },
+      "git": {
+        "branch_symbol": {
+          "ascii": "git",
+          "nerd": "",
+          "unicode": "⎇"
+        },
+        "status_symbols": {
+          "ahead": "⇡",
+          "behind": "⇣",
+          "conflicted": "=",
+          "deleted": "✘",
+          "diverged": "⇕",
+          "modified": "!",
+          "renamed": "»",
+          "staged": "+",
+          "stashed": "$",
+          "untracked": "?"
+        },
+        "style": {
+          "background": "#394260",
+          "foreground": "#769FF0"
+        },
+        "type": "git"
+      },
+      "go": {
+        "language": "golang",
+        "style": {
+          "background": "#212736",
+          "foreground": "#769FF0"
+        },
+        "symbol": {
+          "ascii": "go",
+          "nerd": "",
+          "unicode": "go"
+        },
+        "type": "language"
+      },
+      "node": {
+        "language": "nodejs",
+        "style": {
+          "background": "#212736",
+          "foreground": "#769FF0"
+        },
+        "symbol": {
+          "ascii": "node",
+          "nerd": "",
+          "unicode": "⬢"
+        },
+        "type": "language"
+      },
+      "php": {
+        "argv": [
+          "php",
+          "-nr",
+          "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;"
+        ],
+        "detect_extensions": [
+          "php"
+        ],
+        "detect_files": [
+          "composer.json",
+          ".php-version"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "(\\d+\\.\\d+\\.\\d+)",
+        "style": {
+          "background": "#212736",
+          "foreground": "#769FF0"
+        },
+        "symbol": {
+          "ascii": "php",
+          "nerd": "",
+          "unicode": "php"
+        },
+        "type": "command"
+      },
+      "rust": {
+        "language": "rust",
+        "style": {
+          "background": "#212736",
+          "foreground": "#769FF0"
+        },
+        "symbol": {
+          "ascii": "rust",
+          "nerd": "",
+          "unicode": "rust"
+        },
+        "type": "language"
+      },
+      "text1": {
+        "style": {
+          "background": "#A3AED2",
+          "foreground": "#090C0C"
+        },
+        "text": {
+          "nerd": "  "
+        },
+        "type": "text"
+      },
+      "time": {
+        "style": {
+          "background": "#1D2230",
+          "foreground": "#A0A9CB"
+        },
+        "symbol": {
+          "ascii": "",
+          "nerd": "",
+          "unicode": ""
+        },
+        "time_format": "%R",
+        "type": "time"
+      }
+    },
+    "schema_version": 1,
+    "symbols": "auto"
+  },
+  "skipped": [],
+  "unsupported": []
+}

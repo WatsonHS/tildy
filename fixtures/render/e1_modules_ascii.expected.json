@@ -1,0 +1,176 @@
+{
+  "columns": [
+    0,
+    182,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f4465762f4e69782f6e6978706b6773222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main ──\n> ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%F{cyan}~/D/N/%B%F{blue}nixpkgs%b%F{cyan}%k/pkgs/top-level%f %F{magenta}main:trunk ^%f %F{green}(abc1234 tag v24.05)%f %B%F{green}+42%b%f%k %B%F{red}-7%b%f%k %F{208}pkg v24.5.0%f %F{yellow}lvl 2%f %F{blue}nix pure (nixpkgs-dev)%f %F{yellow}direnv loaded/allowed%f mem 21GiB/32GiB | 3GiB/5GiB 192.168.1.13 %F{blue}sudo%f zsh",
+      "> "
+    ],
+    "right": "%F{red}^CINT%f 09:05:09 AM",
+    "status": "fresh",
+    "transient": "\n> "
+  },
+  "reports": [
+    {
+      "columns": 28,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "~/D/N/nixpkgs/pkgs/top-level",
+      "visible": true
+    },
+    {
+      "columns": 12,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "main:trunk ^",
+      "visible": true
+    },
+    {
+      "columns": 20,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "gc",
+      "module_type": "git_commit",
+      "rules_hit": [],
+      "text": "(abc1234 tag v24.05)",
+      "visible": true
+    },
+    {
+      "columns": 6,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "gm",
+      "module_type": "git_metrics",
+      "rules_hit": [],
+      "text": "+42 -7",
+      "visible": true
+    },
+    {
+      "columns": 11,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "pkg",
+      "module_type": "package",
+      "rules_hit": [],
+      "text": "pkg v24.5.0",
+      "visible": true
+    },
+    {
+      "columns": 5,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "lvl",
+      "module_type": "shlvl",
+      "rules_hit": [],
+      "text": "lvl 2",
+      "visible": true
+    },
+    {
+      "columns": 22,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "nix",
+      "module_type": "nix_shell",
+      "rules_hit": [],
+      "text": "nix pure (nixpkgs-dev)",
+      "visible": true
+    },
+    {
+      "columns": 21,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "de",
+      "module_type": "direnv",
+      "rules_hit": [],
+      "text": "direnv loaded/allowed",
+      "visible": true
+    },
+    {
+      "columns": 27,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "mem",
+      "module_type": "memory_usage",
+      "rules_hit": [],
+      "text": "mem 21GiB/32GiB | 3GiB/5GiB",
+      "visible": true
+    },
+    {
+      "columns": 12,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "ip",
+      "module_type": "localip",
+      "rules_hit": [],
+      "text": "192.168.1.13",
+      "visible": true
+    },
+    {
+      "columns": 4,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "su",
+      "module_type": "sudo",
+      "rules_hit": [],
+      "text": "sudo",
+      "visible": true
+    },
+    {
+      "columns": 3,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "sh",
+      "module_type": "shell",
+      "rules_hit": [],
+      "text": "zsh",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": ">",
+      "visible": true
+    },
+    {
+      "columns": 5,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "st",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "^CINT",
+      "visible": true
+    },
+    {
+      "columns": 11,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "t",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "09:05:09 AM",
+      "visible": true
+    }
+  ]
+}

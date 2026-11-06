@@ -1,0 +1,296 @@
+{
+  "columns": [
+    0,
+    65,
+    4
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main ──\n%B%F{green}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%B%F{cyan}tildy %f%bon %B%F{magenta} main%b%f%k %B%F{red}[!?]%b%f%k via %B%F{green} v22.3.0 %b%f%kvia %B%F{yellow}🐍 v3.12.1 (demo) %b%f%ktook %B%F{yellow}3s%b%f%k ",
+      "%B%F{blue}✦ %f%b%B%F{green}❯%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{green}❯%f%b "
+  },
+  "reports": [
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "not_ssh_or_root",
+      "id": "user",
+      "module_type": "username",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "host",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 6,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "tildy ",
+      "visible": true
+    },
+    {
+      "columns": 15,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "on  main [!?] ",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "docker",
+      "module_type": "docker_context",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "c",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "elixir",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "go",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "haskell",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "java",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "kotlin",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "lua",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 14,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "node",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "via  v22.3.0 ",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "php",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 22,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "py",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "via 🐍 v3.12.1 (demo) ",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "ruby",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "rust",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "scala",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "swift",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "zig",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "deno",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "bun",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:env.CONDA_DEFAULT_ENV",
+      "id": "conda",
+      "module_type": "env_var",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 8,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "duration",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "took 3s ",
+      "visible": true
+    },
+    {
+      "columns": 2,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "✦ ",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

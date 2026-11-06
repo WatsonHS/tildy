@@ -1,0 +1,27 @@
+{
+  "symbols": "unicode",
+  "config": null,
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/code/tildy",
+      "cols": 100,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 0,
+      "env": ""
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "timeout",
+      "age_ms": null,
+      "value": null,
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {}
+  }
+}

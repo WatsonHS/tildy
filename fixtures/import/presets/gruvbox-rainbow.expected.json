@@ -1,0 +1,419 @@
+{
+  "candidate": {
+    "add_newline": true,
+    "history": {
+      "mode": "compact"
+    },
+    "layout": {
+      "rows": [
+        {
+          "end": {
+            "ascii": ">",
+            "nerd": ""
+          },
+          "left": [
+            "os",
+            "user",
+            "cwd",
+            "git",
+            "c",
+            "rust",
+            "go",
+            "node",
+            "php",
+            "java",
+            "kotlin",
+            "haskell",
+            "py",
+            "docker",
+            "conda",
+            "time"
+          ],
+          "separator": {
+            "ascii": ">",
+            "nerd": ""
+          },
+          "start": {
+            "ascii": "",
+            "nerd": "",
+            "unicode": ""
+          },
+          "style": "powerline"
+        },
+        {
+          "left": [
+            "char"
+          ]
+        }
+      ]
+    },
+    "modules": {
+      "c": {
+        "language": "c",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "c",
+          "nerd": "",
+          "unicode": "c"
+        },
+        "type": "language"
+      },
+      "char": {
+        "error_style": {
+          "bold": true,
+          "foreground": "color_red"
+        },
+        "success_style": {
+          "bold": true,
+          "foreground": "color_green"
+        },
+        "symbol": {
+          "ascii": ">",
+          "nerd": "",
+          "unicode": "❯"
+        },
+        "type": "character"
+      },
+      "conda": {
+        "format": "$symbol( $env_value)",
+        "show_when": {
+          "field": "env.CONDA_DEFAULT_ENV",
+          "op": "ne",
+          "value": "base"
+        },
+        "style": {
+          "background": "color_bg3",
+          "foreground": "#83A598"
+        },
+        "symbol": {
+          "ascii": "conda",
+          "unicode": "🅒"
+        },
+        "type": "env_var",
+        "variable": "CONDA_DEFAULT_ENV"
+      },
+      "cwd": {
+        "style": {
+          "background": "color_yellow",
+          "foreground": "color_fg0"
+        },
+        "substitutions": {
+          "Developer": {
+            "nerd": "󰲋 "
+          },
+          "Documents": {
+            "nerd": "󰈙 "
+          },
+          "Downloads": {
+            "nerd": " "
+          },
+          "Music": {
+            "nerd": "󰝚 "
+          },
+          "Pictures": {
+            "nerd": " "
+          }
+        },
+        "truncation_length": 3,
+        "truncation_symbol": "…/",
+        "type": "directory"
+      },
+      "docker": {
+        "style": {
+          "background": "color_bg3",
+          "foreground": "#83A598"
+        },
+        "symbol": {
+          "ascii": "docker",
+          "nerd": "",
+          "unicode": "docker"
+        },
+        "type": "docker_context"
+      },
+      "git": {
+        "branch_symbol": {
+          "ascii": "git",
+          "nerd": "",
+          "unicode": "⎇"
+        },
+        "status_symbols": {
+          "ahead": "⇡",
+          "behind": "⇣",
+          "conflicted": "=",
+          "deleted": "✘",
+          "diverged": "⇕",
+          "modified": "!",
+          "renamed": "»",
+          "staged": "+",
+          "stashed": "$",
+          "untracked": "?"
+        },
+        "style": {
+          "background": "color_aqua",
+          "foreground": "color_fg0"
+        },
+        "type": "git"
+      },
+      "go": {
+        "language": "golang",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "go",
+          "nerd": "",
+          "unicode": "go"
+        },
+        "type": "language"
+      },
+      "haskell": {
+        "argv": [
+          "ghc",
+          "--numeric-version"
+        ],
+        "detect_extensions": [
+          "hs",
+          "cabal",
+          "hs-boot"
+        ],
+        "detect_files": [
+          "stack.yaml",
+          "cabal.project"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "(\\d+(?:\\.\\d+)+)",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "haskell",
+          "nerd": "",
+          "unicode": "haskell"
+        },
+        "type": "command"
+      },
+      "java": {
+        "language": "java",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "java",
+          "nerd": "",
+          "unicode": "java"
+        },
+        "type": "language"
+      },
+      "kotlin": {
+        "argv": [
+          "kotlin",
+          "-version"
+        ],
+        "detect_extensions": [
+          "kt",
+          "kts"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "version (\\d+\\.\\d+\\.\\d+)",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "kotlin",
+          "nerd": "",
+          "unicode": "kotlin"
+        },
+        "type": "command"
+      },
+      "node": {
+        "language": "nodejs",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "node",
+          "nerd": "",
+          "unicode": "⬢"
+        },
+        "type": "language"
+      },
+      "os": {
+        "os_symbols": {
+          "android": {
+            "ascii": "",
+            "nerd": "",
+            "unicode": ""
+          },
+          "dragonfly": {
+            "ascii": "",
+            "unicode": "🐉"
+          },
+          "freebsd": {
+            "ascii": "",
+            "unicode": "😈"
+          },
+          "illumos": {
+            "ascii": "",
+            "unicode": "🐦"
+          },
+          "linux": {
+            "ascii": "",
+            "nerd": "󰌽",
+            "unicode": ""
+          },
+          "macos": {
+            "ascii": "",
+            "nerd": "󰀵",
+            "unicode": ""
+          },
+          "netbsd": {
+            "ascii": "",
+            "unicode": "🚩"
+          },
+          "openbsd": {
+            "ascii": "",
+            "unicode": "🐡"
+          },
+          "windows": {
+            "ascii": "",
+            "nerd": "󰍲",
+            "unicode": ""
+          }
+        },
+        "padding": false,
+        "style": {
+          "background": "color_orange",
+          "foreground": "color_fg0"
+        },
+        "type": "os"
+      },
+      "php": {
+        "argv": [
+          "php",
+          "-nr",
+          "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;"
+        ],
+        "detect_extensions": [
+          "php"
+        ],
+        "detect_files": [
+          "composer.json",
+          ".php-version"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "(\\d+\\.\\d+\\.\\d+)",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "php",
+          "nerd": "",
+          "unicode": "php"
+        },
+        "type": "command"
+      },
+      "py": {
+        "format": "$symbol( $version)",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "py",
+          "nerd": "",
+          "unicode": "py"
+        },
+        "type": "python"
+      },
+      "rust": {
+        "language": "rust",
+        "style": {
+          "background": "color_blue",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "rust",
+          "nerd": "",
+          "unicode": "rust"
+        },
+        "type": "language"
+      },
+      "time": {
+        "style": {
+          "background": "color_bg1",
+          "foreground": "color_fg0"
+        },
+        "symbol": {
+          "ascii": "",
+          "nerd": "",
+          "unicode": ""
+        },
+        "time_format": "%R",
+        "type": "time"
+      },
+      "user": {
+        "show_always": true,
+        "style": {
+          "background": "color_orange",
+          "foreground": "color_fg0"
+        },
+        "type": "username"
+      }
+    },
+    "palette": "gruvbox_dark",
+    "palettes": {
+      "gruvbox_dark": {
+        "color_aqua": "#689D6A",
+        "color_bg1": "#3C3836",
+        "color_bg3": "#665C54",
+        "color_blue": "#458588",
+        "color_fg0": "#FBF1C7",
+        "color_green": "#98971A",
+        "color_orange": "#D65D0E",
+        "color_purple": "#B16286",
+        "color_red": "#CC241D",
+        "color_yellow": "#D79921"
+      }
+    },
+    "schema_version": 1,
+    "symbols": "auto"
+  },
+  "skipped": [
+    "cpp"
+  ],
+  "unsupported": [
+    {
+      "item": "os.symbols",
+      "reason": "distribution symbols are not used (no distribution detection); Linux uses `Linux`"
+    },
+    {
+      "item": "format: $pixi",
+      "reason": "needs the Starship bridge; left out (commands mode)"
+    },
+    {
+      "item": "character.vimcmd_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    },
+    {
+      "item": "character.vimcmd_visual_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    },
+    {
+      "item": "character.vimcmd_replace_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    },
+    {
+      "item": "character.vimcmd_replace_one_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    }
+  ]
+}

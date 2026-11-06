@@ -1,0 +1,36 @@
+{
+  "symbols": "nerd",
+  "config": "preset:pastel-powerline",
+  "now": "2026-10-19T14:05:09",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/code/tildy",
+      "cols": 120,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 0,
+      "env": "",
+      "jobs": 0
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "pending",
+      "age_ms": null,
+      "value": null,
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {
+      "node": {
+        "freshness": "pending",
+        "age_ms": null,
+        "value": null,
+        "error": null
+      }
+    }
+  }
+}

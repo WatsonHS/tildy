@@ -1,0 +1,132 @@
+{
+  "config": null,
+  "data": {
+    "git": {
+      "age_ms": 0,
+      "error": null,
+      "freshness": "fresh",
+      "value": {
+        "ahead": 0,
+        "behind": 0,
+        "branch": "main",
+        "conflicted": 0,
+        "deleted": 0,
+        "detached": false,
+        "git_dir": "/Users/you/code/tildy/.git",
+        "head_short": "1a2b3c4",
+        "in_repo": true,
+        "incomplete": false,
+        "operation": null,
+        "operation_progress": null,
+        "renamed": 0,
+        "staged": 0,
+        "stashed": 0,
+        "state": "clean",
+        "typechanged": 0,
+        "unborn": false,
+        "unstaged": 0,
+        "untracked": 0,
+        "upstream": "origin/main",
+        "worktree_id": "/Users/you/code/tildy/.git",
+        "worktree_root": "/Users/you/code/tildy"
+      }
+    },
+    "home": "/Users/you",
+    "hostname": "build-01",
+    "modules": {
+      "c": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "commit": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "docker": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "elixir": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "elm": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "go": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "haskell": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "java": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "julia": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "nim": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "node": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "py": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      },
+      "rust": {
+        "age_ms": 0,
+        "error": null,
+        "freshness": "fresh",
+        "value": null
+      }
+    },
+    "request": {
+      "cols": 100,
+      "cwd": "/Users/you/code/tildy",
+      "env": "USER=you\u001fHOST=build-01\u001fSSH_CONNECTION=10.0.0.5 51234 10.0.0.9 22\u001fSSH_TTY=/dev/ttys001",
+      "gen": 1,
+      "jobs": 0,
+      "last_duration_ms": 0,
+      "last_exit": 0,
+      "lines": 40,
+      "session_id": "preview"
+    },
+    "ssh": true,
+    "username": "you"
+  },
+  "now": "2026-10-19T14:05:00",
+  "symbols": "ascii"
+}

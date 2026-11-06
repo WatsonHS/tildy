@@ -1,0 +1,39 @@
+{
+  "symbols": "unicode",
+  "config": null,
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/one/two/three/four/five/six",
+      "cols": 100,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 0,
+      "env": ""
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": false,
+        "state": "unknown",
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0,
+        "conflicted": 0,
+        "incomplete": false,
+        "detached": false,
+        "unborn": false
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {}
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "columns": [
+    0,
+    99,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main ──\n%B%F{#98c379}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 3000
+    },
+    "left": [
+      "",
+      "%K{#3e4452}%F{#56b6c2}  %F{#61afef}%F{#5c6370}%F{#61afef}%F{#61afef}%B  ~/code/tildy %b%F{#98c379}%F{#5c6370}%F{#98c379}%F{#98c379}  main %F{#e5c07b}!2%F{#98c379} %F{#56b6c2}?1%F{#98c379} %k%F{#3e4452}%f                          %F{#3e4452}%K{#3e4452}%F{#98c379} ✔ %F{#e5c07b}%F{#5c6370}%F{#e5c07b}%F{#e5c07b} 3s  %F{#56b6c2}%F{#5c6370}%F{#56b6c2}%F{#56b6c2}  %F{#56b6c2}%F{#5c6370}%F{#56b6c2}%F{#56b6c2} demo  %F{#56b6c2}%F{#5c6370}%F{#56b6c2}%F{#56b6c2} 14:05:09  %k%f",
+      "%B%F{#98c379}❯%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#98c379}❯%f%b "
+  },
+  "reports": [
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "os",
+      "module_type": "os",
+      "rules_hit": [],
+      "text": "",
+      "visible": true
+    },
+    {
+      "columns": 14,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": " ~/code/tildy",
+      "visible": true
+    },
+    {
+      "columns": 12,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": " main !2 ?1",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "ok",
+      "module_type": "text",
+      "rules_hit": [],
+      "text": "✔",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "status",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 4,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "3s ",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "",
+      "visible": true
+    },
+    {
+      "columns": 6,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "venv",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "demo ",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "context",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 10,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "14:05:09 ",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

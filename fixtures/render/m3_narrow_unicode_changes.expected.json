@@ -1,0 +1,260 @@
+{
+  "columns": [
+    0,
+    10,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c22e4b8ade69687f09f91a9e2808df09f92bb2d766572792d6c6f6e672d6272616e63682d6e616d652d666f722d6e6172726f772d7465726d696e616c222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · 中文👩‍💻-very-long-bra\n%B%F{green}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%K{#da627d}%f …/tildy %k%F{#da627d}>%f",
+      "%B%F{green}❯%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{green}❯%f%b "
+  },
+  "reports": [
+    {
+      "additional_columns": 45,
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "user",
+      "module_type": "username",
+      "rules_hit": [],
+      "text": "u",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "host",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 7,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "…/tildy",
+      "visible": true
+    },
+    {
+      "additional_columns": 97,
+      "columns": 50,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "⎇ 中文👩‍💻-very-long-branch-name-for-narrow-terminal",
+      "visible": false
+    },
+    {
+      "additional_columns": 41,
+      "columns": 60,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "⟳ main → 中文👩‍💻-very-long-branch-name-for-narrow-terminal ✚3",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detached",
+      "id": "commit",
+      "module_type": "git_commit",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "c",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "elixir",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "elm",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "go",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "haskell",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "java",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "julia",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "node",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "nim",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "py",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "rust",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "docker",
+      "module_type": "docker_context",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:command.duration_ms",
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 107,
+      "columns": 7,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "♥ 14:05",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "status",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

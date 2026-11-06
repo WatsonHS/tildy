@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/agent-state/v1",
+  "title": "Agent 状态记录 v1（OSC 7501 词汇）",
+  "description": "一条 Agent 状态记录：字段与 OSC 7501（Program Status Protocol rev 0.4，https://www.superlogical.com/rex/docs/build/program-status）的报告一一对应，外加显示范围、发布者会话、采集通道、序号与 TTL。`tildy agent publish --file` 接受本格式；存储文件 `$XDG_STATE_HOME/tildy/agent/<kind>/<scope-hash>/<id-hash>.json` 也是本格式（此时 seq、ttl_s、received_at_ms 总是存在）。每次发布整体替换同一 scope 与 id 的记录（报告里没写的键视为删除）。title/msg 的上限按 UTF-8 字节计（JSON Schema 按字符计，字节上限由 fixtures/validate.py 与 Rust 校验器检查）。超限、控制字符或 id 语法错误整条拒绝；kind 只用于 blocked，progress 只用于 working/blocked（发布时其余状态下会被丢弃）。实现：src/agent/record.rs。",
+  "type": "object",
+  "required": ["protocol_version", "state", "scope"],
+  "additionalProperties": false,
+  "properties": {
+    "protocol_version": { "const": 1 },
+    "id": {
+      "type": "string",
+      "description": "7501 id：1-32 个 [A-Za-z0-9_.+-] 组成的段，以 / 连接，最多 8 层、128 字节；缺省为根记录。采集器加前缀，例如 wrap/<app>/<pid>。",
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9_.+-]{1,32}(/[A-Za-z0-9_.+-]{1,32}){0,7}$"
+    },
+    "app": {
+      "type": "string",
+      "description": "稳定的程序标识；缺省时继承最近祖先记录的 app。",
+      "pattern": "^[A-Za-z0-9_.+-]{1,32}$"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["idle", "working", "done", "blocked", "error"],
+      "description": "7501 状态。clear 是操作不是状态（tildy agent publish --state clear / --osc 'state=clear'）。"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["permission", "question", "auth"],
+      "description": "仅 blocked：需要用户做什么。"
+    },
+    "progress": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "仅 working/blocked；缺省表示不确定。"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 192,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]*$",
+      "description": "短标签，明文 UTF-8（7501 的 base64 由采集器解码），≤192 字节，无控制字符。"
+    },
+    "msg": {
+      "type": "string",
+      "maxLength": 2048,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]*$",
+      "description": "单行说明当前在做什么或需要什么，明文 UTF-8，≤2048 字节，无控制字符（含换行与制表符）。"
+    },
+    "scope": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "additionalProperties": false,
+      "description": "显示范围：session 的 id 是 TILDY_SESSION_ID；worktree 的 id 与 GitData.worktree_id 相同（<canonical common dir>@<canonical toplevel>）；global 的 id 为 *。",
+      "properties": {
+        "kind": { "type": "string", "enum": ["session", "worktree", "global"] },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]*$"
+        }
+      },
+      "if": { "properties": { "kind": { "const": "global" } } },
+      "then": { "properties": { "id": { "const": "*" } } }
+    },
+    "origin_session": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F]*$",
+      "description": "发布者所在 Shell 会话（TILDY_SESSION_ID）：该会话下一个提示符丢弃 idle/working/blocked，第二个提示符丢弃 done/error（7501 的 OSC 133 规则）。"
+    },
+    "source": {
+      "type": "string",
+      "enum": ["osc", "cli"],
+      "description": "采集通道：osc（tildy agent wrap 解析 OSC 7501）或 cli（tildy agent publish）。缺省 cli。"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "同一 scope 与 id 单调递增；只接受比现存未过期记录更大的 seq。发布时缺省为上一条 +1。"
+    },
+    "ttl_s": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 86400,
+      "description": "存活秒数；缺省按状态：idle/working/blocked 7200，done/error 900。"
+    },
+    "received_at_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "接收端写入的墙钟（Unix 毫秒）；过期时刻 = received_at_ms + ttl_s × 1000。发布时提供的值被覆盖。"
+    },
+    "prompt_seen": {
+      "type": "boolean",
+      "description": "接收端内部：done/error 记录已在 origin_session 的一个提示符上显示过，下一个提示符丢弃。"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "state": { "const": "blocked" } } },
+      "else": { "not": { "required": ["kind"] } }
+    },
+    {
+      "if": { "properties": { "state": { "enum": ["working", "blocked"] } } },
+      "else": { "not": { "required": ["progress"] } }
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "api_version": 1,
+  "ok": true,
+  "data": {
+    "api_version": 1,
+    "schema_version": 1,
+    "protocol_version": 1,
+    "binary_version": "0.3.0-m3",
+    "shells": [
+      "zsh"
+    ],
+    "module_types": [
+      "directory",
+      "git",
+      "exit_status",
+      "duration",
+      "hostname",
+      "agent_status",
+      "command",
+      "character",
+      "time",
+      "username",
+      "jobs",
+      "python",
+      "docker_context",
+      "language",
+      "starship",
+      "text",
+      "os",
+      "fill",
+      "env_var",
+      "changes"
+    ],
+    "rule_operators": [
+      "eq",
+      "ne",
+      "gt",
+      "lt",
+      "ge",
+      "le",
+      "in"
+    ],
+    "symbol_tiers": [
+      "unicode",
+      "nerd",
+      "ascii"
+    ],
+    "history_modes": [
+      "compact",
+      "full"
+    ],
+    "presets": [
+      {
+        "name": "plain",
+        "description": "Tildy \u9ed8\u8ba4\u7684\u6734\u7d20\u5916\u89c2\uff1a\u5355\u884c\u3001\u65e0\u80cc\u666f\u8272\uff0cNerd \u5b57\u4f53\u5c42\u663e\u793a\u56fe\u6807",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy",
+        "palette": null
+      },
+      {
+        "name": "pastel-powerline",
+        "description": "\u7c89\u5f69 powerline \u4e24\u884c\u5e03\u5c40\uff0c\u542b\u7528\u6237\u3001\u76ee\u5f55\u3001Git\u3001\u8bed\u8a00\u3001\u65f6\u95f4\uff0c\u7b2c\u4e8c\u884c \u276f",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 pastel-powerline\uff08\u4f5c\u8005\u7684\u53d8\u4f53\uff09",
+        "palette": null
+      },
+      {
+        "name": "tokyo-night",
+        "description": "Tokyo Night \u6df1\u84dd\u6e10\u53d8 powerline\uff1a\u2591\u2592\u2593 \u8d77\u5934\u3001\u82f9\u679c\u56fe\u6807\u3001\u5706\u89d2\u5206\u9694\uff0c\u7b2c\u4e8c\u884c \u276f",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 tokyo-night",
+        "palette": null
+      },
+      {
+        "name": "gruvbox-rainbow",
+        "description": "Gruvbox \u6696\u8272\u5f69\u8679 powerline\uff1a\u7cfb\u7edf\u56fe\u6807\u3001\u7528\u6237\u3001\u76ee\u5f55\u3001Git\u3001\u8bed\u8a00\u3001conda\u3001\u65f6\u95f4\uff0c\u7b2c\u4e8c\u884c Nerd \u7bad\u5934",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 gruvbox-rainbow",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-powerline",
+        "description": "Catppuccin Mocha\uff08\u6df1\u8272\uff09\u5f69\u8272 powerline \u5355\u884c\uff0c\u542b\u547d\u4ee4\u8017\u65f6\u4e0e \u276f",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (mocha)",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-latte",
+        "description": "Catppuccin Latte\uff08\u6d45\u8272\u80cc\u666f\u7528\uff09\u914d\u8272\u7684\u540c\u6b3e powerline \u5355\u884c",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (latte)",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-frappe",
+        "description": "Catppuccin Frapp\u00e9\uff08\u4e2d\u6df1\u8272\uff09\u914d\u8272\u7684\u540c\u6b3e powerline \u5355\u884c",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (frappe)",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-macchiato",
+        "description": "Catppuccin Macchiato\uff08\u6df1\u8272\uff09\u914d\u8272\u7684\u540c\u6b3e powerline \u5355\u884c",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (macchiato)",
+        "palette": null
+      },
+      {
+        "name": "jetpack",
+        "description": "Jetpack \u6781\u7b80\u5de6\u4fa7 \u25ce\uff0c\u76ee\u5f55\u3001Git\u3001\u8bed\u8a00\u3001\u65f6\u95f4\u653e\u5728\u53f3\u4fa7\uff08RPROMPT\uff09\uff0c\u51e0\u4f55\u7b26\u53f7\u65e0\u9700 Nerd \u5b57\u4f53",
+        "nerd_font": "no",
+        "symbols": "auto",
+        "source": "starship 1.24.2 jetpack",
+        "palette": null
+      },
+      {
+        "name": "pure-preset",
+        "description": "\u4eff Pure\uff1a\u76ee\u5f55\u3001\u7070\u8272\u5206\u652f\u4e0e * \u810f\u6807\u8bb0\u3001\u547d\u4ee4\u8017\u65f6\uff0c\u7b2c\u4e8c\u884c\u7d2b\u8272 \u276f",
+        "nerd_font": "no",
+        "symbols": "auto",
+        "source": "starship 1.24.2 pure-preset",
+        "palette": null
+      },
+      {
+        "name": "bracketed-segments",
+        "description": "Starship \u9ed8\u8ba4\u5916\u89c2\uff0c\u5404\u6a21\u5757\u7528\u65b9\u62ec\u53f7\u5305\u8d77\u6765\u7d27\u6328\u6392\u5217",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "starship 1.24.2 bracketed-segments",
+        "palette": null
+      },
+      {
+        "name": "nerd-font-symbols",
+        "description": "Starship \u9ed8\u8ba4\u5916\u89c2\uff0c\u8bed\u8a00\u4e0e\u5de5\u5177\u5168\u90e8\u6362\u6210 Nerd \u5b57\u4f53\u56fe\u6807",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 nerd-font-symbols",
+        "palette": null
+      },
+      {
+        "name": "no-empty-icons",
+        "description": "Starship \u9ed8\u8ba4\u5916\u89c2\uff1b\u5de5\u5177\u672a\u5b89\u88c5\u65f6\u4e0d\u663e\u793a\u7a7a\u56fe\u6807\uff08tildy \u672c\u6765\u5c31\u5982\u6b64\uff09",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "starship 1.24.2 no-empty-icons",
+        "palette": null
+      },
+      {
+        "name": "no-nerd-font",
+        "description": "Starship \u9ed8\u8ba4\u5916\u89c2\uff0c\u4e0d\u7528\u4efb\u4f55 Nerd \u5b57\u4f53\u5b57\u5f62\uff08\u56fa\u5b9a unicode \u5c42\uff09",
+        "nerd_font": "no",
+        "symbols": "unicode",
+        "source": "starship 1.24.2 no-nerd-font",
+        "palette": null
+      },
+      {
+        "name": "no-runtime-versions",
+        "description": "Starship \u9ed8\u8ba4\u5916\u89c2\uff0c\u53ea\u663e\u793a\u8bed\u8a00\u56fe\u6807\u3001\u4e0d\u663e\u793a\u7248\u672c\u53f7",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "starship 1.24.2 no-runtime-versions",
+        "palette": null
+      },
+      {
+        "name": "plain-text-symbols",
+        "description": "Starship \u9ed8\u8ba4\u5916\u89c2\uff0c\u5168\u90e8\u7b26\u53f7\u6362\u6210\u7eaf\u6587\u5b57\uff08\u56fa\u5b9a ascii \u5c42\uff09",
+        "nerd_font": "no",
+        "symbols": "ascii",
+        "source": "starship 1.24.2 plain-text-symbols",
+        "palette": null
+      },
+      {
+        "name": "powerline",
+        "description": "\u6309\u89d2\u8272\u7740\u8272\u7684 powerline \u4e24\u884c\uff1a\u7528\u6237\u3001\u76ee\u5f55\u3001Git\u3001\u8bed\u8a00\u3001\u65f6\u95f4\uff0c\u7b2c\u4e8c\u884c \u276f\uff1b\u7528 palette \u6362\u8272",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy\uff08pastel-powerline \u7684\u7ed3\u6784\uff0c\u6309\u8c03\u8272\u677f\u89d2\u8272\u7740\u8272\uff09",
+        "palette": "catppuccin-mocha"
+      },
+      {
+        "name": "lean",
+        "description": "\u4eff p10k lean\uff1a\u4e24\u884c\u3001\u65e0\u80cc\u666f\uff0c\u5de6\u4fa7\u76ee\u5f55\u4e0e Git\uff0c\u7b2c\u4e00\u884c\u53f3\u4fa7\u72b6\u6001\u3001\u8017\u65f6\u4e0e\u65f6\u95f4\uff0c\u7b2c\u4e8c\u884c \u276f",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy\uff08Powerlevel10k lean \u5e03\u5c40\uff09",
+        "palette": "tokyo-night"
+      },
+      {
+        "name": "classic",
+        "description": "\u4eff p10k classic\uff1a\u4e2d\u6027\u5e95\u8272\u7684 powerline\uff0c\u4e24\u4fa7\u7ec6\u5206\u9694\uff0c\u7b2c\u4e00\u884c\u53f3\u4fa7\u72b6\u6001\u4e0e\u65f6\u95f4\uff0c\u7b2c\u4e8c\u884c \u276f",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy\uff08Powerlevel10k classic \u5e03\u5c40\uff09",
+        "palette": "one-dark"
+      },
+      {
+        "name": "rainbow",
+        "description": "\u4eff p10k rainbow\uff1a\u6bcf\u6bb5\u4e00\u79cd\u5e95\u8272\u7684 powerline\uff0c\u7b2c\u4e00\u884c\u53f3\u4fa7\u72b6\u6001\u3001\u8017\u65f6\u4e0e\u65f6\u95f4\uff0c\u7b2c\u4e8c\u884c \u276f",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy\uff08Powerlevel10k rainbow \u5e03\u5c40\uff09",
+        "palette": "gruvbox-dark"
+      },
+      {
+        "name": "minimal",
+        "description": "\u6781\u7b80\u5355\u884c\uff1a\u76ee\u5f55\u3001Git \u5206\u652f\u4e0e\u72b6\u6001\u6807\u8bb0\u3001\u276f",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy",
+        "palette": "nord"
+      }
+    ],
+    "palettes": [
+      {
+        "name": "dracula",
+        "description": "Dracula\uff1a\u6df1\u7d2b\u7070\u5e95\uff0c\u7c89\u3001\u7d2b\u3001\u9752\u3001\u7eff\u9ad8\u9971\u548c\u70b9\u7f00",
+        "variant": "dark",
+        "source": "https://draculatheme.com/spec"
+      },
+      {
+        "name": "nord",
+        "description": "Nord\uff1a\u5317\u6781\u51b7\u8272\u8c03\uff0c\u84dd\u7070\u5e95\u914d\u971c\u84dd\u4e0e\u6781\u5149\u8272",
+        "variant": "dark",
+        "source": "https://www.nordtheme.com/docs/colors-and-palettes"
+      },
+      {
+        "name": "solarized-dark",
+        "description": "Solarized \u6df1\u8272\uff1a\u58a8\u7eff\u5e95\uff0c\u7ecf\u5178\u4f4e\u5bf9\u6bd4 16 \u8272",
+        "variant": "dark",
+        "source": "https://ethanschoonover.com/solarized"
+      },
+      {
+        "name": "solarized-light",
+        "description": "Solarized \u6d45\u8272\uff1a\u7c73\u767d\u5e95\uff08\u6d45\u8272\u7ec8\u7aef\u7528\uff09",
+        "variant": "light",
+        "source": "https://ethanschoonover.com/solarized"
+      },
+      {
+        "name": "one-dark",
+        "description": "One Dark\uff1aAtom \u9ed8\u8ba4\u6df1\u8272\uff0c\u7070\u5e95\u914d\u67d4\u548c\u84dd\u7d2b",
+        "variant": "dark",
+        "source": "https://github.com/joshdick/onedark.vim"
+      },
+      {
+        "name": "rose-pine",
+        "description": "Ros\u00e9 Pine\uff1a\u6697\u7d2b\u5e95\uff0c\u73ab\u7470\u3001\u91d1\u3001\u677e\u7eff\u7684\u67d4\u548c\u8272",
+        "variant": "dark",
+        "source": "https://rosepinetheme.com/palette"
+      },
+      {
+        "name": "everforest",
+        "description": "Everforest\uff1a\u68ee\u6797\u7eff\u7070\u5e95\uff0c\u6696\u8272\u4f4e\u9971\u548c",
+        "variant": "dark",
+        "source": "https://github.com/sainnhe/everforest"
+      },
+      {
+        "name": "kanagawa",
+        "description": "Kanagawa\uff08wave\uff09\uff1a\u6d6e\u4e16\u7ed8\u975b\u84dd\u5e95\uff0c\u6697\u91d1\u4e0e\u6a31\u7c89",
+        "variant": "dark",
+        "source": "https://github.com/rebelot/kanagawa.nvim"
+      },
+      {
+        "name": "gruvbox-dark",
+        "description": "Gruvbox \u6df1\u8272\uff1a\u590d\u53e4\u6696\u68d5\u5e95\uff0c\u4eae\u6a59\u9ec4\u7eff",
+        "variant": "dark",
+        "source": "https://github.com/morhetz/gruvbox"
+      },
+      {
+        "name": "tokyo-night",
+        "description": "Tokyo Night\uff08night\uff09\uff1a\u6df1\u591c\u84dd\u5e95\uff0c\u9713\u8679\u84dd\u7d2b",
+        "variant": "dark",
+        "source": "https://github.com/folke/tokyonight.nvim"
+      },
+      {
+        "name": "catppuccin-latte",
+        "description": "Catppuccin Latte\uff1a\u6d45\u8272\uff08\u6d45\u8272\u7ec8\u7aef\u7528\uff09",
+        "variant": "light",
+        "source": "https://github.com/catppuccin/palette"
+      },
+      {
+        "name": "catppuccin-frappe",
+        "description": "Catppuccin Frapp\u00e9\uff1a\u4e2d\u6df1\u8272",
+        "variant": "dark",
+        "source": "https://github.com/catppuccin/palette"
+      },
+      {
+        "name": "catppuccin-macchiato",
+        "description": "Catppuccin Macchiato\uff1a\u6df1\u8272",
+        "variant": "dark",
+        "source": "https://github.com/catppuccin/palette"
+      },
+      {
+        "name": "catppuccin-mocha",
+        "description": "Catppuccin Mocha\uff1a\u6700\u6df1\u7684\u7c89\u5f69\u6df1\u8272",
+        "variant": "dark",
+        "source": "https://github.com/catppuccin/palette"
+      }
+    ],
+    "palette_roles": [
+      "bg1",
+      "bg2",
+      "bg3",
+      "bg4",
+      "bg5",
+      "bg6",
+      "fg",
+      "fg_dim",
+      "surface",
+      "accent",
+      "ok",
+      "warn",
+      "err",
+      "info"
+    ],
+    "config": {
+      "path": "/Users/example/.config/tildy/config.json",
+      "exists": false,
+      "valid": true,
+      "error": null,
+      "revision": "builtin"
+    },
+    "diagnostics": {
+      "snapshot_schema_version": 1,
+      "timing_history_limit": 33,
+      "snapshot_schema": "schema/snapshot.schema.json",
+      "active_session_env": "TILDY_SESSION_ID"
+    },
+    "commands": [
+      {
+        "name": "explain",
+        "about": "Explain modules",
+        "subcommands": [],
+        "json": true
+      },
+      {
+        "name": "timings",
+        "about": "Cycle timings",
+        "subcommands": [],
+        "json": true
+      },
+      {
+        "name": "inspect",
+        "about": "Read/list sessions",
+        "subcommands": [],
+        "json": true
+      }
+    ]
+  },
+  "error": {
+    "code": "ok",
+    "path": null,
+    "message": null,
+    "hint": null
+  }
+}

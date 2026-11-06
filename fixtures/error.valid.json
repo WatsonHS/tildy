@@ -1,0 +1,11 @@
+{
+  "api_version": 0,
+  "ok": false,
+  "data": null,
+  "error": {
+    "code": "revision_conflict",
+    "path": "expect_revision",
+    "message": "配置修订已变化：期望 cfg-0f3c9b，当前为 cfg-7a11d2。",
+    "hint": "重新执行 tildy config get --effective --json 获取当前修订后再生成候选。"
+  }
+}

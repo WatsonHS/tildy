@@ -1,0 +1,21 @@
+#!/bin/sh
+# Harness self-test stand-in for target/debug/tildy, used only to exercise the
+# real-binary code path of tests/pty/run.py (`--real --tildy-bin` this file):
+# `init zsh` prints the three typeset lines plus shell/zsh/tildy.zsh like
+# src/cli/init.rs; `worker`/`render` run the fake backend with a "❯" prompt
+# character and a T line, like the default config.
+here=$(cd "$(dirname "$0")" && pwd)
+root=$here/../../..
+case $1 in
+  init)
+    printf "typeset -g TILDY_BIN='%s'\n" "$here/tildy-bin"
+    printf "typeset -g TILDY_VERSION='0.1.0-m1'\n"
+    printf "typeset -g TILDY_PROTOCOL_VERSION=1\n"
+    cat "$root/shell/zsh/tildy.zsh" ;;
+  worker|render)
+    TILDY_FAKE_CHAR='❯' TILDY_FAKE_TRANSIENT=1 exec "$root/bench/fake-backend.sh" "$@" ;;
+  capabilities)
+    printf '{"api_version":1,"ok":true}\n' ;;
+  *)
+    exit 2 ;;
+esac

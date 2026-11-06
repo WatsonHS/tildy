@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/error/v0",
+  "title": "Tildy CLI 统一结果（M0 草案）",
+  "description": "所有 --json 命令的统一结果外壳。error 始终存在：成功时 code 为 \"ok\"、path/message/hint 为 null，且 data 可为任意值；失败时 ok 为 false、data 为 null，code 不得为 \"ok\"，message 必须是非空字符串。退出码映射（x-exit-codes）：ok→0，validation_failed→2，revision_conflict→3，environment_unavailable→4，backend_unavailable→5，internal_error→1。非 0 退出码必须与 error.code 一致。",
+  "type": "object",
+  "required": ["api_version", "ok", "data", "error"],
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "公开接口版本，与 schema_version、配置 revision 各自独立。"
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "data": {
+      "type": ["object", "array", "string", "number", "boolean", "null"],
+      "description": "成功时的结构化数据；失败时为 null。"
+    },
+    "error": {
+      "type": "object",
+      "required": ["code", "path", "message", "hint"],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "validation_failed",
+            "revision_conflict",
+            "environment_unavailable",
+            "backend_unavailable",
+            "internal_error"
+          ]
+        },
+        "path": {
+          "type": ["string", "null"],
+          "description": "出错字段的路径，例如 modules.git_main.rules[0].when.op；与错误无关时为 null。"
+        },
+        "message": {
+          "type": ["string", "null"],
+          "maxLength": 1000,
+          "description": "可读的错误说明。"
+        },
+        "hint": {
+          "type": ["string", "null"],
+          "maxLength": 1000,
+          "description": "恢复建议。"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "ok": { "const": true } },
+        "required": ["ok"]
+      },
+      "then": {
+        "properties": {
+          "error": {
+            "properties": {
+              "code": { "const": "ok" },
+              "path": { "type": "null" },
+              "message": { "type": "null" },
+              "hint": { "type": "null" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "ok": { "const": false } },
+        "required": ["ok"]
+      },
+      "then": {
+        "properties": {
+          "data": { "type": "null" },
+          "error": {
+            "properties": {
+              "code": { "not": { "const": "ok" } },
+              "message": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "x-exit-codes": {
+    "ok": 0,
+    "internal_error": 1,
+    "validation_failed": 2,
+    "revision_conflict": 3,
+    "environment_unavailable": 4,
+    "backend_unavailable": 5
+  }
+}

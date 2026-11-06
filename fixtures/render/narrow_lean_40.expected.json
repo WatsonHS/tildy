@@ -1,0 +1,131 @@
+{
+  "columns": [
+    0,
+    33,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f776f726b2f61692d6e6f746573222c22666561747572652f726573697a652d726564726177222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · feature/resize-redraw ──\n%B%F{#9ece6a}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 3000
+    },
+    "left": [
+      "",
+      "%B%F{#7aa2f7}…/code/work/ai-notes/services/api%f%b",
+      "%B%F{#9ece6a}❯%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#9ece6a}❯%f%b "
+  },
+  "reports": [
+    {
+      "columns": 33,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "…/code/work/ai-notes/services/api",
+      "visible": true
+    },
+    {
+      "additional_columns": 21,
+      "columns": 27,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "feature/resize-redraw !2 ?1",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "status",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 13,
+      "columns": 2,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "3s",
+      "visible": false
+    },
+    {
+      "additional_columns": 13,
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "✦",
+      "visible": false
+    },
+    {
+      "additional_columns": 13,
+      "columns": 4,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "venv",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "demo",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "context",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 13,
+      "columns": 8,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "14:05:09",
+      "visible": false
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

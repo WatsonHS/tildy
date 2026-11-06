@@ -1,0 +1,39 @@
+[package]
+name = "tildy"
+version = "0.4.1"
+edition = "2021"
+description = "Async, agent-friendly Zsh prompt"
+license = "MIT"
+repository = "https://github.com/WatsonHS/tildy"
+readme = "README.md"
+
+[[bin]]
+name = "tildy"
+path = "src/main.rs"
+
+[lib]
+name = "tildy"
+path = "src/lib.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+anyhow = "1.0"
+unicode-width = "0.2"
+libc = "0.2"
+toml = "0.8"
+regex = "1"
+unicode-segmentation = "1.12"
+
+[target.'cfg(not(target_os = "macos"))'.dependencies]
+notify = "8"
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

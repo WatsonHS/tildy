@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "identity": {
+    "term": "xterm-256color",
+    "program": "ghostty",
+    "program_version": "1.3.1",
+    "locale": "en_US.UTF-8",
+    "font_revision": "explicit-test-label"
+  },
+  "entries": [
+    {
+      "cluster": "\u001b",
+      "columns": 1
+    }
+  ]
+}

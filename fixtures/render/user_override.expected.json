@@ -1,0 +1,79 @@
+{
+  "columns": [
+    0,
+    20
+  ],
+  "prompt": {
+    "left": [
+      "",
+      "%B%F{blue}~/code/tildy%f%b %F{green}main%f ❯ "
+    ],
+    "right": "%F{yellow}took 4.0s%f",
+    "status": "fresh",
+    "transient": null
+  },
+  "reports": [
+    {
+      "columns": 12,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "~/code/tildy",
+      "visible": true
+    },
+    {
+      "columns": 4,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [
+        "clean"
+      ],
+      "text": "main",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "ssh_host",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 9,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "took 4.0s",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:cwd.has_file",
+      "id": "node",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:command.exit",
+      "id": "result",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    }
+  ]
+}

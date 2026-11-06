@@ -1,0 +1,176 @@
+{
+  "columns": [
+    0,
+    37,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f4465762f4e69782f6e6978706b6773222c22666561747572652f666973682d7061746873222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · feature/fish-paths ──\n❯ ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%F{cyan}~/D/N/%B%F{blue}nixpkgs%b%F{cyan}%k%f %F{magenta}feature/…%f %F{green}(abc1234)%f zsh",
+      "❯ "
+    ],
+    "right": "09:05:09 AM",
+    "status": "partial",
+    "transient": "\n❯ "
+  },
+  "reports": [
+    {
+      "columns": 13,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "~/D/N/nixpkgs",
+      "visible": true
+    },
+    {
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "feature/…",
+      "visible": true
+    },
+    {
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "gc",
+      "module_type": "git_commit",
+      "rules_hit": [],
+      "text": "(abc1234)",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "empty",
+      "id": "gm",
+      "module_type": "git_metrics",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "pkg",
+      "module_type": "package",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "not_detected",
+      "id": "lvl",
+      "module_type": "shlvl",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "not_detected",
+      "id": "nix",
+      "module_type": "nix_shell",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "pending",
+      "hidden_reason": "pending",
+      "id": "de",
+      "module_type": "direnv",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "error",
+      "hidden_reason": "error",
+      "id": "mem",
+      "module_type": "memory_usage",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "timeout",
+      "hidden_reason": "timeout",
+      "id": "ip",
+      "module_type": "localip",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_data",
+      "id": "su",
+      "module_type": "sudo",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 3,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "sh",
+      "module_type": "shell",
+      "rules_hit": [],
+      "text": "zsh",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "st",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 11,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "t",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "09:05:09 AM",
+      "visible": true
+    }
+  ]
+}

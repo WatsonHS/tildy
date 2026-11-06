@@ -1,0 +1,12 @@
+{
+  "session_id": "s-7f3a",
+  "worker_epoch": 3,
+  "generation": 42,
+  "cwd": "/Users/example/Development/tildy/.worktrees/m0-d",
+  "git_dir": "/Users/example/Development/tildy/.git/worktrees/m0-d",
+  "worktree_id": "wt-4c1e",
+  "env_revision": "env-9a02",
+  "config_revision": "cfg-0f3c9b",
+  "cols": 120,
+  "lines": 2
+}

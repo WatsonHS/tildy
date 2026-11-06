@@ -1,0 +1,11 @@
+{
+  "frame": "REQ",
+  "gen": 7,
+  "session_id": "s-7f3a",
+  "cwd": "/Users/example/a\u0000b",
+  "cols": 120,
+  "lines": 2,
+  "last_exit": 0,
+  "last_duration_ms": 1530,
+  "env": ""
+}

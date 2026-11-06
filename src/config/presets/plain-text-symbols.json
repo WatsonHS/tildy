@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "$comment": "Port of Starship 1.24.2's `plain-text-symbols` preset (fixtures/import/presets/plain-text-symbols.toml, imported with `tildy::import` in commands mode, then finished by hand). Differences: Pinned to the ascii tier. Starship's default `$all` layout is approximated by the modules tildy supports (native: user, host, directory, git, docker, c, go, java, node, python, rust, conda, duration, jobs, character; other languages as command modules with Starship's detection). Not shown: package version (📦), read-only lock, exotic modules that only the Starship bridge could render; blank line before the prompt not reproduced.",
+  "symbols": "ascii",
+  "modules": {
+    "bun": {
+      "argv": [
+        "bun",
+        "--version"
+      ],
+      "detect_files": [
+        "bun.lockb",
+        "bun.lock",
+        "bunfig.toml"
+      ],
+      "format": "via [$symbol($version )](bold fg:red)",
+      "regex": "(\\d+\\.\\d+\\.\\d+)",
+      "symbol": "bun ",
+      "type": "command",
+      "priority": 20
+    },
+    "c": {
+      "format": "via [$symbol($version )](bold fg:149)",
+      "language": "c",
+      "symbol": "C ",
+      "type": "language",
+      "priority": 20
+    },
+    "char": {
+      "error_style": {
+        "bold": true,
+        "foreground": "red"
+      },
+      "error_symbol": "x",
+      "success_style": {
+        "bold": true,
+        "foreground": "green"
+      },
+      "symbol": ">",
+      "type": "character",
+      "priority": 100
+    },
+    "conda": {
+      "format": "via [$symbol$env_value](bold fg:green) ",
+      "show_when": {
+        "field": "env.CONDA_DEFAULT_ENV",
+        "op": "ne",
+        "value": "base"
+      },
+      "symbol": "conda ",
+      "type": "env_var",
+      "priority": 30,
+      "variable": "CONDA_DEFAULT_ENV"
+    },
+    "cwd": {
+      "format": "$path ",
+      "style": {
+        "bold": true,
+        "foreground": "cyan"
+      },
+      "truncation_length": 3,
+      "truncation_symbol": "",
+      "type": "directory",
+      "priority": 100
+    },
+    "deno": {
+      "argv": [
+        "deno",
+        "-V"
+      ],
+      "detect_files": [
+        "deno.json",
+        "deno.jsonc",
+        "deno.lock",
+        "mod.ts",
+        "mod.js",
+        "deps.ts",
+        "deps.js"
+      ],
+      "format": "via [$symbol($version )](bold fg:green)",
+      "regex": "deno (\\d+\\.\\d+\\.\\d+)",
+      "symbol": "deno ",
+      "type": "command",
+      "priority": 20
+    },
+    "docker": {
+      "format": "via [$symbol$context](bold fg:blue) ",
+      "symbol": "docker ",
+      "type": "docker_context",
+      "priority": 30
+    },
+    "duration": {
+      "format": "took [$human](bold fg:yellow) ",
+      "show_when": {
+        "field": "command.duration_ms",
+        "op": "ge",
+        "value": 2000
+      },
+      "type": "duration",
+      "priority": 40
+    },
+    "elixir": {
+      "argv": [
+        "elixir",
+        "--version"
+      ],
+      "detect_files": [
+        "mix.exs"
+      ],
+      "format": "via [$symbol($version )](bold fg:magenta)",
+      "regex": "Elixir (\\d+\\.\\d+\\.\\d+)",
+      "symbol": "exs ",
+      "type": "command",
+      "priority": 20
+    },
+    "git": {
+      "branch_symbol": "git ",
+      "format": "on [$branch_symbol$branch](bold fg:magenta) ([\\[$all_status$ahead_behind\\]](bold fg:red) )",
+      "status_symbols": {
+        "ahead": ">",
+        "behind": "<",
+        "conflicted": "=",
+        "deleted": "x",
+        "diverged": "<>",
+        "modified": "!",
+        "renamed": "r",
+        "staged": "+",
+        "stashed": "$",
+        "untracked": "?"
+      },
+      "type": "git",
+      "priority": 80
+    },
+    "go": {
+      "format": "via [$symbol($version )](bold fg:cyan)",
+      "language": "golang",
+      "symbol": "go ",
+      "type": "language",
+      "priority": 20
+    },
+    "haskell": {
+      "argv": [
+        "ghc",
+        "--numeric-version"
+      ],
+      "detect_extensions": [
+        "hs",
+        "cabal",
+        "hs-boot"
+      ],
+      "detect_files": [
+        "stack.yaml",
+        "cabal.project"
+      ],
+      "format": "via [$symbol($version )](bold fg:magenta)",
+      "regex": "(\\d+(?:\\.\\d+)+)",
+      "symbol": "haskell ",
+      "type": "command",
+      "priority": 20
+    },
+    "host": {
+      "format": "[$symbol$host](bold dimmed fg:green) in ",
+      "show_when": {
+        "field": "session.ssh",
+        "op": "eq",
+        "value": true
+      },
+      "symbol": "ssh ",
+      "type": "hostname",
+      "priority": 60
+    },
+    "java": {
+      "format": "via [$symbol($version )](dimmed fg:red)",
+      "language": "java",
+      "symbol": "java ",
+      "type": "language",
+      "priority": 20
+    },
+    "jobs": {
+      "format": "$symbol$number ",
+      "number_threshold": 2,
+      "style": {
+        "bold": true,
+        "foreground": "blue"
+      },
+      "symbol": "*",
+      "type": "jobs",
+      "priority": 50
+    },
+    "kotlin": {
+      "argv": [
+        "kotlin",
+        "-version"
+      ],
+      "detect_extensions": [
+        "kt",
+        "kts"
+      ],
+      "format": "via [$symbol($version )](bold fg:blue)",
+      "regex": "version (\\d+\\.\\d+\\.\\d+)",
+      "symbol": "kt ",
+      "type": "command",
+      "priority": 20
+    },
+    "lua": {
+      "argv": [
+        "lua",
+        "-v"
+      ],
+      "detect_extensions": [
+        "lua"
+      ],
+      "detect_files": [
+        ".lua-version"
+      ],
+      "detect_folders": [
+        "lua"
+      ],
+      "format": "via [$symbol($version )](bold fg:blue)",
+      "regex": "Lua (\\d+\\.\\d+(?:\\.\\d+)?)",
+      "symbol": "lua ",
+      "type": "command",
+      "priority": 20
+    },
+    "node": {
+      "format": "via [$symbol($version )](bold fg:green)",
+      "language": "nodejs",
+      "symbol": "nodejs ",
+      "type": "language",
+      "priority": 20
+    },
+    "php": {
+      "argv": [
+        "php",
+        "-nr",
+        "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;"
+      ],
+      "detect_extensions": [
+        "php"
+      ],
+      "detect_files": [
+        "composer.json",
+        ".php-version"
+      ],
+      "format": "via [$symbol($version )](bold fg:147)",
+      "regex": "(\\d+\\.\\d+\\.\\d+)",
+      "symbol": "php ",
+      "type": "command",
+      "priority": 20
+    },
+    "py": {
+      "format": "via [$symbol($version )(\\($env\\) )](bold fg:yellow)",
+      "symbol": "py ",
+      "type": "python",
+      "priority": 30
+    },
+    "ruby": {
+      "argv": [
+        "ruby",
+        "-v"
+      ],
+      "detect_extensions": [
+        "rb"
+      ],
+      "detect_files": [
+        "Gemfile",
+        ".ruby-version"
+      ],
+      "format": "via [$symbol($version )](bold fg:red)",
+      "regex": "ruby (\\d+\\.\\d+\\.\\d+)",
+      "symbol": "rb ",
+      "type": "command",
+      "priority": 20
+    },
+    "rust": {
+      "format": "via [$symbol($version )](bold fg:red)",
+      "language": "rust",
+      "symbol": "rs ",
+      "type": "language",
+      "priority": 20
+    },
+    "scala": {
+      "argv": [
+        "scalac",
+        "-version"
+      ],
+      "detect_extensions": [
+        "scala",
+        "sbt",
+        "sc"
+      ],
+      "detect_files": [
+        "build.sbt",
+        ".scalaenv",
+        ".sbtenv",
+        "build.sc"
+      ],
+      "detect_folders": [
+        ".metals"
+      ],
+      "format": "via [$symbol($version )](bold fg:red)",
+      "regex": "version (\\d+\\.\\d+\\.\\d+)",
+      "symbol": "scala ",
+      "type": "command",
+      "priority": 20
+    },
+    "swift": {
+      "argv": [
+        "swift",
+        "--version"
+      ],
+      "detect_extensions": [
+        "swift"
+      ],
+      "detect_files": [
+        "Package.swift"
+      ],
+      "format": "via [$symbol($version )](bold fg:202)",
+      "regex": "version (\\d+\\.\\d+(?:\\.\\d+)?)",
+      "symbol": "swift ",
+      "type": "command",
+      "priority": 20
+    },
+    "user": {
+      "format": "[$user](bold fg:yellow) in ",
+      "show_always": false,
+      "type": "username",
+      "priority": 90
+    },
+    "zig": {
+      "argv": [
+        "zig",
+        "version"
+      ],
+      "detect_extensions": [
+        "zig"
+      ],
+      "format": "via [$symbol($version )](bold fg:yellow)",
+      "regex": "(\\d+\\.\\d+\\.\\d+\\S*)",
+      "symbol": "zig ",
+      "type": "command",
+      "priority": 20
+    },
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "style": {
+        "foreground": "yellow"
+      }
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "left": [
+          "user",
+          "host",
+          "cwd",
+          "git",
+          "changes",
+          "docker",
+          "c",
+          "elixir",
+          "go",
+          "haskell",
+          "java",
+          "kotlin",
+          "lua",
+          "node",
+          "php",
+          "py",
+          "ruby",
+          "rust",
+          "scala",
+          "swift",
+          "zig",
+          "deno",
+          "bun",
+          "conda",
+          "duration"
+        ]
+      },
+      {
+        "left": [
+          "jobs",
+          "char"
+        ]
+      }
+    ]
+  }
+}

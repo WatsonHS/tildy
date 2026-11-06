@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "preset": "plain",
+  "$comment": "A palette defined entirely in the user file (Starship semantics); palette colors win over the 16 color names.",
+  "palette": "mine",
+  "palettes": {
+    "mine": {
+      "red": "#e06c75",
+      "accent": "purple",
+      "dim_text": "244"
+    }
+  },
+  "modules": {
+    "cwd": {
+      "style": {
+        "foreground": "accent"
+      }
+    },
+    "result": {
+      "style": {
+        "foreground": "red"
+      }
+    }
+  }
+}

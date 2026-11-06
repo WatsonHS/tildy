@@ -1,0 +1,69 @@
+[
+  {
+    "name": "dracula",
+    "source": "https://github.com/dracula/dracula-theme",
+    "license_file": "dracula.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "nord",
+    "source": "https://github.com/nordtheme/nord",
+    "license_file": "nord.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "solarized",
+    "source": "https://github.com/altercation/solarized",
+    "license_file": "solarized.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "one-dark",
+    "source": "https://github.com/joshdick/onedark.vim",
+    "license_file": "one-dark.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "rose-pine",
+    "source": "https://github.com/rose-pine/rose-pine-palette",
+    "license_file": "rose-pine.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "everforest",
+    "source": "https://github.com/sainnhe/everforest",
+    "license_file": "everforest.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "kanagawa",
+    "source": "https://github.com/rebelot/kanagawa.nvim",
+    "license_file": "kanagawa.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "tokyo-night",
+    "source": "https://github.com/folke/tokyonight.nvim",
+    "license_file": "tokyo-night.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "catppuccin",
+    "source": "https://github.com/catppuccin/palette",
+    "license_file": "catppuccin.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "starship",
+    "source": "https://github.com/starship/starship/tree/v1.24.2",
+    "license_file": "starship.txt",
+    "retrieved": "2026-11-07"
+  },
+  {
+    "name": "gruvbox",
+    "source": "https://github.com/morhetz/gruvbox",
+    "license_file": "gruvbox.txt",
+    "license_declaration": "README.md: MIT/X11",
+    "retrieved": "2026-11-07"
+  }
+]

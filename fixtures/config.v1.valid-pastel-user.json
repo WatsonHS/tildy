@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "$comment": "One line selects the look; overrides merge into the preset's modules.",
+  "preset": "pastel-powerline",
+  "modules": {
+    "time": {
+      "time_format": "%T",
+      "style": {
+        "background": "#112233"
+      }
+    },
+    "cwd": {
+      "truncation_length": 2
+    }
+  }
+}

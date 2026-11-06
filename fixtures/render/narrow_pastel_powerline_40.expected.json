@@ -1,0 +1,263 @@
+{
+  "columns": [
+    0,
+    30,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f776f726b2f61692d6e6f746573222c22666561747572652f726573697a652d726564726177222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · feature/resize-redraw ──\n%B%F{green}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%K{#9a348e}%f  %F{#9a348e}%K{#da627d}%f …/ai-notes/services/api %k%F{#da627d}%f",
+      "%B%F{green}❯%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{green}❯%f%b "
+  },
+  "reports": [
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "user",
+      "module_type": "username",
+      "rules_hit": [],
+      "text": "",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "host",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 23,
+      "columns": 2,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "✦1",
+      "visible": false
+    },
+    {
+      "columns": 23,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "…/ai-notes/services/api",
+      "visible": true
+    },
+    {
+      "additional_columns": 19,
+      "columns": 26,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": " feature/resize-redraw !?",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detached",
+      "id": "commit",
+      "module_type": "git_commit",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "c",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "elixir",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "elm",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "go",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "haskell",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "java",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "julia",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 77,
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "node",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": " v22.3.0",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "nim",
+      "module_type": "starship",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 54,
+      "columns": 16,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "py",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": " v3.12.1 (demo)",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "rust",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "additional_columns": 66,
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": "no_room",
+      "id": "docker",
+      "module_type": "docker_context",
+      "rules_hit": [],
+      "text": "  colima",
+      "visible": false
+    },
+    {
+      "additional_columns": 35,
+      "columns": 9,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "took 3.2s",
+      "visible": false
+    },
+    {
+      "additional_columns": 86,
+      "columns": 7,
+      "freshness": null,
+      "hidden_reason": "no_room",
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "♥ 14:05",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "status",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

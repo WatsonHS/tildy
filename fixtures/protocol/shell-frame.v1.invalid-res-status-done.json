@@ -1,0 +1,7 @@
+{
+  "frame": "RES",
+  "gen": 7,
+  "status": "done",
+  "worker_epoch": 3,
+  "left": ["%F{green}❯%f "]
+}

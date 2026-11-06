@@ -1,0 +1,97 @@
+{
+  "$comment": "Minimal one-line prompt: directory, git branch with Starship-style status marks, ❯. Colors from the palette roles accent (directory), fg_dim (branch), ok/warn/err/info (status and prompt character).",
+  "palette": "nord",
+  "modules": {
+    "cwd": {
+      "type": "directory",
+      "priority": 100,
+      "truncation_length": 3,
+      "truncation_symbol": {
+        "unicode": "…/",
+        "ascii": ".../"
+      },
+      "style": {
+        "foreground": "accent",
+        "bold": true
+      }
+    },
+    "git": {
+      "type": "git",
+      "priority": 80,
+      "branch_symbol": {
+        "nerd": " ",
+        "unicode": "",
+        "ascii": ""
+      },
+      "format": "$branch_symbol$branch( $status)",
+      "status_symbols": {
+        "conflicted": "[=](fg:err)",
+        "ahead": {
+          "unicode": "[⇡](fg:info)",
+          "ascii": "[^](fg:info)"
+        },
+        "behind": {
+          "unicode": "[⇣](fg:info)",
+          "ascii": "[v](fg:info)"
+        },
+        "diverged": {
+          "unicode": "[⇕](fg:info)",
+          "ascii": "[^v](fg:info)"
+        },
+        "untracked": "[?](fg:info)",
+        "stashed": "[$](fg:fg_dim)",
+        "modified": "[!](fg:warn)",
+        "staged": "[+](fg:ok)",
+        "renamed": {
+          "unicode": "[»](fg:warn)",
+          "ascii": "[>](fg:warn)"
+        },
+        "deleted": {
+          "unicode": "[✘](fg:warn)",
+          "ascii": "[x](fg:warn)"
+        }
+      },
+      "state_style": {
+        "foreground": "err"
+      },
+      "style": {
+        "foreground": "fg_dim"
+      }
+    },
+    "char": {
+      "type": "character",
+      "priority": 100,
+      "symbol": {
+        "unicode": "❯",
+        "ascii": ">"
+      },
+      "success_style": {
+        "foreground": "ok",
+        "bold": true
+      },
+      "error_style": {
+        "foreground": "err",
+        "bold": true
+      }
+    },
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "style": {
+        "foreground": "yellow"
+      }
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "left": [
+          "cwd",
+          "git",
+          "changes",
+          "char"
+        ]
+      }
+    ]
+  }
+}

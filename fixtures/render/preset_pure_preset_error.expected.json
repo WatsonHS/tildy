@@ -1,0 +1,106 @@
+{
+  "columns": [
+    0,
+    15,
+    7
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main ──\n%F{red}❯%f ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%F{blue}tildy %f%F{8}main%f%F{218}*​​%f%F{cyan} %f%F{yellow}3s %f",
+      "%F{8}demo %f%F{red}❯%f "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%F{red}❯%f "
+  },
+  "reports": [
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "not_ssh_or_root",
+      "id": "user",
+      "module_type": "username",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:session.ssh",
+      "id": "host",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 6,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "tildy ",
+      "visible": true
+    },
+    {
+      "columns": 6,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "main*​​ ",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 3,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "duration",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "3s ",
+      "visible": true
+    },
+    {
+      "columns": 5,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "py",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "demo ",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

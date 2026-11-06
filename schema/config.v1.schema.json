@@ -1,0 +1,2636 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/config/v1",
+  "title": "tildy config v1 (user layer)",
+  "description": "Config file format. Layers: shared built-in base -> the preset named by `preset` (pastel-powerline when omitted) (its `modules` and `layout` replace the built-in ones) -> this file, deep-merged (objects merge by key, arrays replace). A module here that sets `type` is a full definition and replaces the module of the same id; one without `type` is a partial override merged into it, so `{\"schema_version\": 1, \"preset\": \"pastel-powerline\"}` alone gives the full look. Every object accepts a `$comment` string (the loader ignores it). Extension data belongs under `extensions`. Checks this schema cannot express, enforced by the loader with a JSON path (src/config/validate.rs): the merged config must have `modules` and `layout` (`layout.rows` non-empty); every module must have a `type` after merging; layout ids must exist in modules (or in the built-in config, see validate.py); rule ids unique per module; command modules need non-empty argv; language modules need language; starship modules need module; env_var modules need variable; format/repo_root_format/time_format template syntax; regex compiles; `schema_version` greater than the supported version is rejected as unsupported.",
+  "type": "object",
+  "required": [
+    "schema_version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$comment": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "description": "Newer versions are rejected."
+    },
+    "preset": {
+      "enum": [
+        "plain",
+        "pastel-powerline",
+        "tokyo-night",
+        "gruvbox-rainbow",
+        "catppuccin-powerline",
+        "catppuccin-latte",
+        "catppuccin-frappe",
+        "catppuccin-macchiato",
+        "jetpack",
+        "pure-preset",
+        "bracketed-segments",
+        "nerd-font-symbols",
+        "no-empty-icons",
+        "no-nerd-font",
+        "no-runtime-versions",
+        "plain-text-symbols",
+        "powerline",
+        "lean",
+        "classic",
+        "rainbow",
+        "minimal"
+      ],
+      "default": "pastel-powerline",
+      "description": "Built-in look to start from; names are the presets listed by `tildy capabilities --json` (data.presets). plain: modules joined by spaces, icons in the nerd tier. pastel-powerline: Starship's Pastel Powerline (two rows, powerline segments, then a ❯ line). Role-based presets (powerline, lean, classic, rainbow, minimal) are colored by palette roles and recolored with `palette`."
+    },
+    "symbols": {
+      "enum": [
+        "auto",
+        "unicode",
+        "nerd",
+        "ascii"
+      ],
+      "default": "auto",
+      "description": "Symbol tier. auto: $TILDY_SYMBOLS, then terminal/locale detection."
+    },
+    "palette": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,64}$",
+      "description": "Active palette (Starship semantics): a built-in palette (`tildy palette list`: dracula, nord, solarized-dark, solarized-light, one-dark, rose-pine, everforest, kanagawa, gruvbox-dark, tokyo-night, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha) or one defined under `palettes`. Any style color (style objects and `[...](style)` spans) may name a color of the active palette; palette names win over the 16 color names. Unknown palettes and unknown color names are rejected by the loader with a JSON path. Role-based presets set a default palette."
+    },
+    "palettes": {
+      "type": "object",
+      "description": "User palettes: {name: {color name: color}}. Values are concrete colors (they cannot refer to other palette colors). A palette named like a built-in one merges over it key by key, e.g. {\"nord\": {\"accent\": \"#ff8800\"}}. Role-based presets need the roles bg1, bg2, bg3, bg4, bg5, bg6, fg, fg_dim, surface, accent, ok, warn, err, info.",
+      "propertyNames": {
+        "pattern": "^([A-Za-z0-9_-]{1,64}|\\$comment)$"
+      },
+      "properties": {
+        "$comment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/palette"
+      }
+    },
+    "modules": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[A-Za-z0-9_-]{1,64}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/module"
+      }
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        }
+      }
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "default": "compact",
+          "description": "compact: collapse to a transient prompt after accepting a line."
+        },
+        "add_newline": {
+          "type": "boolean",
+          "default": true,
+          "description": "With add_newline: keep the blank line above the collapsed (transient) prompt in the history too, like p10k. false: the collapsed line sits directly under the previous output."
+        },
+        "context_separator": {
+          "type": "boolean",
+          "default": true
+        },
+        "summary": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Agent status collection. The Zsh adapter runs `programs` through `tildy agent wrap` so their OSC 7501 status reaches agent_status modules in other prompts (docs/agent-status.md).",
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "wrap": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wrap `programs` from the Zsh adapter (TILDY_AGENT_WRAP=0 turns it off per shell)."
+        },
+        "programs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.+][A-Za-z0-9_.+-]{0,63}$"
+          },
+          "description": "Command names to wrap (default: claude, codex, gemini, aider, opencode, amp, goose, copilot, cursor-agent). 1-64 characters of [A-Za-z0-9_.+-], not starting with '-'."
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Namespace for extension data; preserved verbatim."
+    },
+    "add_newline": {
+      "type": "boolean",
+      "default": true,
+      "description": "Starship's add_newline: an empty first prompt line (a blank line between prompts). The transient form keeps the blank line unless history.add_newline is false."
+    },
+    "command_timeout_ms": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60000,
+      "default": 500,
+      "description": "Starship's command_timeout: default timeout_ms of provider-backed modules."
+    }
+  },
+  "$defs": {
+    "color": {
+      "description": "ANSI color name, bright-<name>, grey/gray, default, 0-255 (leading zeros accepted up to 3 digits), #rrggbb, or the name of a color of the active palette (see `palette`).",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^(default|black|red|green|yellow|blue|magenta|cyan|white|grey|gray|bright-(black|red|green|yellow|blue|magenta|cyan|white)|#[0-9a-fA-F]{6}|0{0,2}[0-9]|0?[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
+        },
+        {
+          "$ref": "#/$defs/palette_color_name"
+        }
+      ]
+    },
+    "concrete_color": {
+      "description": "A concrete color: ANSI color name (or purple/bright-purple), bright-<name>, grey/gray, default, 0-255 or #rrggbb.",
+      "type": "string",
+      "pattern": "^(default|purple|bright-purple|black|red|green|yellow|blue|magenta|cyan|white|grey|gray|bright-(black|red|green|yellow|blue|magenta|cyan|white)|#[0-9a-fA-F]{6}|0{0,2}[0-9]|0?[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
+    },
+    "palette_color_name": {
+      "description": "A palette color name: a letter or '_', then [A-Za-z0-9_-] (at most 64 chars); not bold/dimmed/dim/italic/underline/none.",
+      "type": "string",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_-]{0,63}$",
+      "not": {
+        "pattern": "^(?i:bold|dimmed|dim|italic|underline|none)$"
+      }
+    },
+    "palette": {
+      "type": "object",
+      "description": "One palette: color name -> concrete color.",
+      "propertyNames": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/palette_color_name"
+          },
+          {
+            "const": "$comment"
+          }
+        ]
+      },
+      "properties": {
+        "$comment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/concrete_color"
+      }
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "foreground": {
+          "$ref": "#/$defs/color",
+          "description": "Rendered as %F{...}; #rrggbb is passed through (24-bit, Zsh 5.7+)."
+        },
+        "background": {
+          "$ref": "#/$defs/color",
+          "description": "Rendered as %K{...}; also the segment color in powerline rows."
+        },
+        "bold": {
+          "type": "boolean"
+        },
+        "underline": {
+          "type": "boolean"
+        },
+        "dim": {
+          "type": "boolean",
+          "description": "Raw SGR 2 inside %{...%} (Zsh has no escape for it)."
+        },
+        "italic": {
+          "type": "boolean",
+          "description": "Raw SGR 3 inside %{...%} (Zsh has no escape for it)."
+        }
+      }
+    },
+    "scalar": {
+      "type": [
+        "string",
+        "number",
+        "boolean"
+      ]
+    },
+    "sym": {
+      "description": "A symbol-like string, or per-tier values {nerd, unicode, ascii}. A missing tier falls back downwards (nerd -> unicode -> ascii); a tier set to \"\" means nothing. An empty object is accepted by the loader.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "$comment": {
+              "type": "string"
+            },
+            "nerd": {
+              "type": "string"
+            },
+            "unicode": {
+              "type": "string"
+            },
+            "ascii": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "condition": {
+      "type": "object",
+      "required": [
+        "field",
+        "op",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Flat field: git.state, git.branch, git.freshness, git.staged, session.ssh, command.exit, command.duration_ms, cwd.path, ... Missing data makes every operator false."
+        },
+        "op": {
+          "enum": [
+            "eq",
+            "ne",
+            "gt",
+            "lt",
+            "ge",
+            "le",
+            "in"
+          ]
+        },
+        "value": {
+          "description": "A scalar; an array of scalars for `in`; a number for gt/lt/ge/le."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "op"
+            ],
+            "properties": {
+              "op": {
+                "const": "in"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/scalar"
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/scalar"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "op"
+            ],
+            "properties": {
+              "op": {
+                "enum": [
+                  "gt",
+                  "lt",
+                  "ge",
+                  "le"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "required": [
+        "id",
+        "when"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique within its module (not checked by this schema)."
+        },
+        "when": {
+          "$ref": "#/$defs/condition"
+        },
+        "style": {
+          "$ref": "#/$defs/style"
+        }
+      }
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "left": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Module ids (must exist in modules, or in the built-in config)."
+        },
+        "right": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Module ids (must exist in modules, or in the built-in config). The last row's right side is Zsh's RPROMPT (always plain); an earlier row's right side is drawn right-aligned on that row's line, one column short of the edge, in the row's style (powerline glyphs mirrored), and dropped when it does not fit."
+        },
+        "style": {
+          "enum": [
+            "plain",
+            "powerline"
+          ],
+          "default": "plain",
+          "description": "plain: visible modules joined by single spaces. powerline: each module on its style.background with one space of padding, joined by `separator` drawn in the previous background over the next one (none between equal backgrounds); the last segment ends with the separator over the default background. Hidden modules leave nothing. Applies to `left` and to the `right` of an upper row (mirrored); the last row's `right` (RPROMPT) is always plain."
+        },
+        "separator": {
+          "$ref": "#/$defs/sym",
+          "description": "Powerline separator. Default {\"nerd\": \"\\ue0b0\", \"ascii\": \">\"}. Counts as one column."
+        },
+        "start": {
+          "$ref": "#/$defs/sym",
+          "description": "Powerline start cap drawn before the first segment."
+        },
+        "end": {
+          "$ref": "#/$defs/sym",
+          "description": "Powerline end cap drawn after the last segment (overrides the default separator end)."
+        },
+        "subseparator": {
+          "$ref": "#/$defs/sym",
+          "description": "Powerline glyph between neighbours with the same background (default none). Drawn in the next segment's foreground unless it carries a span, e.g. \"[\\ue0b1](fg:fg_dim)\"."
+        }
+      }
+    },
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A module definition (a full one when it sets type; a partial override of the same id otherwise). Type-specific fields are checked only when type is present in the same object.",
+      "properties": {
+        "$comment": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "directory",
+            "git",
+            "exit_status",
+            "duration",
+            "hostname",
+            "agent_status",
+            "changes",
+            "command",
+            "character",
+            "time",
+            "username",
+            "jobs",
+            "python",
+            "docker_context",
+            "language",
+            "starship",
+            "text",
+            "os",
+            "fill",
+            "env_var",
+            "package",
+            "git_commit",
+            "git_metrics",
+            "shlvl",
+            "localip",
+            "memory_usage",
+            "sudo",
+            "direnv",
+            "nix_shell",
+            "shell"
+          ],
+          "description": "Module type (capabilities module_types). Required on the merged config; a module without type in a user file is a partial override."
+        },
+        "priority": {
+          "type": "integer",
+          "default": 50,
+          "description": "When a row is wider than the terminal, modules are dropped by ascending priority (equal priorities: the rightmost first) and reported hidden with no_room. The character module and fills are never dropped; the highest-priority module of a row always stays. Built-in presets: time 10, language versions 20, python/docker/env 30, duration 40, jobs 50, hostname 60, git details 70, git 80, username 90, directory/exit status 100."
+        },
+        "style": {
+          "$ref": "#/$defs/style"
+        },
+        "show_when": {
+          "$ref": "#/$defs/condition"
+        },
+        "rules": {
+          "type": "array",
+          "description": "Evaluated in order; every matching rule's style is overlaid, later wins. Rule ids unique per module (not checked by this schema).",
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "format": {
+          "type": "string",
+          "description": "Text template: $name or ${name} variables, (...) groups dropped when every variable inside is empty, \\\\ escapes the next character. No nesting, no inline styles. Variables: all types $symbol; directory $path; git $branch_symbol $branch $status; exit_status $code; duration $text $duration; hostname $text $host $user; command/language/python/docker_context $text $version (version_format applied) $env $context and every key of the provider's fields; time $time; username $user; jobs $count. Defaults: directory \"$path\", git \"($branch_symbol )$branch( $status)\", exit_status \"$symbol $code\", duration/hostname \"$text\", command \"($symbol )$text\", language \"$symbol( $version)\", python \"$symbol( $version)( \\\\($env\\\\))\", docker_context \"$symbol( $context)\", character \"$symbol\", time \"($symbol )$time\", jobs \"$symbol$count\", username \"$symbol\" when a symbol is set else \"$user\". Template syntax is checked by the loader (src/config/template.rs), not by this schema."
+        },
+        "symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "$symbol. Defaults: language/python/docker_context Nerd icons (unicode/ascii text fallbacks), jobs ✦, character ❯ (ascii >), exit_status ✗ (ascii x)."
+        },
+        "padding": {
+          "type": "boolean",
+          "description": "Accepted by every module type."
+        },
+        "success_style": {
+          "$ref": "#/$defs/style",
+          "description": "character/exit_status: overlaid when the last command exited 0."
+        },
+        "error_style": {
+          "$ref": "#/$defs/style",
+          "description": "character/exit_status: overlaid when the last command failed."
+        },
+        "error_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "character: symbol when the last command failed."
+        },
+        "text": {
+          "$ref": "#/$defs/sym",
+          "description": "text: the literal text (required for text modules)."
+        },
+        "os_symbols": {
+          "type": "object",
+          "propertyNames": {
+            "minLength": 1
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/sym"
+          },
+          "description": "os: map from OS name to symbol."
+        },
+        "variable": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_]+$",
+          "description": "env_var: environment variable name (required)."
+        },
+        "number_threshold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "jobs: show the count from this number of jobs."
+        },
+        "show_always": {
+          "type": "boolean",
+          "default": false,
+          "description": "username: show even when not over SSH and not root."
+        },
+        "time_format": {
+          "type": "string",
+          "default": "%T",
+          "pattern": "^(?:[^%]|%[RHMSIpYmdFTr%])*$",
+          "description": "time: %R %H %M %S %I %p %Y %m %d %F %T %r %%. Other % sequences are rejected by the loader."
+        },
+        "truncation_length": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "default": 3,
+          "description": "directory: keep the last N path components (the home symbol counts; 0 = no truncation). git: cut the branch name to N characters plus truncation_symbol."
+        },
+        "truncation_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "directory: prefix of a truncated or repo-relative path. Default …/ (ascii .../). git: appended to a cut branch name (first character; default …)."
+        },
+        "home_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "directory: replaces $HOME. Default ~."
+        },
+        "substitutions": {
+          "type": "object",
+          "propertyNames": {
+            "minLength": 1
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/sym"
+          },
+          "description": "directory: keys containing / replace the longest matching leading path (e.g. ~/work/x); other keys replace whole path components. A value empty for the current tier disables that entry."
+        },
+        "truncate_to_repo": {
+          "type": "boolean",
+          "default": true,
+          "description": "directory: inside a repository whose root is not $HOME, start the path at the repo root name (Starship). When false, truncation never cuts above the repo root."
+        },
+        "repo_root_format": {
+          "type": "string",
+          "description": "directory: format of the repo-root part of the path (template syntax as in format; checked by the loader)."
+        },
+        "branch_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "git: $branch_symbol (falls back to symbol)."
+        },
+        "ignore_branches": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "git: branch names that never show."
+        },
+        "only_attached": {
+          "type": "boolean",
+          "description": "git: only show when HEAD is attached to a branch."
+        },
+        "status_symbols": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "git: when set, $status is Starship's $all_status$ahead_behind: conflicted, stashed, deleted, renamed, modified, staged, untracked, then diverged|ahead|behind. Unset keys default to = $ ✘ » ! + ? ⇕ ⇡ ⇣ (ASCII fallbacks). When absent, $status is tildy's summary (±changes =conflicts ↑ahead ↓behind).",
+          "properties": {
+            "$comment": {
+              "type": "string"
+            },
+            "conflicted": {
+              "$ref": "#/$defs/sym"
+            },
+            "ahead": {
+              "$ref": "#/$defs/sym"
+            },
+            "behind": {
+              "$ref": "#/$defs/sym"
+            },
+            "diverged": {
+              "$ref": "#/$defs/sym"
+            },
+            "untracked": {
+              "$ref": "#/$defs/sym"
+            },
+            "stashed": {
+              "$ref": "#/$defs/sym"
+            },
+            "modified": {
+              "$ref": "#/$defs/sym"
+            },
+            "staged": {
+              "$ref": "#/$defs/sym"
+            },
+            "renamed": {
+              "$ref": "#/$defs/sym"
+            },
+            "deleted": {
+              "$ref": "#/$defs/sym"
+            },
+            "up_to_date": {
+              "$ref": "#/$defs/sym",
+              "description": "$ahead_behind when the branch has an upstream and is neither ahead nor behind (default empty)."
+            },
+            "typechanged": {
+              "$ref": "#/$defs/sym"
+            }
+          }
+        },
+        "show_counts": {
+          "type": "boolean",
+          "default": false,
+          "description": "git: append counts to status symbols."
+        },
+        "show_state": {
+          "type": "boolean",
+          "default": true,
+          "description": "git: show an in-progress operation like Starship's git_state, e.g. (REBASING 2/5)."
+        },
+        "state_labels": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "git: label per operation (defaults: MERGING, REBASING, CHERRY-PICKING, REVERTING, BISECTING, AM).",
+          "properties": {
+            "$comment": {
+              "type": "string"
+            },
+            "merge": {
+              "type": "string"
+            },
+            "rebase": {
+              "type": "string"
+            },
+            "cherry-pick": {
+              "type": "string"
+            },
+            "revert": {
+              "type": "string"
+            },
+            "bisect": {
+              "type": "string"
+            },
+            "am": {
+              "type": "string"
+            }
+          }
+        },
+        "state_style": {
+          "$ref": "#/$defs/style",
+          "description": "git: style of the state label. Default bold yellow."
+        },
+        "language": {
+          "enum": [
+            "nodejs",
+            "rust",
+            "golang",
+            "java",
+            "c",
+            "python"
+          ],
+          "description": "language modules (required): entry of the built-in table (detection, version command, symbol)."
+        },
+        "version_format": {
+          "type": "string",
+          "default": "v${raw}",
+          "description": "language/python/command/package: $version from the provider's version; ${raw} ${major} ${minor} ${patch}."
+        },
+        "module": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.]+$",
+          "description": "starship modules (required): name passed to `starship module`; output is shown as-is (no padding added in powerline rows)."
+        },
+        "detect_files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "command/language/python/docker_context/starship/direnv: overrides the provider's detection list (entries of the current directory)."
+        },
+        "detect_extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "command/language/python/docker_context/starship/direnv: overrides the provider's detection list (entries of the current directory)."
+        },
+        "detect_folders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "command/language/python/docker_context/starship/direnv: overrides the provider's detection list (entries of the current directory)."
+        },
+        "argv": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "command modules (required): the command to run."
+        },
+        "regex": {
+          "type": "string",
+          "description": "command modules: the first capture group (or whole match) of this regex on the output becomes the text/version. Compiled by the loader (Rust regex syntax); not checked here."
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "provider-backed modules (command, language, python, docker_context, starship, package, git_commit, git_metrics, localip, memory_usage, sudo, direnv). Default: the config's command_timeout_ms, else 500."
+        },
+        "cache_ttl_s": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "provider-backed modules (command, language, python, docker_context, starship, package, git_commit, git_metrics, localip, memory_usage, sudo, direnv)."
+        },
+        "read_only": {
+          "$ref": "#/$defs/sym",
+          "description": "directory: shown by $read_only when the cwd is not writable. Default 🔒 (ascii RO)."
+        },
+        "read_only_style": {
+          "$ref": "#/$defs/style",
+          "description": "directory: style of $read_only; unset, it takes the style of the span it sits in."
+        },
+        "fish_style_pwd_dir_length": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "default": 0,
+          "description": "directory: truncated components are shown abbreviated to N characters instead of dropped (Starship's fish style; off with substitutions)."
+        },
+        "use_logical_path": {
+          "type": "boolean",
+          "default": true,
+          "description": "directory: true shows the shell's logical cwd; false resolves symlinks."
+        },
+        "repo_root_style": {
+          "$ref": "#/$defs/style",
+          "description": "directory: style of $repo_root. Setting it splits the path at a visible repository root: repo_root_format, else format with $path read as $before_root_path$repo_root$path."
+        },
+        "before_repo_root_style": {
+          "$ref": "#/$defs/style",
+          "description": "directory: style of $before_root_path in the split form."
+        },
+        "always_show_remote": {
+          "type": "boolean",
+          "default": false,
+          "description": "git: show $remote_name/$remote_branch even when the upstream branch has the local branch's name."
+        },
+        "ignore_submodules": {
+          "type": "boolean",
+          "default": false,
+          "description": "git/git_metrics: ignore changes inside submodules (status --ignore-submodules=dirty; diff --ignore-submodules)."
+        },
+        "min_time": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "duration: hide below this many milliseconds."
+        },
+        "show_milliseconds": {
+          "type": "boolean",
+          "default": false,
+          "description": "duration: $human includes milliseconds (like $human_ms)."
+        },
+        "trim_at": {
+          "type": "string",
+          "default": ".",
+          "description": "hostname: cut the name (the shell's $HOST) at the first occurrence; \"\" shows the full name."
+        },
+        "aliases": {
+          "type": "object",
+          "propertyNames": {
+            "minLength": 1
+          },
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "hostname/username: replace a name by another (hostname: after trim_at)."
+        },
+        "detect_env_vars": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^!?[A-Za-z0-9_]+$"
+          },
+          "description": "hostname/username/direnv: forwarded env variables that show the module; !NAME hides it while NAME is set."
+        },
+        "use_12hr": {
+          "type": "boolean",
+          "default": false,
+          "description": "time: without time_format, use %r (12-hour clock)."
+        },
+        "utc_time_offset": {
+          "type": "string",
+          "default": "local",
+          "pattern": "^(local|[+-]?[0-9]+(\\.[0-9]+)?)$",
+          "description": "time: local, or hours east of UTC between -24 and 24 (e.g. -5, 5.5)."
+        },
+        "time_range": {
+          "type": "string",
+          "default": "-",
+          "pattern": "^([0-2][0-9]:[0-5][0-9]:[0-5][0-9])?-([0-2][0-9]:[0-5][0-9]:[0-5][0-9])?$",
+          "description": "time: START-END in HH:MM:SS (either side may be empty): show only inside; - always."
+        },
+        "success_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "exit_status: symbol after success; when non-empty the module also shows for exit 0."
+        },
+        "not_executable_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "exit_status: with map_symbol, for exit 126."
+        },
+        "not_found_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "exit_status: with map_symbol, for exit 127."
+        },
+        "sigint_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "exit_status: with map_symbol and recognize_signal_code, for exit 130."
+        },
+        "signal_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "exit_status: with map_symbol and recognize_signal_code, for exits 129-255."
+        },
+        "map_symbol": {
+          "type": "boolean",
+          "default": false,
+          "description": "exit_status: use not_executable/not_found/sigint/signal symbols."
+        },
+        "recognize_signal_code": {
+          "type": "boolean",
+          "default": true,
+          "description": "exit_status: codes above 128 are signals ($signal_number, $signal_name)."
+        },
+        "symbol_threshold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "default": 1,
+          "description": "jobs: show $symbol from this number of jobs."
+        },
+        "display_private": {
+          "type": "boolean",
+          "default": false,
+          "description": "package: show the version of a package.json marked private."
+        },
+        "commit_hash_length": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "default": 7,
+          "description": "git_commit: characters of $hash (above 7 runs git rev-parse)."
+        },
+        "only_detached": {
+          "type": "boolean",
+          "default": true,
+          "description": "git_commit: show only on a detached HEAD."
+        },
+        "tag_disabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "git_commit: false fills $tag (tag_symbol + the nearest tag, from git describe --tags)."
+        },
+        "tag_max_candidates": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "default": 0,
+          "description": "git_commit: commits the tag may be behind HEAD (0 = exact match)."
+        },
+        "tag_symbol": {
+          "$ref": "#/$defs/sym",
+          "description": "git_commit: prefix of $tag."
+        },
+        "added_style": {
+          "$ref": "#/$defs/style",
+          "description": "git_metrics: style of +added in $diff. Default bold green."
+        },
+        "deleted_style": {
+          "$ref": "#/$defs/style",
+          "description": "git_metrics: style of -deleted in $diff. Default bold red."
+        },
+        "only_nonzero_diffs": {
+          "type": "boolean",
+          "default": true,
+          "description": "git_metrics: $added/$deleted are empty when 0."
+        },
+        "threshold": {
+          "type": "integer",
+          "minimum": -1000,
+          "maximum": 1000,
+          "description": "shlvl: show from this SHLVL (default 2). memory_usage: show from this RAM percentage (default 75; -1 = always)."
+        },
+        "repeat": {
+          "type": "boolean",
+          "default": false,
+          "description": "shlvl: repeat $symbol SHLVL times."
+        },
+        "repeat_offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "default": 0,
+          "description": "shlvl: repeat the symbol this many times fewer."
+        },
+        "ssh_only": {
+          "type": "boolean",
+          "default": true,
+          "description": "localip: show only when the shell forwards SSH_CONNECTION."
+        },
+        "allowed_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "direnv: $allowed for an allowed rc file."
+        },
+        "not_allowed_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "direnv: $allowed for an rc file not allowed yet."
+        },
+        "denied_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "direnv: $allowed for a denied rc file."
+        },
+        "loaded_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "direnv: $loaded when the rc file is loaded."
+        },
+        "unloaded_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "direnv: $loaded when it is not."
+        },
+        "pure_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "nix_shell: $state for IN_NIX_SHELL=pure."
+        },
+        "impure_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "nix_shell: $state for IN_NIX_SHELL=impure."
+        },
+        "unknown_msg": {
+          "$ref": "#/$defs/sym",
+          "description": "nix_shell: $state when detected by the heuristic."
+        },
+        "heuristic": {
+          "type": "boolean",
+          "default": false,
+          "description": "nix_shell: treat a PATH with /nix/store entries as a nix shell of unknown state."
+        },
+        "indicators": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "bash",
+              "fish",
+              "zsh",
+              "powershell",
+              "pwsh",
+              "ion",
+              "elvish",
+              "tcsh",
+              "xonsh",
+              "cmd",
+              "nu"
+            ]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/sym"
+          },
+          "description": "shell: indicator per shell name (defaults: Starship's bsh fsh zsh psh ...)."
+        },
+        "unknown_indicator": {
+          "$ref": "#/$defs/sym",
+          "description": "shell: indicator for a shell without one."
+        },
+        "state_symbols": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "agent_status: $symbol per state of the highlighted record (OSC 7501 states); unset states use the built-in tiers.",
+          "properties": {
+            "$comment": {
+              "type": "string"
+            },
+            "idle": {
+              "$ref": "#/$defs/sym"
+            },
+            "working": {
+              "$ref": "#/$defs/sym"
+            },
+            "done": {
+              "$ref": "#/$defs/sym"
+            },
+            "blocked": {
+              "$ref": "#/$defs/sym"
+            },
+            "error": {
+              "$ref": "#/$defs/sym"
+            }
+          }
+        },
+        "max_width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "agent_status: $msg is cut to this many columns (default 40)."
+        },
+        "icon_padding": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "starship_config": {
+          "type": "string",
+          "pattern": "^/[^\\u0000]*$",
+          "description": "Absolute source TOML for a Starship bridge. When omitted, Starship uses its environment/default config."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "type",
+              "success_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "character",
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "error_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "character",
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "error_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "character"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "text"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "os_symbols"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "os"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "variable"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "env_var"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "number_threshold"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "jobs"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "symbol_threshold"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "jobs"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "show_always"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "username"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "time_format"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "time"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "use_12hr"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "time"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "utc_time_offset"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "time"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "time_range"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "time"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "truncation_length"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory",
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "truncation_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory",
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "home_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "substitutions"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "truncate_to_repo"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "repo_root_format"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "read_only"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "read_only_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "fish_style_pwd_dir_length"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "use_logical_path"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "repo_root_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "before_repo_root_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "directory"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "ignore_branches"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "only_attached"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "always_show_remote"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "ignore_submodules"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git",
+                  "git_metrics"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "branch_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "status_symbols"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "show_counts"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "show_state"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "state_labels"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "state_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "min_time"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "duration"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "show_milliseconds"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "duration"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "trim_at"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "hostname"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "aliases"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "hostname",
+                  "username"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "detect_env_vars"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "hostname",
+                  "username",
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "success_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "not_executable_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "not_found_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "sigint_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "signal_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "map_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "recognize_signal_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "exit_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "display_private"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "package"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "commit_hash_length"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_commit"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "only_detached"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_commit"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "tag_disabled"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_commit"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "tag_max_candidates"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_commit"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "tag_symbol"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_commit"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "added_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_metrics"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "deleted_style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_metrics"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "only_nonzero_diffs"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "git_metrics"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "threshold"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "shlvl",
+                  "memory_usage"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "repeat"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "shlvl"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "repeat_offset"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "shlvl"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "ssh_only"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "localip"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "allowed_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "not_allowed_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "denied_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "loaded_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "unloaded_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "pure_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "nix_shell"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "impure_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "nix_shell"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "unknown_msg"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "nix_shell"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "heuristic"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "nix_shell"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "indicators"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "shell"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "unknown_indicator"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "shell"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "language"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "language"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "version_format"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "language",
+                  "python",
+                  "command",
+                  "package"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "module"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "starship"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "detect_files"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "command",
+                  "language",
+                  "python",
+                  "docker_context",
+                  "starship",
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "detect_extensions"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "command",
+                  "language",
+                  "python",
+                  "docker_context",
+                  "starship",
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "detect_folders"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "command",
+                  "language",
+                  "python",
+                  "docker_context",
+                  "starship",
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "argv"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "command"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "regex"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "command"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "timeout_ms"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "command",
+                  "language",
+                  "python",
+                  "docker_context",
+                  "starship",
+                  "package",
+                  "git_commit",
+                  "git_metrics",
+                  "localip",
+                  "memory_usage",
+                  "sudo",
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "cache_ttl_s"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "command",
+                  "language",
+                  "python",
+                  "docker_context",
+                  "starship",
+                  "package",
+                  "git_commit",
+                  "git_metrics",
+                  "localip",
+                  "memory_usage",
+                  "sudo",
+                  "direnv"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "const": "text"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "text"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "const": "env_var"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "variable"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "const": "language"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "language"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "const": "starship"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "module"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "const": "command"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "argv"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "state_symbols"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "agent_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "max_width"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "agent_status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type",
+              "starship_config"
+            ]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "starship"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

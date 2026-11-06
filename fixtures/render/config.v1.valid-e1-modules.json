@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "$comment": "M2 task E1: every Starship-parity module added natively, plus new options of existing modules (render goldens e1_*).",
+  "add_newline": true,
+  "command_timeout_ms": 700,
+  "modules": {
+    "cwd": {
+      "type": "directory",
+      "fish_style_pwd_dir_length": 1,
+      "repo_root_style": { "foreground": "blue", "bold": true },
+      "format": "$path$read_only",
+      "read_only": { "nerd": " ", "ascii": " RO" },
+      "read_only_style": { "foreground": "red" },
+      "style": { "foreground": "cyan" }
+    },
+    "git": {
+      "type": "git",
+      "truncation_length": 8,
+      "format": "($branch_symbol )$branch(:$remote_branch)( $status)",
+      "status_symbols": { "up_to_date": { "unicode": "✓", "ascii": "=" } },
+      "style": { "foreground": "magenta" }
+    },
+    "gc": { "type": "git_commit", "only_detached": false, "tag_disabled": false, "style": { "foreground": "green" } },
+    "gm": { "type": "git_metrics" },
+    "pkg": { "type": "package", "style": { "foreground": "208" } },
+    "lvl": { "type": "shlvl", "style": { "foreground": "yellow" } },
+    "nix": { "type": "nix_shell", "style": { "foreground": "blue" } },
+    "de": { "type": "direnv", "style": { "foreground": "yellow" } },
+    "mem": { "type": "memory_usage", "threshold": -1, "style": { "dim": true } },
+    "ip": { "type": "localip", "ssh_only": false },
+    "su": { "type": "sudo", "style": { "foreground": "blue" } },
+    "sh": { "type": "shell", "indicators": { "zsh": { "nerd": "", "ascii": "zsh" } } },
+    "st": {
+      "type": "exit_status",
+      "format": "$symbol$common_meaning$signal_name$maybe_int",
+      "map_symbol": true,
+      "error_style": { "foreground": "red" }
+    },
+    "t": { "type": "time", "use_12hr": true, "utc_time_offset": "-5", "time_range": "-" },
+    "char": { "type": "character" }
+  },
+  "layout": {
+    "rows": [
+      { "left": ["cwd", "git", "gc", "gm", "pkg", "lvl", "nix", "de", "mem", "ip", "su", "sh"] },
+      { "left": ["char"], "right": ["st", "t"] }
+    ]
+  }
+}

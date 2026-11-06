@@ -1,0 +1,344 @@
+{
+  "api_version": 1,
+  "ok": true,
+  "data": {
+    "api_version": 1,
+    "schema_version": 1,
+    "protocol_version": 1,
+    "binary_version": "0.3.0-m3",
+    "shells": [
+      "zsh"
+    ],
+    "module_types": [
+      "directory",
+      "git",
+      "exit_status",
+      "duration",
+      "hostname",
+      "agent_status",
+      "command",
+      "character",
+      "time",
+      "username",
+      "jobs",
+      "python",
+      "docker_context",
+      "language",
+      "starship",
+      "text",
+      "os",
+      "fill",
+      "env_var",
+      "changes"
+    ],
+    "rule_operators": [
+      "eq",
+      "ne",
+      "gt",
+      "lt",
+      "ge",
+      "le",
+      "in"
+    ],
+    "symbol_tiers": [
+      "unicode",
+      "nerd",
+      "ascii"
+    ],
+    "history_modes": [
+      "compact",
+      "full"
+    ],
+    "presets": [
+      {
+        "name": "plain",
+        "description": "Tildy 默认的朴素外观：单行、无背景色，Nerd 字体层显示图标",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy",
+        "palette": null
+      },
+      {
+        "name": "pastel-powerline",
+        "description": "粉彩 powerline 两行布局，含用户、目录、Git、语言、时间，第二行 ❯",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 pastel-powerline（作者的变体）",
+        "palette": null
+      },
+      {
+        "name": "tokyo-night",
+        "description": "Tokyo Night 深蓝渐变 powerline：░▒▓ 起头、苹果图标、圆角分隔，第二行 ❯",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 tokyo-night",
+        "palette": null
+      },
+      {
+        "name": "gruvbox-rainbow",
+        "description": "Gruvbox 暖色彩虹 powerline：系统图标、用户、目录、Git、语言、conda、时间，第二行 Nerd 箭头",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 gruvbox-rainbow",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-powerline",
+        "description": "Catppuccin Mocha（深色）彩色 powerline 单行，含命令耗时与 ❯",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (mocha)",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-latte",
+        "description": "Catppuccin Latte（浅色背景用）配色的同款 powerline 单行",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (latte)",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-frappe",
+        "description": "Catppuccin Frappé（中深色）配色的同款 powerline 单行",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (frappe)",
+        "palette": null
+      },
+      {
+        "name": "catppuccin-macchiato",
+        "description": "Catppuccin Macchiato（深色）配色的同款 powerline 单行",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 catppuccin-powerline (macchiato)",
+        "palette": null
+      },
+      {
+        "name": "jetpack",
+        "description": "Jetpack 极简左侧 ◎，目录、Git、语言、时间放在右侧（RPROMPT），几何符号无需 Nerd 字体",
+        "nerd_font": "no",
+        "symbols": "auto",
+        "source": "starship 1.24.2 jetpack",
+        "palette": null
+      },
+      {
+        "name": "pure-preset",
+        "description": "仿 Pure：目录、灰色分支与 * 脏标记、命令耗时，第二行紫色 ❯",
+        "nerd_font": "no",
+        "symbols": "auto",
+        "source": "starship 1.24.2 pure-preset",
+        "palette": null
+      },
+      {
+        "name": "bracketed-segments",
+        "description": "Starship 默认外观，各模块用方括号包起来紧挨排列",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "starship 1.24.2 bracketed-segments",
+        "palette": null
+      },
+      {
+        "name": "nerd-font-symbols",
+        "description": "Starship 默认外观，语言与工具全部换成 Nerd 字体图标",
+        "nerd_font": "required",
+        "symbols": "nerd",
+        "source": "starship 1.24.2 nerd-font-symbols",
+        "palette": null
+      },
+      {
+        "name": "no-empty-icons",
+        "description": "Starship 默认外观；工具未安装时不显示空图标（tildy 本来就如此）",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "starship 1.24.2 no-empty-icons",
+        "palette": null
+      },
+      {
+        "name": "no-nerd-font",
+        "description": "Starship 默认外观，不用任何 Nerd 字体字形（固定 unicode 层）",
+        "nerd_font": "no",
+        "symbols": "unicode",
+        "source": "starship 1.24.2 no-nerd-font",
+        "palette": null
+      },
+      {
+        "name": "no-runtime-versions",
+        "description": "Starship 默认外观，只显示语言图标、不显示版本号",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "starship 1.24.2 no-runtime-versions",
+        "palette": null
+      },
+      {
+        "name": "plain-text-symbols",
+        "description": "Starship 默认外观，全部符号换成纯文字（固定 ascii 层）",
+        "nerd_font": "no",
+        "symbols": "ascii",
+        "source": "starship 1.24.2 plain-text-symbols",
+        "palette": null
+      },
+      {
+        "name": "powerline",
+        "description": "按角色着色的 powerline 两行：用户、目录、Git、语言、时间，第二行 ❯；用 palette 换色",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy（pastel-powerline 的结构，按调色板角色着色）",
+        "palette": "catppuccin-mocha"
+      },
+      {
+        "name": "lean",
+        "description": "仿 p10k lean：两行、无背景，左侧目录与 Git，第一行右侧状态、耗时与时间，第二行 ❯",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy（Powerlevel10k lean 布局）",
+        "palette": "tokyo-night"
+      },
+      {
+        "name": "classic",
+        "description": "仿 p10k classic：中性底色的 powerline，两侧细分隔，第一行右侧状态与时间，第二行 ❯",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy（Powerlevel10k classic 布局）",
+        "palette": "one-dark"
+      },
+      {
+        "name": "rainbow",
+        "description": "仿 p10k rainbow：每段一种底色的 powerline，第一行右侧状态、耗时与时间，第二行 ❯",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy（Powerlevel10k rainbow 布局）",
+        "palette": "gruvbox-dark"
+      },
+      {
+        "name": "minimal",
+        "description": "极简单行：目录、Git 分支与状态标记、❯",
+        "nerd_font": "optional",
+        "symbols": "auto",
+        "source": "tildy",
+        "palette": "nord"
+      }
+    ],
+    "palettes": [
+      {
+        "name": "dracula",
+        "description": "Dracula：深紫灰底，粉、紫、青、绿高饱和点缀",
+        "variant": "dark",
+        "source": "https://draculatheme.com/spec"
+      },
+      {
+        "name": "nord",
+        "description": "Nord：北极冷色调，蓝灰底配霜蓝与极光色",
+        "variant": "dark",
+        "source": "https://www.nordtheme.com/docs/colors-and-palettes"
+      },
+      {
+        "name": "solarized-dark",
+        "description": "Solarized 深色：墨绿底，经典低对比 16 色",
+        "variant": "dark",
+        "source": "https://ethanschoonover.com/solarized"
+      },
+      {
+        "name": "solarized-light",
+        "description": "Solarized 浅色：米白底（浅色终端用）",
+        "variant": "light",
+        "source": "https://ethanschoonover.com/solarized"
+      },
+      {
+        "name": "one-dark",
+        "description": "One Dark：Atom 默认深色，灰底配柔和蓝紫",
+        "variant": "dark",
+        "source": "https://github.com/joshdick/onedark.vim"
+      },
+      {
+        "name": "rose-pine",
+        "description": "Rosé Pine：暗紫底，玫瑰、金、松绿的柔和色",
+        "variant": "dark",
+        "source": "https://rosepinetheme.com/palette"
+      },
+      {
+        "name": "everforest",
+        "description": "Everforest：森林绿灰底，暖色低饱和",
+        "variant": "dark",
+        "source": "https://github.com/sainnhe/everforest"
+      },
+      {
+        "name": "kanagawa",
+        "description": "Kanagawa（wave）：浮世绘靛蓝底，暗金与樱粉",
+        "variant": "dark",
+        "source": "https://github.com/rebelot/kanagawa.nvim"
+      },
+      {
+        "name": "gruvbox-dark",
+        "description": "Gruvbox 深色：复古暖棕底，亮橙黄绿",
+        "variant": "dark",
+        "source": "https://github.com/morhetz/gruvbox"
+      },
+      {
+        "name": "tokyo-night",
+        "description": "Tokyo Night（night）：深夜蓝底，霓虹蓝紫",
+        "variant": "dark",
+        "source": "https://github.com/folke/tokyonight.nvim"
+      },
+      {
+        "name": "catppuccin-latte",
+        "description": "Catppuccin Latte：浅色（浅色终端用）",
+        "variant": "light",
+        "source": "https://github.com/catppuccin/palette"
+      },
+      {
+        "name": "catppuccin-frappe",
+        "description": "Catppuccin Frappé：中深色",
+        "variant": "dark",
+        "source": "https://github.com/catppuccin/palette"
+      },
+      {
+        "name": "catppuccin-macchiato",
+        "description": "Catppuccin Macchiato：深色",
+        "variant": "dark",
+        "source": "https://github.com/catppuccin/palette"
+      },
+      {
+        "name": "catppuccin-mocha",
+        "description": "Catppuccin Mocha：最深的粉彩深色",
+        "variant": "dark",
+        "source": "https://github.com/catppuccin/palette"
+      }
+    ],
+    "palette_roles": [
+      "bg1",
+      "bg2",
+      "bg3",
+      "bg4",
+      "bg5",
+      "bg6",
+      "fg",
+      "fg_dim",
+      "surface",
+      "accent",
+      "ok",
+      "warn",
+      "err",
+      "info"
+    ],
+    "config": {
+      "path": "/Users/example/.config/tildy/config.json",
+      "exists": false,
+      "valid": true,
+      "error": null,
+      "revision": "builtin"
+    },
+    "diagnostics": {
+      "snapshot_schema_version": 1,
+      "timing_history_limit": 32,
+      "snapshot_schema": "schema/snapshot.schema.json",
+      "active_session_env": "TILDY_SESSION_ID"
+    }
+  },
+  "error": {
+    "code": "ok",
+    "path": null,
+    "message": null,
+    "hint": null
+  }
+}

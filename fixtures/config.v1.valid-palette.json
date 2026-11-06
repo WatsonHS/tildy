@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "$comment": "A role-based preset recolored by a built-in palette, one role tweaked, plus a user palette color used in a style and a span.",
+  "preset": "powerline",
+  "palette": "nord",
+  "palettes": {
+    "$comment": "palettes.nord merges over the built-in nord palette key by key",
+    "nord": {
+      "bg2": "#5E81AC",
+      "brand": "#ff8800"
+    }
+  },
+  "modules": {
+    "time": {
+      "style": {
+        "background": "brand",
+        "foreground": "nord0"
+      },
+      "format": "[$time](bold fg:nord6)"
+    }
+  }
+}

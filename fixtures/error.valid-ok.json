@@ -1,0 +1,11 @@
+{
+  "api_version": 0,
+  "ok": true,
+  "data": { "valid": true, "config_revision": "cfg-0f3c9b" },
+  "error": {
+    "code": "ok",
+    "path": null,
+    "message": null,
+    "hint": null
+  }
+}

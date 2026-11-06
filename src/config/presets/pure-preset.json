@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "$comment": "Port of Starship 1.24.2's `pure-preset` preset (fixtures/import/presets/pure-preset.toml, imported with `tildy::import` in commands mode, then finished by hand). Differences: tildy draws the git operation (REBASING 1/2) after the status instead of between branch and status; vi-mode symbols are not supported.",
+  "modules": {
+    "char": {
+      "error_style": {
+        "foreground": "red"
+      },
+      "success_style": {
+        "foreground": "magenta"
+      },
+      "symbol": {
+        "ascii": ">",
+        "unicode": "❯"
+      },
+      "type": "character",
+      "priority": 100
+    },
+    "cwd": {
+      "format": "$path ",
+      "style": {
+        "foreground": "blue"
+      },
+      "truncation_length": 3,
+      "truncation_symbol": "",
+      "type": "directory",
+      "priority": 100
+    },
+    "duration": {
+      "format": "$human ",
+      "show_when": {
+        "field": "command.duration_ms",
+        "op": "ge",
+        "value": 2000
+      },
+      "style": {
+        "foreground": "yellow"
+      },
+      "type": "duration",
+      "priority": 40
+    },
+    "git": {
+      "branch_symbol": {
+        "ascii": "git ",
+        "nerd": " ",
+        "unicode": "⎇ "
+      },
+      "format": "[$branch](fg:8)[[(*$conflicted$untracked$modified$staged$renamed$deleted)](fg:218) ($ahead_behind$stashed)](fg:cyan)",
+      "state_style": {
+        "foreground": "8"
+      },
+      "status_symbols": {
+        "ahead": {
+          "unicode": "⇡",
+          "ascii": "^"
+        },
+        "behind": {
+          "unicode": "⇣",
+          "ascii": "v"
+        },
+        "conflicted": "​",
+        "deleted": "​",
+        "diverged": {
+          "unicode": "⇕",
+          "ascii": "^v"
+        },
+        "modified": "​",
+        "renamed": "​",
+        "staged": "​",
+        "stashed": {
+          "unicode": "≡",
+          "ascii": "$"
+        },
+        "untracked": "​"
+      },
+      "type": "git",
+      "priority": 80
+    },
+    "host": {
+      "format": "[$symbol$host](bold dimmed fg:green) in ",
+      "show_when": {
+        "field": "session.ssh",
+        "op": "eq",
+        "value": true
+      },
+      "symbol": {
+        "ascii": "ssh ",
+        "unicode": "🌐 "
+      },
+      "type": "hostname",
+      "priority": 60
+    },
+    "py": {
+      "$comment": "detect_files [\"/\"] never matches (Starship's empty detection lists)",
+      "detect_files": [
+        "/"
+      ],
+      "format": "$env ",
+      "style": {
+        "foreground": "8"
+      },
+      "symbol": {
+        "ascii": "py ",
+        "unicode": "🐍 "
+      },
+      "type": "python",
+      "priority": 30
+    },
+    "user": {
+      "format": "[$user](bold fg:yellow) in ",
+      "show_always": false,
+      "type": "username",
+      "priority": 90
+    },
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "style": {
+        "foreground": "yellow"
+      }
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "left": [
+          "user",
+          "host",
+          "cwd",
+          "git",
+          "changes",
+          "duration"
+        ],
+        "separator": ""
+      },
+      {
+        "left": [
+          "py",
+          "char"
+        ]
+      }
+    ]
+  }
+}

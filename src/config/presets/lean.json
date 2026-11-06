@@ -1,0 +1,195 @@
+{
+  "$comment": "Powerlevel10k lean (config/p10k-lean.zsh, two lines): directory and git on the left; status (errors only), duration (3 s and up), background jobs, virtualenv, user@host over SSH and time right-aligned on the first line; ❯ on the second. No backgrounds; colors from the palette roles accent/ok/warn/err/info/fg_dim.",
+  "palette": "tokyo-night",
+  "modules": {
+    "cwd": {
+      "type": "directory",
+      "priority": 100,
+      "truncation_length": 5,
+      "truncate_to_repo": false,
+      "truncation_symbol": {
+        "unicode": "…/",
+        "ascii": ".../"
+      },
+      "style": {
+        "foreground": "accent",
+        "bold": true
+      }
+    },
+    "git": {
+      "type": "git",
+      "priority": 80,
+      "branch_symbol": {
+        "nerd": " ",
+        "unicode": "",
+        "ascii": ""
+      },
+      "format": "$branch_symbol$branch( $ahead_behind)( $stashed)( $conflicted)( $staged)( $modified)( $renamed)( $deleted)( $untracked)",
+      "status_symbols": {
+        "conflicted": "[~$count](fg:err)",
+        "ahead": {
+          "unicode": "[⇡$count](fg:ok)",
+          "ascii": "[^$count](fg:ok)"
+        },
+        "behind": {
+          "unicode": "[⇣$count](fg:ok)",
+          "ascii": "[v$count](fg:ok)"
+        },
+        "diverged": {
+          "unicode": "[⇣$behind_count⇡$ahead_count](fg:ok)",
+          "ascii": "[v$behind_count^$ahead_count](fg:ok)"
+        },
+        "untracked": "[?$count](fg:info)",
+        "stashed": "[*$count](fg:ok)",
+        "modified": "[!$count](fg:warn)",
+        "staged": "[+$count](fg:warn)",
+        "renamed": {
+          "unicode": "[»$count](fg:warn)",
+          "ascii": "[>$count](fg:warn)"
+        },
+        "deleted": {
+          "unicode": "[✘$count](fg:warn)",
+          "ascii": "[x$count](fg:warn)"
+        }
+      },
+      "state_style": {
+        "foreground": "err"
+      },
+      "style": {
+        "foreground": "ok"
+      },
+      "rules": [
+        {
+          "id": "not_fresh",
+          "when": {
+            "field": "git.freshness",
+            "op": "in",
+            "value": [
+              "pending",
+              "stale"
+            ]
+          },
+          "style": {
+            "foreground": "fg_dim"
+          }
+        }
+      ]
+    },
+    "status": {
+      "type": "exit_status",
+      "priority": 100,
+      "symbol": {
+        "unicode": "✘",
+        "ascii": "x"
+      },
+      "style": {
+        "foreground": "err"
+      }
+    },
+    "elapsed": {
+      "type": "duration",
+      "priority": 40,
+      "format": "$human",
+      "show_when": {
+        "field": "command.duration_ms",
+        "op": "ge",
+        "value": 3000
+      },
+      "style": {
+        "foreground": "warn"
+      }
+    },
+    "jobs": {
+      "type": "jobs",
+      "priority": 50,
+      "symbol": {
+        "nerd": "",
+        "unicode": "✦",
+        "ascii": "&"
+      },
+      "number_threshold": 1000,
+      "style": {
+        "foreground": "ok"
+      }
+    },
+    "venv": {
+      "$comment": "python virtualenv/conda name only; detect_files [\"/\"] never matches, so no version command runs",
+      "type": "python",
+      "priority": 30,
+      "format": "$env",
+      "detect_files": [
+        "/"
+      ],
+      "style": {
+        "foreground": "info"
+      }
+    },
+    "context": {
+      "type": "hostname",
+      "priority": 60,
+      "show_when": {
+        "field": "session.ssh",
+        "op": "eq",
+        "value": true
+      },
+      "style": {
+        "foreground": "warn"
+      }
+    },
+    "time": {
+      "type": "time",
+      "priority": 10,
+      "time_format": "%T",
+      "style": {
+        "foreground": "fg_dim"
+      }
+    },
+    "char": {
+      "type": "character",
+      "priority": 100,
+      "symbol": {
+        "unicode": "❯",
+        "ascii": ">"
+      },
+      "success_style": {
+        "foreground": "ok",
+        "bold": true
+      },
+      "error_style": {
+        "foreground": "err",
+        "bold": true
+      }
+    },
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "style": {
+        "foreground": "yellow"
+      }
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "left": [
+          "cwd",
+          "git",
+          "changes"
+        ],
+        "right": [
+          "status",
+          "elapsed",
+          "jobs",
+          "venv",
+          "context",
+          "time"
+        ]
+      },
+      {
+        "left": [
+          "char"
+        ]
+      }
+    ]
+  }
+}

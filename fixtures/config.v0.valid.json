@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "$comment": "个人日用配置",
+  "modules": {
+    "cwd": { "type": "directory", "priority": 100 },
+    "git_main": {
+      "type": "git",
+      "priority": 80,
+      "rules": [
+        {
+          "id": "dirty_color",
+          "when": { "field": "git.state", "op": "eq", "value": "dirty" },
+          "style": { "foreground": "yellow" }
+        }
+      ]
+    },
+    "ssh_host": {
+      "type": "hostname",
+      "priority": 60,
+      "show_when": { "field": "session.ssh", "op": "eq", "value": true }
+    },
+    "elapsed": {
+      "type": "duration",
+      "priority": 30,
+      "show_when": { "field": "command.duration_ms", "op": "gt", "value": 3000 }
+    },
+    "node": {
+      "type": "command",
+      "priority": 20,
+      "argv": ["node", "--version"],
+      "timeout_ms": 300,
+      "cache_ttl_s": 60,
+      "show_when": { "field": "cwd.has_file", "op": "eq", "value": "package.json" }
+    },
+    "agent": { "type": "agent_status", "priority": 90 },
+    "result": { "type": "exit_status", "priority": 100 }
+  },
+  "layout": {
+    "rows": [
+      { "left": ["cwd", "git_main", "ssh_host", "result"], "right": ["agent", "elapsed", "node"] }
+    ]
+  },
+  "history": { "mode": "compact" }
+}

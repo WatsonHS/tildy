@@ -1,0 +1,52 @@
+{
+  "symbols": "unicode",
+  "config": "preset:pastel-powerline",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/code/tildy",
+      "cols": 32,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 0,
+      "env": ""
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": true,
+        "git_dir": "/Users/u/code/tildy/.git",
+        "worktree_root": "/Users/u/code/tildy",
+        "worktree_id": "x",
+        "branch": "中文👩‍💻-very-long-branch-name-for-narrow-terminal",
+        "detached": false,
+        "unborn": false,
+        "head_short": "abc1234",
+        "upstream": "origin/main",
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0,
+        "conflicted": 0,
+        "incomplete": false,
+        "state": "clean"
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {},
+    "changes": {
+      "branch_from": "main",
+      "branch_to": "中文👩‍💻-very-long-branch-name-for-narrow-terminal",
+      "files_added": 3,
+      "environments": []
+    }
+  },
+  "now": "2026-10-19T14:05:00"
+}

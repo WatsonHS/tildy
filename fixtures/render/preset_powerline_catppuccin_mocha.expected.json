@@ -1,0 +1,176 @@
+{
+  "columns": [
+    0,
+    81,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main ──\n%B%F{#a6e3a1}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%K{#cba6f7}%F{#11111b}  %F{#11111b} ✦1 %F{#cba6f7}%K{#f38ba8}%F{#11111b} …/tildy %F{#f38ba8}%K{#fab387}%F{#11111b}  main !? %F{#fab387}%K{#74c7ec}%F{#11111b}  v22.3.0 %F{#11111b}  v3.12.1 (demo) %F{#74c7ec}%K{#a6adc8}%F{#11111b} took 3.2s %F{#11111b} ♥ 14:05 %k%F{#a6adc8}%f",
+      "%B%F{#a6e3a1}❯%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#a6e3a1}❯%f%b "
+  },
+  "reports": [
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "user",
+      "module_type": "username",
+      "rules_hit": [],
+      "text": "",
+      "visible": true
+    },
+    {
+      "columns": 2,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "✦1",
+      "visible": true
+    },
+    {
+      "columns": 7,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "…/tildy",
+      "visible": true
+    },
+    {
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": " main !?",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "c",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "go",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "java",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "node",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": " v22.3.0",
+      "visible": true
+    },
+    {
+      "columns": 16,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "py",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": " v3.12.1 (demo)",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "rust",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "docker",
+      "module_type": "docker_context",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 9,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "took 3.2s",
+      "visible": true
+    },
+    {
+      "columns": 7,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "♥ 14:05",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

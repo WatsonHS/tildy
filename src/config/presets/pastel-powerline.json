@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "$comment": "Pastel Powerline: reproduces Starship's preset of the same name as configured in the author's starship.toml. 该预设依赖 Nerd Font，symbols 固定为 nerd，在任何终端都显示图标；用户文件可覆盖为 auto。",
+  "symbols": "nerd",
+  "modules": {
+    "user": {
+      "type": "username",
+      "priority": 90,
+      "show_always": true,
+      "symbol": {
+        "nerd": "",
+        "unicode": "",
+        "ascii": "u"
+      },
+      "style": {
+        "background": "#9A348E"
+      }
+    },
+    "host": {
+      "type": "hostname",
+      "priority": 60,
+      "show_when": {
+        "field": "session.ssh",
+        "op": "eq",
+        "value": true
+      },
+      "format": "$host",
+      "style": {
+        "background": "#9A348E"
+      }
+    },
+    "cwd": {
+      "type": "directory",
+      "priority": 100,
+      "truncation_length": 3,
+      "truncation_symbol": {
+        "unicode": "…/",
+        "ascii": ".../"
+      },
+      "substitutions": {
+        "Documents": {
+          "nerd": " "
+        },
+        "Downloads": {
+          "nerd": " "
+        },
+        "Music": {
+          "nerd": " "
+        },
+        "Pictures": {
+          "nerd": " "
+        }
+      },
+      "style": {
+        "background": "#DA627D"
+      }
+    },
+    "git": {
+      "type": "git",
+      "priority": 80,
+      "branch_symbol": {
+        "nerd": "",
+        "unicode": "⎇",
+        "ascii": "git"
+      },
+      "status_symbols": {
+        "conflicted": "=",
+        "ahead": {
+          "unicode": "⇡",
+          "ascii": "^"
+        },
+        "behind": {
+          "unicode": "⇣",
+          "ascii": "v"
+        },
+        "diverged": {
+          "unicode": "⇕",
+          "ascii": "^v"
+        },
+        "untracked": "?",
+        "stashed": "$",
+        "modified": "!",
+        "staged": "+",
+        "renamed": {
+          "unicode": "»",
+          "ascii": ">"
+        },
+        "deleted": {
+          "unicode": "✘",
+          "ascii": "x"
+        }
+      },
+      "style": {
+        "background": "#FCA17D"
+      }
+    },
+    "commit": {
+      "type": "git_commit",
+      "priority": 70,
+      "style": {
+        "background": "#FCA17D"
+      }
+    },
+    "c": {
+      "type": "language",
+      "priority": 20,
+      "language": "c",
+      "symbol": {
+        "nerd": " ",
+        "unicode": "c",
+        "ascii": "c"
+      },
+      "style": {
+        "background": "#86BBD8"
+      }
+    },
+    "elixir": {
+      "type": "starship",
+      "priority": 20,
+      "module": "elixir",
+      "style": {
+        "background": "#86BBD8"
+      },
+      "detect_files": [
+        "mix.exs"
+      ]
+    },
+    "elm": {
+      "type": "starship",
+      "priority": 20,
+      "module": "elm",
+      "style": {
+        "background": "#86BBD8"
+      },
+      "detect_files": [
+        "elm.json",
+        "elm-package.json",
+        ".elm-version"
+      ],
+      "detect_folders": [
+        "elm-stuff"
+      ],
+      "detect_extensions": [
+        "elm"
+      ]
+    },
+    "go": {
+      "type": "language",
+      "priority": 20,
+      "language": "golang",
+      "symbol": {
+        "nerd": " ",
+        "unicode": "go",
+        "ascii": "go"
+      },
+      "style": {
+        "background": "#86BBD8"
+      }
+    },
+    "haskell": {
+      "type": "starship",
+      "priority": 20,
+      "module": "haskell",
+      "style": {
+        "background": "#86BBD8"
+      },
+      "detect_files": [
+        "stack.yaml",
+        "cabal.project"
+      ],
+      "detect_extensions": [
+        "hs",
+        "cabal",
+        "hs-boot"
+      ]
+    },
+    "java": {
+      "type": "language",
+      "priority": 20,
+      "language": "java",
+      "symbol": {
+        "nerd": " ",
+        "unicode": "java",
+        "ascii": "java"
+      },
+      "style": {
+        "background": "#86BBD8"
+      }
+    },
+    "julia": {
+      "type": "starship",
+      "priority": 20,
+      "module": "julia",
+      "style": {
+        "background": "#86BBD8"
+      },
+      "detect_files": [
+        "Project.toml",
+        "Manifest.toml"
+      ],
+      "detect_extensions": [
+        "jl"
+      ]
+    },
+    "node": {
+      "type": "language",
+      "priority": 20,
+      "language": "nodejs",
+      "symbol": {
+        "nerd": "",
+        "unicode": "⬢",
+        "ascii": "node"
+      },
+      "style": {
+        "background": "#86BBD8"
+      }
+    },
+    "nim": {
+      "type": "starship",
+      "priority": 20,
+      "module": "nim",
+      "style": {
+        "background": "#86BBD8"
+      },
+      "detect_files": [
+        "nim.cfg"
+      ],
+      "detect_extensions": [
+        "nim",
+        "nims",
+        "nimble"
+      ]
+    },
+    "rust": {
+      "type": "language",
+      "priority": 20,
+      "language": "rust",
+      "symbol": {
+        "nerd": "",
+        "unicode": "rust",
+        "ascii": "rust"
+      },
+      "style": {
+        "background": "#86BBD8"
+      }
+    },
+    "docker": {
+      "type": "docker_context",
+      "priority": 30,
+      "symbol": {
+        "nerd": " ",
+        "unicode": "docker",
+        "ascii": "docker"
+      },
+      "style": {
+        "background": "#06969A"
+      }
+    },
+    "time": {
+      "type": "time",
+      "priority": 10,
+      "time_format": "%R",
+      "symbol": {
+        "unicode": "♥",
+        "ascii": ""
+      },
+      "format": "($symbol )$time",
+      "style": {
+        "background": "#33658A"
+      }
+    },
+    "char": {
+      "type": "character",
+      "priority": 100,
+      "symbol": {
+        "unicode": "❯",
+        "ascii": ">"
+      },
+      "success_style": {
+        "foreground": "green",
+        "bold": true
+      },
+      "error_style": {
+        "foreground": "red",
+        "bold": true
+      }
+    },
+    "status": {
+      "type": "exit_status",
+      "priority": 100,
+      "symbol": {
+        "unicode": "✘",
+        "ascii": "x"
+      },
+      "style": {
+        "foreground": "red",
+        "bold": true
+      }
+    },
+    "py": {
+      "type": "python",
+      "priority": 30,
+      "symbol": {
+        "nerd": "",
+        "unicode": "🐍",
+        "ascii": "py"
+      },
+      "format": "$symbol( $version)( \\($env\\))",
+      "style": {
+        "background": "#86BBD8"
+      }
+    },
+    "jobs": {
+      "type": "jobs",
+      "priority": 50,
+      "symbol": {
+        "unicode": "✦",
+        "ascii": "jobs"
+      },
+      "style": {
+        "background": "#9A348E"
+      }
+    },
+    "elapsed": {
+      "type": "duration",
+      "priority": 40,
+      "format": "$text",
+      "style": {
+        "background": "#33658A"
+      },
+      "show_when": {
+        "field": "command.duration_ms",
+        "op": "gt",
+        "value": 2000
+      }
+    },
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "style": {
+        "foreground": "yellow",
+        "background": "#FCA17D"
+      }
+    }
+  },
+  "layout": {
+    "$comment": "Row 1 follows the author's Starship format, plus four Starship defaults the author approved: jobs, py (python/conda env), elapsed (over 2 s) and the git in-progress state. Added 2026-10-20 at the author's request: host (SSH sessions only), commit (detached HEAD only) and status (non-zero exit code on row 2).",
+    "rows": [
+      {
+        "style": "powerline",
+        "separator": {
+          "nerd": "",
+          "ascii": ">"
+        },
+        "left": [
+          "user",
+          "host",
+          "jobs",
+          "cwd",
+          "git",
+          "changes",
+          "commit",
+          "c",
+          "elixir",
+          "elm",
+          "go",
+          "haskell",
+          "java",
+          "julia",
+          "node",
+          "nim",
+          "py",
+          "rust",
+          "docker",
+          "elapsed",
+          "time"
+        ]
+      },
+      {
+        "left": [
+          "status",
+          "char"
+        ]
+      }
+    ]
+  }
+}

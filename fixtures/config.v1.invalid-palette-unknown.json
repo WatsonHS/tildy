@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "$comment": "The active palette must be built in or defined under palettes (checked by validate.py and the loader, not by the schema).",
+  "preset": "lean",
+  "palette": "neon"
+}

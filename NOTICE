@@ -1,0 +1,49 @@
+Tildy — third-party notices
+==========================
+
+Tildy's original code is licensed under the MIT License; see LICENSE.
+Third-party material retains its original copyright and license.
+
+Starship presets and compatibility data
+---------------------------------------
+Source: https://github.com/starship/starship/tree/v1.24.2
+Version: 1.24.2
+Upstream files: docs/public/presets/toml/*.toml
+Local files: fixtures/import/presets/*.toml, their *.expected.json import
+goldens, fixtures/import/author-pastel-powerline.*, the benchmark preset in
+bench/zdotdir-starship_user/starship.toml, and the Starship-derived presets in
+src/config/presets/*.json.
+The Catppuccin preset is expanded into flavor variants; pastel-powerline
+adds a second prompt row and status modules. Tildy's importer translates
+the upstream TOML into Tildy's JSON configuration model.
+License: ISC; complete upstream notice in licenses/starship.txt.
+Directory/language/package/environment providers implement compatible
+behavior independently, as documented in their source headers.
+
+Color palettes
+--------------
+src/config/palettes/*.json expresses named upstream palettes in Tildy's
+format and adds semantic roles (bg1–bg6, accent, ok, warn, err, etc.).
+Source URLs and retrieved license texts are in licenses/sources.json and
+licenses/*.txt. Palette authors retain rights to their original material.
+The original import commit did not record exact palette revisions; these
+license copies were checked against upstream on 2026-11-07. This does not
+claim that the original revisions were pinned.
+
+Gruvbox colors: morhetz, https://github.com/morhetz/gruvbox.
+The upstream README identifies its license as MIT/X11. Attribution and
+license terms are reproduced in licenses/gruvbox.txt.
+
+Tokyo Night: https://github.com/folke/tokyonight.nvim, Apache-2.0.
+Only color data is adapted, with new Tildy semantic role mappings; no Vim/Lua
+implementation is included. See licenses/tokyo-night.txt.
+
+Powerlevel10k inspired the lean/classic layouts and prompt interaction design.
+Its implementation and fonts are not bundled. Nerd Font glyphs refer to fonts
+installed by the user; no font software is distributed with Tildy.
+
+Rust dependencies
+-----------------
+Cargo.lock records exact dependency versions. Release builds collect registry
+packages' license texts and metadata with scripts/collect-licenses.py and
+include them under licenses/dependencies in each binary archive.

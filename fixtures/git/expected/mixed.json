@@ -1,0 +1,18 @@
+{
+  "in_repo": true,
+  "branch": "main",
+  "detached": false,
+  "unborn": false,
+  "ahead": 0,
+  "behind": 0,
+  "staged": 1,
+  "unstaged": 1,
+  "untracked": 1,
+  "conflicted": 0,
+  "state": "dirty",
+  "renamed": 0,
+  "deleted": 0,
+  "stashed": 0,
+  "operation": null,
+  "operation_progress": null
+}

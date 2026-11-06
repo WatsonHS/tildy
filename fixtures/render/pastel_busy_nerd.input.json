@@ -1,0 +1,93 @@
+{
+  "symbols": "nerd",
+  "config": "preset:pastel-powerline",
+  "now": "2026-10-19T09:30:00",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/code/tildy/src/render/deep",
+      "cols": 120,
+      "lines": 40,
+      "last_exit": 1,
+      "last_duration_ms": 3200,
+      "env": "",
+      "jobs": 2
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": true,
+        "git_dir": "/Users/u/code/tildy/.git",
+        "worktree_root": "/Users/u/code/tildy",
+        "worktree_id": "x",
+        "branch": "main",
+        "detached": false,
+        "unborn": false,
+        "head_short": "abc1234",
+        "upstream": "origin/main",
+        "ahead": 1,
+        "behind": 3,
+        "staged": 2,
+        "unstaged": 1,
+        "untracked": 0,
+        "conflicted": 0,
+        "renamed": 1,
+        "deleted": 1,
+        "stashed": 1,
+        "incomplete": false,
+        "state": "dirty",
+        "operation": "rebase",
+        "operation_progress": [
+          2,
+          5
+        ]
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {
+      "py": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "3.12.1",
+          "fields": {
+            "version": "3.12.1",
+            "env": "venv"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "rust": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "1.80.0",
+          "fields": {
+            "version": "1.80.0"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "docker": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "colima",
+          "fields": {
+            "context": "colima"
+          },
+          "prerendered": null
+        },
+        "error": null
+      }
+    }
+  }
+}

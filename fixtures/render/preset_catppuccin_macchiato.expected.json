@@ -1,0 +1,204 @@
+{
+  "columns": [
+    0,
+    83
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "── tildy · main ──\n%B%F{#a6da95}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 2000
+    },
+    "left": [
+      "",
+      "%k%F{#ed8796}%K{#ed8796}%F{#181926}󰀵%F{#181926} u%F{#ed8796}%K{#f5a97f}%F{#181926} …/tildy %F{#f5a97f}%K{#eed49f}%F{#181926}  main !? %F{#eed49f}%K{#a6da95}%F{#181926}  v22.3.0 %F{#181926}  v3.12.1(#demo) %F{#a6da95}%K{#b7bdf8}%F{#181926}  14:05 %F{#b7bdf8}%k %f in 3s200ms %F{#a6da95}%B❯%b%k%f "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#a6da95}❯%f%b "
+  },
+  "reports": [
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "os",
+      "module_type": "os",
+      "rules_hit": [],
+      "text": "󰀵",
+      "visible": true
+    },
+    {
+      "columns": 2,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "user",
+      "module_type": "username",
+      "rules_hit": [],
+      "text": " u",
+      "visible": true
+    },
+    {
+      "columns": 7,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "…/tildy",
+      "visible": true
+    },
+    {
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": " main !?",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "c",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "rust",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "go",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 9,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "node",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": " v22.3.0",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "php",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "java",
+      "module_type": "language",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "kotlin",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": "fresh",
+      "hidden_reason": "not_detected",
+      "id": "haskell",
+      "module_type": "command",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 16,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "py",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": " v3.12.1(#demo)",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "conda",
+      "module_type": "env_var",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 7,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": " 14:05",
+      "visible": true
+    },
+    {
+      "columns": 13,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "duration",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": " in 3s200ms ",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

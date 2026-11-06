@@ -1,0 +1,284 @@
+{
+  "$comment": "Role-colored powerline: the structure of pastel-powerline (user, jobs, directory, git, languages, docker, duration, time; then a ❯ line) with every color taken from the palette roles bg1…bg6 (segments), fg (their text), ok/err (prompt character). Native modules only (no Starship bridge). Recolor with \"palette\"; see docs/palettes.md.",
+  "palette": "catppuccin-mocha",
+  "modules": {
+    "user": {
+      "type": "username",
+      "priority": 90,
+      "show_always": true,
+      "symbol": {
+        "nerd": "",
+        "unicode": "",
+        "ascii": "u"
+      },
+      "style": {
+        "background": "bg1",
+        "foreground": "fg"
+      }
+    },
+    "jobs": {
+      "type": "jobs",
+      "priority": 50,
+      "symbol": {
+        "unicode": "✦",
+        "ascii": "jobs"
+      },
+      "style": {
+        "background": "bg1",
+        "foreground": "fg"
+      }
+    },
+    "cwd": {
+      "type": "directory",
+      "priority": 100,
+      "truncation_length": 3,
+      "truncation_symbol": {
+        "unicode": "…/",
+        "ascii": ".../"
+      },
+      "substitutions": {
+        "Documents": {
+          "nerd": " "
+        },
+        "Downloads": {
+          "nerd": " "
+        },
+        "Music": {
+          "nerd": " "
+        },
+        "Pictures": {
+          "nerd": " "
+        }
+      },
+      "style": {
+        "background": "bg2",
+        "foreground": "fg"
+      }
+    },
+    "git": {
+      "type": "git",
+      "priority": 80,
+      "branch_symbol": {
+        "nerd": "",
+        "unicode": "⎇",
+        "ascii": "git"
+      },
+      "status_symbols": {
+        "conflicted": "=",
+        "ahead": {
+          "unicode": "⇡",
+          "ascii": "^"
+        },
+        "behind": {
+          "unicode": "⇣",
+          "ascii": "v"
+        },
+        "diverged": {
+          "unicode": "⇕",
+          "ascii": "^v"
+        },
+        "untracked": "?",
+        "stashed": "$",
+        "modified": "!",
+        "staged": "+",
+        "renamed": {
+          "unicode": "»",
+          "ascii": ">"
+        },
+        "deleted": {
+          "unicode": "✘",
+          "ascii": "x"
+        }
+      },
+      "style": {
+        "background": "bg3",
+        "foreground": "fg"
+      },
+      "state_style": {
+        "foreground": "fg",
+        "bold": true
+      }
+    },
+    "c": {
+      "type": "language",
+      "priority": 20,
+      "language": "c",
+      "symbol": {
+        "nerd": "",
+        "unicode": "c",
+        "ascii": "c"
+      },
+      "style": {
+        "background": "bg4",
+        "foreground": "fg"
+      }
+    },
+    "go": {
+      "type": "language",
+      "priority": 20,
+      "language": "golang",
+      "symbol": {
+        "nerd": "",
+        "unicode": "go",
+        "ascii": "go"
+      },
+      "style": {
+        "background": "bg4",
+        "foreground": "fg"
+      }
+    },
+    "java": {
+      "type": "language",
+      "priority": 20,
+      "language": "java",
+      "symbol": {
+        "nerd": "",
+        "unicode": "java",
+        "ascii": "java"
+      },
+      "style": {
+        "background": "bg4",
+        "foreground": "fg"
+      }
+    },
+    "node": {
+      "type": "language",
+      "priority": 20,
+      "language": "nodejs",
+      "symbol": {
+        "nerd": "",
+        "unicode": "⬢",
+        "ascii": "node"
+      },
+      "style": {
+        "background": "bg4",
+        "foreground": "fg"
+      }
+    },
+    "py": {
+      "type": "python",
+      "priority": 30,
+      "symbol": {
+        "nerd": "",
+        "unicode": "🐍",
+        "ascii": "py"
+      },
+      "format": "$symbol( $version)( \\($env\\))",
+      "style": {
+        "background": "bg4",
+        "foreground": "fg"
+      }
+    },
+    "rust": {
+      "type": "language",
+      "priority": 20,
+      "language": "rust",
+      "symbol": {
+        "nerd": "",
+        "unicode": "rust",
+        "ascii": "rust"
+      },
+      "style": {
+        "background": "bg4",
+        "foreground": "fg"
+      }
+    },
+    "docker": {
+      "type": "docker_context",
+      "priority": 30,
+      "symbol": {
+        "nerd": "",
+        "unicode": "docker",
+        "ascii": "docker"
+      },
+      "style": {
+        "background": "bg5",
+        "foreground": "fg"
+      }
+    },
+    "elapsed": {
+      "type": "duration",
+      "priority": 40,
+      "format": "$text",
+      "style": {
+        "background": "bg6",
+        "foreground": "fg"
+      },
+      "show_when": {
+        "field": "command.duration_ms",
+        "op": "gt",
+        "value": 2000
+      }
+    },
+    "time": {
+      "type": "time",
+      "priority": 10,
+      "time_format": "%R",
+      "symbol": {
+        "unicode": "♥",
+        "ascii": ""
+      },
+      "format": "($symbol )$time",
+      "style": {
+        "background": "bg6",
+        "foreground": "fg"
+      }
+    },
+    "char": {
+      "type": "character",
+      "priority": 100,
+      "symbol": {
+        "unicode": "❯",
+        "ascii": ">"
+      },
+      "success_style": {
+        "foreground": "ok",
+        "bold": true
+      },
+      "error_style": {
+        "foreground": "err",
+        "bold": true
+      }
+    },
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "style": {
+        "foreground": "yellow",
+        "background": "bg3"
+      }
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "style": "powerline",
+        "separator": {
+          "nerd": "",
+          "ascii": ">"
+        },
+        "left": [
+          "user",
+          "jobs",
+          "cwd",
+          "git",
+          "changes",
+          "c",
+          "go",
+          "java",
+          "node",
+          "py",
+          "rust",
+          "docker",
+          "elapsed",
+          "time"
+        ]
+      },
+      {
+        "left": [
+          "char"
+        ]
+      }
+    ]
+  }
+}

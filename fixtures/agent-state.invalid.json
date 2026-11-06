@@ -1,0 +1,8 @@
+{
+  "protocol_version": 1,
+  "app": "claude",
+  "state": "done",
+  "kind": "permission",
+  "scope": { "kind": "global", "id": "*" },
+  "seq": 4
+}

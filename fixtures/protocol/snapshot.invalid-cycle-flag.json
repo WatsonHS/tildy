@@ -1,0 +1,197 @@
+{
+  "kind": "tildy.session_snapshot",
+  "schema_version": 1,
+  "written_at_ms": 1792410969021,
+  "worker": {
+    "binary_version": "0.3.0-m3",
+    "protocol_version": 1,
+    "epoch": 5605965789659492,
+    "pid": 94909,
+    "parent_pid": null,
+    "started_at_ms": 1792410968996
+  },
+  "session_id": "schematest",
+  "config_revision": "builtin",
+  "request": {
+    "gen": 1,
+    "session_id": "schematest",
+    "cwd": "/Users/example/Development/tildy",
+    "cols": 100,
+    "lines": 30,
+    "last_exit": 0,
+    "last_duration_ms": 0,
+    "env": ""
+  },
+  "request_received_at_ms": 1792410968996,
+  "last_result": {
+    "gen": 1,
+    "status": "fresh",
+    "sent_at_ms": 1792410969021,
+    "latency_ms": 24.524,
+    "left_lines": 1,
+    "bytes": 105
+  },
+  "slots": [
+    {
+      "provider": "session/ssh",
+      "freshness": "fresh",
+      "age_ms": 24,
+      "error": null,
+      "fetching": false,
+      "scope": "global"
+    },
+    {
+      "provider": "session/hostname",
+      "freshness": "fresh",
+      "age_ms": 24,
+      "error": null,
+      "fetching": false,
+      "scope": "global"
+    },
+    {
+      "provider": "session/username",
+      "freshness": "fresh",
+      "age_ms": 24,
+      "error": null,
+      "fetching": false,
+      "scope": "global"
+    },
+    {
+      "provider": "git",
+      "freshness": "fresh",
+      "age_ms": 0,
+      "error": null,
+      "fetching": false,
+      "scope": "worktree:/Users/example/Development/tildy/.git@/Users/example/Development/tildy"
+    }
+  ],
+  "providers": [
+    {
+      "key": "session/ssh",
+      "runs": 1,
+      "errors": 0,
+      "last_ms": 0.002,
+      "p50_ms": 0.002,
+      "max_ms": 0.002,
+      "stats": {
+        "started": 1,
+        "completed": 1,
+        "cache_hits": 0,
+        "coalesced": 0,
+        "timeouts": 0,
+        "failed": 0,
+        "late": 0,
+        "dropped_queued": 0,
+        "abandoned_running": 0
+      }
+    },
+    {
+      "key": "session/hostname",
+      "runs": 1,
+      "errors": 0,
+      "last_ms": 0.006,
+      "p50_ms": 0.006,
+      "max_ms": 0.006,
+      "stats": {
+        "started": 1,
+        "completed": 1,
+        "cache_hits": 0,
+        "coalesced": 0,
+        "timeouts": 0,
+        "failed": 0,
+        "late": 0,
+        "dropped_queued": 0,
+        "abandoned_running": 0
+      }
+    },
+    {
+      "key": "session/username",
+      "runs": 1,
+      "errors": 0,
+      "last_ms": 0.005,
+      "p50_ms": 0.005,
+      "max_ms": 0.005,
+      "stats": {
+        "started": 1,
+        "completed": 1,
+        "cache_hits": 0,
+        "coalesced": 0,
+        "timeouts": 0,
+        "failed": 0,
+        "late": 0,
+        "dropped_queued": 0,
+        "abandoned_running": 0
+      }
+    },
+    {
+      "key": "git",
+      "runs": 1,
+      "errors": 0,
+      "last_ms": 24.109,
+      "p50_ms": 24.109,
+      "max_ms": 24.109,
+      "stats": {
+        "started": 1,
+        "completed": 1,
+        "cache_hits": 0,
+        "coalesced": 0,
+        "timeouts": 0,
+        "failed": 0,
+        "late": 0,
+        "dropped_queued": 0,
+        "abandoned_running": 0
+      }
+    }
+  ],
+  "counters": {
+    "requests": 1,
+    "dropped_requests": 0,
+    "protocol_errors": 0,
+    "partial_sent": 1,
+    "fresh_sent": 1
+  },
+  "degraded": [],
+  "watch": {
+    "mode": "fsevents",
+    "last_event_ms": 1792410969020,
+    "coalesced_events": 49,
+    "fallback_count": 0
+  },
+  "module_reports": [
+    {
+      "id": "git",
+      "module_type": "git",
+      "visible": false,
+      "hidden_reason": "no_room",
+      "text": "main",
+      "columns": 4,
+      "rules_hit": [
+        "dirty"
+      ],
+      "freshness": "stale",
+      "source": "builtin",
+      "age_ms": 2000,
+      "row": 0,
+      "side": "left",
+      "additional_columns": 5
+    }
+  ],
+  "timing_history": [
+    {
+      "gen": 1,
+      "at_ms": 1792410969021,
+      "providers": [
+        {
+          "provider": "git",
+          "duration_ms": 12,
+          "cache_hit": false,
+          "executed": "yes",
+          "timed_out": false,
+          "coalesced": true,
+          "coalesced_count": 1,
+          "completed": true
+        }
+      ]
+    }
+  ]
+}

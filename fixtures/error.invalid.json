@@ -1,0 +1,11 @@
+{
+  "api_version": 0,
+  "ok": false,
+  "data": { "valid": false },
+  "error": {
+    "code": "ok",
+    "path": null,
+    "message": null,
+    "hint": null
+  }
+}

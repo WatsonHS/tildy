@@ -1,0 +1,23 @@
+# Rust
+/target/
+# Python
+__pycache__/
+*.pyc
+# Local observations can contain paths, environment data and command output.
+/bench/results/
+/docs/*/evidence/
+/linux-results/
+/bench/results-quick/
+# Local shell state created by isolated ZDOTDIRs during tests
+/tests/pty/zdotdir/.zsh_history
+/tests/pty/zdotdir/.zcompdump*
+/bench/zdotdir-*/.zsh_history
+/bench/zdotdir-*/.zcompdump*
+/bench/zdotdir-*/cache/
+.DS_Store
+# Agent worktrees
+/.claude/
+/.codex/
+/.env
+/.env.*
+/.venv/

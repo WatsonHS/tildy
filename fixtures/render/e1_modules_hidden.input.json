@@ -1,0 +1,94 @@
+{
+  "symbols": "unicode",
+  "config": "render/config.v1.valid-e1-modules.json",
+  "now": "2026-10-19T14:05:09",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/Dev/Nix/nixpkgs",
+      "cols": 120,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 0,
+      "env": "",
+      "jobs": 0
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": true,
+        "git_dir": "/Users/u/Dev/Nix/nixpkgs/.git",
+        "worktree_root": "/Users/u/Dev/Nix/nixpkgs",
+        "worktree_id": "x",
+        "branch": "feature/fish-paths",
+        "detached": false,
+        "unborn": false,
+        "head_short": "abc1234",
+        "upstream": null,
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0,
+        "conflicted": 0,
+        "renamed": 0,
+        "deleted": 0,
+        "stashed": 0,
+        "incomplete": false,
+        "state": "clean"
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {
+      "gc": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "gm": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "",
+          "fields": {
+            "added": "0",
+            "deleted": "0"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "pkg": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "de": {
+        "freshness": "pending",
+        "age_ms": null,
+        "value": null,
+        "error": null
+      },
+      "mem": {
+        "freshness": "error",
+        "age_ms": null,
+        "value": null,
+        "error": "memory statistics are not available on this system"
+      },
+      "ip": {
+        "freshness": "timeout",
+        "age_ms": null,
+        "value": null,
+        "error": "timed out"
+      }
+    }
+  }
+}

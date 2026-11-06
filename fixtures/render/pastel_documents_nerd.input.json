@@ -1,0 +1,47 @@
+{
+  "symbols": "nerd",
+  "config": "preset:pastel-powerline",
+  "now": "2026-10-19T23:59:59",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/Documents/notes",
+      "cols": 120,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 0,
+      "env": "",
+      "jobs": 0
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": false,
+        "git_dir": null,
+        "worktree_root": null,
+        "worktree_id": null,
+        "branch": null,
+        "detached": false,
+        "unborn": false,
+        "head_short": null,
+        "upstream": null,
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0,
+        "conflicted": 0,
+        "incomplete": false,
+        "state": "unknown"
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {}
+  }
+}

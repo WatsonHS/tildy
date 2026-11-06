@@ -1,0 +1,126 @@
+{
+  "columns": [
+    0,
+    99,
+    2
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c226d6270225d",
+      "context_suffix": null,
+      "context_transient": "\n── tildy · main · mbp ──\n%B%F{#b8bb26}❯%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 3000
+    },
+    "left": [
+      "",
+      "%B%F{#83a598}~/code/tildy%f%b %F{#b8bb26}main ⇡2%f                                                            %F{#8ec07c}demo%f %F{#fabd2f}u@mbp%f %F{#928374}14:05:09%f",
+      "%B%F{#b8bb26}❯%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#b8bb26}❯%f%b "
+  },
+  "reports": [
+    {
+      "columns": 12,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": "~/code/tildy",
+      "visible": true
+    },
+    {
+      "columns": 7,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "main ⇡2",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "status",
+      "module_type": "exit_status",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "show_when:command.duration_ms",
+      "id": "elapsed",
+      "module_type": "duration",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "empty",
+      "id": "jobs",
+      "module_type": "jobs",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 4,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "venv",
+      "module_type": "python",
+      "rules_hit": [],
+      "text": "demo",
+      "visible": true
+    },
+    {
+      "columns": 5,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "context",
+      "module_type": "hostname",
+      "rules_hit": [],
+      "text": "u@mbp",
+      "visible": true
+    },
+    {
+      "columns": 8,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "time",
+      "module_type": "time",
+      "rules_hit": [],
+      "text": "14:05:09",
+      "visible": true
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": "❯",
+      "visible": true
+    }
+  ]
+}

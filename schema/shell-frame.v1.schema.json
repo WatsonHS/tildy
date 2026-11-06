@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/shell-frame/v1",
+  "title": "Tildy Shell 协议帧 v1",
+  "description": "文档用途：描述 Zsh 与 worker/render 后端之间协议 v1 的四种帧：HELLO、REQ、RES、BYE。线路格式是制表符分隔的文本行（tab-separated text）：每行第一个字段是帧标签，之后按字段顺序排列；RES 之后跟随 L/R/T 行与 END 行。本 Schema 描述的是解码后的逻辑帧（JSON 对象），每个对象的 frame 字段对应线路上的首字段标签；它不规定线路编码，只供测试、文档与契约比对引用。转义规则：cwd 与 env 在线路上把反斜杠写成 \\\\、制表符写成 \\t、换行写成 \\n；env 先把 SSH_CONNECTION、SSH_TTY、USER、HOST、VIRTUAL_ENV 的值用 U+001F（\\x1f，原样保留）连接，再做同样的转义。提示符内容（L、R、T）不含控制字符，用户数据中的 % 写为 %%。帧有界：接收端必须完整收到一帧（RES 为 END 行）后再处理；半帧、EOF、超长帧与版本不兼容的处理见 docs/protocol.md 的 Shell 协议 v1。每个帧对象禁止额外字段。",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/hello"
+    },
+    {
+      "$ref": "#/$defs/req"
+    },
+    {
+      "$ref": "#/$defs/res"
+    },
+    {
+      "$ref": "#/$defs/bye"
+    },
+    {
+      "$ref": "#/$defs/ack"
+    }
+  ],
+  "$defs": {
+    "sessionId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^\\u0000-\\u001F\\u007F]+$",
+      "description": "会话标识，由 Zsh 启动时生成（$$ 加随机数）。线路上为原样文本，无需转义。代码只检查非空且不含控制字符（协议解析器），不限制长度与字符集。"
+    },
+    "promptLine": {
+      "type": "string",
+      "pattern": "^(?:[^%\\u0000-\\u001F\\u007F]|%[^\\u0000-\\u001F\\u007F])*$",
+      "description": "一行提示符内容。线路上为 L、R 或 T 行的第二个字段，行内不得含制表符或换行（控制字符已被去除）。只允许 Zsh 提示符转义（如 %F{yellow}、%f、%~）；用户数据中的 % 必须写成 %%。pattern 只能检查结尾孤立的 % 与控制字符，无法判断 %b 之类的转义是否合法。 长度上限 4000 字节（UTF-8，代码 MAX_LINE_BYTES）。JSON Schema 的 maxLength 按字符计数，只能给出必要条件；字节上限由 fixtures/validate.py 的附加检查强制。",
+      "maxLength": 4000
+    },
+    "hello": {
+      "type": "object",
+      "title": "HELLO 帧（worker → shell，启动后立即发送，一次性 render 模式不发）",
+      "description": "线路：HELLO<TAB>protocol_version<TAB>binary_version<TAB>worker_epoch<TAB>pid。Shell 比较 protocol_version 与 TILDY_PROTOCOL_VERSION、binary_version 与 TILDY_VERSION，任一不同即发 BYE 并重启 worker。worker_epoch 为本次 worker 进程的代际号。",
+      "required": [
+        "frame",
+        "protocol_version",
+        "binary_version",
+        "worker_epoch",
+        "pid"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "HELLO",
+          "description": "线路首字段：HELLO。"
+        },
+        "protocol_version": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "协议版本号，v1 为 1。"
+        },
+        "binary_version": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\u0000-\\u001F\\u007F]*$",
+          "description": "tildy 二进制版本字符串（不含控制字符）。"
+        },
+        "worker_epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "worker 代际号。协议未规定 HELLO 中的最小值，此处允许 0。"
+        },
+        "pid": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "worker 进程 pid。"
+        }
+      }
+    },
+    "req": {
+      "type": "object",
+      "title": "REQ 帧（shell → backend，一行）",
+      "description": "线路：REQ<TAB>gen<TAB>session_id<TAB>cwd<TAB>cols<TAB>lines<TAB>last_exit<TAB>last_duration_ms<TAB>env，共 9 个字段，单行。cwd 与 env 按上文规则转义；cwd 在 JSON 中为解码后的原始路径（可含制表符、换行与反斜杠）。env 在 JSON 中为未转义的字符串，内部以 U+001F 分隔 5 个值；后端只把它当作不透明修订，值变化即令依赖 Env 的缓存失效。",
+      "required": [
+        "frame",
+        "gen",
+        "session_id",
+        "cwd",
+        "cols",
+        "lines",
+        "last_exit",
+        "last_duration_ms",
+        "env"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "REQ",
+          "description": "线路首字段：REQ。"
+        },
+        "gen": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "代次，单调递增。结果只有 gen 与当前代次一致时才被接受。",
+          "maximum": 18446744073709551615
+        },
+        "session_id": {
+          "$ref": "#/$defs/sessionId"
+        },
+        "cwd": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\u0000]*$",
+          "description": "当前工作目录的解码值。线路转义：\\\\ 表示反斜杠，\\t 表示制表符，\\n 表示换行。不允许 NUL（代码仅检查非空与 NUL）。非 UTF-8 路径的线路编码仍是待定契约问题。"
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "终端列数，u16（代码只检查十进制数字与 u16 范围）。"
+        },
+        "lines": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "基础提示符的行数，u16（代码只检查十进制数字与 u16 范围）。"
+        },
+        "last_exit": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647,
+          "description": "上一条命令的退出码，i32（代码允许前导负号与 i32 范围）。"
+        },
+        "last_duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "上一条命令的耗时（毫秒）。",
+          "maximum": 18446744073709551615
+        },
+        "env": {
+          "type": "string",
+          "pattern": "^[^\\u0000]*$",
+          "description": "5 个环境值（SSH_CONNECTION、SSH_TTY、USER、HOST、VIRTUAL_ENV）以 U+001F 连接后的解码值，不允许 NUL（代码仅检查 NUL）。线路上按 cwd 的规则转义。"
+        },
+        "jobs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Background job count (${#jobstates}); optional 10th REQ field, 0 when absent."
+        }
+      }
+    },
+    "res": {
+      "type": "object",
+      "title": "RES 帧（backend → shell，一个 gen 可有多个 RES）",
+      "description": "线路：RES<TAB>gen<TAB>status<TAB>worker_epoch，随后是若干 L<TAB>行（至少一行，顺序即显示顺序）、可选的 R<TAB>行与 T<TAB>行，最后是 END<TAB>gen。END 的 gen 必须与 RES 的 gen 相同；不相同时为坏帧，具体丢弃原因归类（bad_frame 或其他枚举值）见 docs/protocol.md 的 discard 枚举，本 Schema 不规定。同一 gen 可先发 partial 再发 fresh，后到的覆盖先到的。一次性模式只发一个 fresh（或超时后的 partial），worker_epoch 填 0。JSON 中 left 的元素数即 L 行数，right 与 transient 分别对应 R 与 T 行。",
+      "required": [
+        "frame",
+        "gen",
+        "status",
+        "worker_epoch",
+        "left"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "RES",
+          "description": "线路首字段：RES。"
+        },
+        "gen": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "对应请求的代次，必须与 END 行的 gen 一致。"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "fresh",
+            "partial"
+          ],
+          "description": "fresh：所有模块已更新；partial：仍有模块 pending、stale 等。"
+        },
+        "worker_epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "产生该结果的 worker 代际号；一次性模式为 0。"
+        },
+        "left": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/promptLine"
+          },
+          "description": "左侧提示符行，每个元素对应一条 L 行。最多 12 行（代码 MAX_LEFT_LINES），至少 1 行。",
+          "maxItems": 12
+        },
+        "right": {
+          "$ref": "#/$defs/promptLine",
+          "description": "右侧提示符，单行，可省略。对应可选的 R 行。"
+        },
+        "transient": {
+          "$ref": "#/$defs/promptBlock"
+        },
+        "observation_seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "history": {
+          "type": "object",
+          "properties": {
+            "context_key": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[0-9a-f]+$",
+              "maxLength": 4000
+            },
+            "context_transient": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/promptBlock"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "context_suffix": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/promptLine"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "summary": {
+              "type": "boolean"
+            },
+            "summary_threshold_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            }
+          },
+          "required": [
+            "context_key",
+            "summary",
+            "summary_threshold_ms"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "bye": {
+      "type": "object",
+      "title": "BYE 帧（shell → worker，单独一行，要求 worker 退出）",
+      "description": "线路：BYE（单独一行，无其他字段）。Shell 在版本不匹配或要求退出时发送。",
+      "required": [
+        "frame"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "BYE",
+          "description": "线路：BYE。"
+        }
+      }
+    },
+    "ack": {
+      "type": "object",
+      "required": [
+        "frame",
+        "gen",
+        "epoch",
+        "seq"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "ACK"
+        },
+        "gen": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        }
+      }
+    },
+    "promptBlock": {
+      "type": "string",
+      "maxLength": 48012,
+      "pattern": "^(?:[^%\\u0000-\\u0009\\u000B-\\u001F\\u007F]|%[^\\u0000-\\u001F\\u007F])*$",
+      "description": "Newline-separated prompt lines; each line is capped at 4000 UTF-8 bytes."
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "$comment": "M2 task E1: Starship add_newline over the pastel-powerline preset (render golden e1_pastel_add_newline).",
+  "preset": "pastel-powerline",
+  "add_newline": true
+}

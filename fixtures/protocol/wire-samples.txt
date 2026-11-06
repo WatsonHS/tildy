@@ -1,0 +1,28 @@
+HELLO	1	0.1.0	3	48211
+
+REQ	7	s-7f3a	/Users/example/tmp\tdir\\x	120	2	0	12	examplembp
+
+RES	7	partial	3
+L	%F{blue}%~%f %F{8}…%f
+L	%F{green}❯%f 
+END	7
+
+RES	7	fresh	3
+L	%F{blue}%~%f %F{yellow}main ±2%f
+L	%F{green}❯%f 
+R	%F{8}took 3.2s%f
+T	%F{green}❯%f 
+END	7
+
+BYE
+
+ACK	8	41	2
+
+RES	8	fresh	41
+L	❯
+T	❯
+O	2
+K	6d61696e
+U	  · main
+S	3000
+END	8

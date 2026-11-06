@@ -1,0 +1,7 @@
+{
+  "protocol_version": 1,
+  "state": "blocked",
+  "kind": "question",
+  "msg": "第一行\n第二行",
+  "scope": { "kind": "global", "id": "*" }
+}

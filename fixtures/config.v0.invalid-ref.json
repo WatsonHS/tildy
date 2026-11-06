@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "modules": {
+    "cwd": { "type": "directory", "priority": 100 }
+  },
+  "layout": {
+    "rows": [ { "left": ["cwd", "node_version"], "right": [] } ]
+  }
+}

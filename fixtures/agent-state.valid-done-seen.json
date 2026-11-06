@@ -1,0 +1,14 @@
+{
+  "protocol_version": 1,
+  "id": "ci/build",
+  "app": "make",
+  "state": "done",
+  "msg": "构建完成：全部 412 项测试通过 ✔",
+  "scope": { "kind": "session", "id": "48190.2113027462" },
+  "origin_session": "48190.2113027462",
+  "source": "cli",
+  "seq": 9,
+  "ttl_s": 900,
+  "received_at_ms": 1792433770139,
+  "prompt_seen": true
+}

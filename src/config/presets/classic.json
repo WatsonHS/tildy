@@ -1,0 +1,277 @@
+{
+  "$comment": "Powerlevel10k classic (config/p10k-classic.zsh, two lines, no frame): os icon, directory and git on the left, status (✔ or ✘ code), duration (3 s and up), jobs, virtualenv, user@host over SSH and time right-aligned on the first line, all on one neutral background (role surface) with thin separators in fg_dim; ❯ on the second line. Text colors from accent/ok/warn/err/info.",
+  "palette": "one-dark",
+  "modules": {
+    "os": {
+      "type": "os",
+      "priority": 10,
+      "os_symbols": {
+        "macos": {
+          "nerd": "",
+          "unicode": "",
+          "ascii": ""
+        },
+        "linux": {
+          "nerd": "",
+          "unicode": "",
+          "ascii": ""
+        },
+        "windows": {
+          "nerd": "",
+          "unicode": "",
+          "ascii": ""
+        },
+        "freebsd": {
+          "nerd": "",
+          "unicode": "",
+          "ascii": ""
+        }
+      },
+      "style": {
+        "foreground": "info",
+        "background": "surface"
+      }
+    },
+    "cwd": {
+      "type": "directory",
+      "priority": 100,
+      "truncation_length": 5,
+      "truncate_to_repo": false,
+      "truncation_symbol": {
+        "unicode": "…/",
+        "ascii": ".../"
+      },
+      "symbol": {
+        "nerd": ""
+      },
+      "format": "($symbol )$path",
+      "style": {
+        "foreground": "accent",
+        "background": "surface",
+        "bold": true
+      }
+    },
+    "git": {
+      "type": "git",
+      "priority": 80,
+      "branch_symbol": {
+        "nerd": " ",
+        "unicode": "",
+        "ascii": ""
+      },
+      "format": "$branch_symbol$branch( $ahead_behind)( $stashed)( $conflicted)( $staged)( $modified)( $renamed)( $deleted)( $untracked)",
+      "status_symbols": {
+        "conflicted": "[~$count](fg:err)",
+        "ahead": {
+          "unicode": "[⇡$count](fg:ok)",
+          "ascii": "[^$count](fg:ok)"
+        },
+        "behind": {
+          "unicode": "[⇣$count](fg:ok)",
+          "ascii": "[v$count](fg:ok)"
+        },
+        "diverged": {
+          "unicode": "[⇣$behind_count⇡$ahead_count](fg:ok)",
+          "ascii": "[v$behind_count^$ahead_count](fg:ok)"
+        },
+        "untracked": "[?$count](fg:info)",
+        "stashed": "[*$count](fg:ok)",
+        "modified": "[!$count](fg:warn)",
+        "staged": "[+$count](fg:warn)",
+        "renamed": {
+          "unicode": "[»$count](fg:warn)",
+          "ascii": "[>$count](fg:warn)"
+        },
+        "deleted": {
+          "unicode": "[✘$count](fg:warn)",
+          "ascii": "[x$count](fg:warn)"
+        }
+      },
+      "state_style": {
+        "foreground": "err"
+      },
+      "style": {
+        "foreground": "ok",
+        "background": "surface"
+      },
+      "rules": [
+        {
+          "id": "not_fresh",
+          "when": {
+            "field": "git.freshness",
+            "op": "in",
+            "value": [
+              "pending",
+              "stale"
+            ]
+          },
+          "style": {
+            "foreground": "fg_dim"
+          }
+        }
+      ]
+    },
+    "ok": {
+      "type": "text",
+      "priority": 10,
+      "text": {
+        "unicode": "✔",
+        "ascii": "ok"
+      },
+      "padding": true,
+      "show_when": {
+        "field": "command.exit",
+        "op": "eq",
+        "value": 0
+      },
+      "style": {
+        "foreground": "ok",
+        "background": "surface"
+      }
+    },
+    "status": {
+      "type": "exit_status",
+      "priority": 100,
+      "symbol": {
+        "unicode": "✘",
+        "ascii": "x"
+      },
+      "style": {
+        "foreground": "err",
+        "background": "surface"
+      }
+    },
+    "elapsed": {
+      "type": "duration",
+      "priority": 40,
+      "symbol": {
+        "nerd": ""
+      },
+      "format": "$human( $symbol)",
+      "show_when": {
+        "field": "command.duration_ms",
+        "op": "ge",
+        "value": 3000
+      },
+      "style": {
+        "foreground": "warn",
+        "background": "surface"
+      }
+    },
+    "jobs": {
+      "type": "jobs",
+      "priority": 50,
+      "symbol": {
+        "nerd": "",
+        "unicode": "✦",
+        "ascii": "&"
+      },
+      "number_threshold": 1000,
+      "style": {
+        "foreground": "info",
+        "background": "surface"
+      }
+    },
+    "venv": {
+      "$comment": "python virtualenv/conda name only; detect_files [\"/\"] never matches, so no version command runs",
+      "type": "python",
+      "priority": 30,
+      "symbol": {
+        "nerd": ""
+      },
+      "format": "$env( $symbol)",
+      "detect_files": [
+        "/"
+      ],
+      "style": {
+        "foreground": "info",
+        "background": "surface"
+      }
+    },
+    "context": {
+      "type": "hostname",
+      "priority": 60,
+      "show_when": {
+        "field": "session.ssh",
+        "op": "eq",
+        "value": true
+      },
+      "style": {
+        "foreground": "warn",
+        "background": "surface"
+      }
+    },
+    "time": {
+      "type": "time",
+      "priority": 10,
+      "time_format": "%T",
+      "symbol": {
+        "nerd": ""
+      },
+      "format": "$time( $symbol)",
+      "style": {
+        "foreground": "info",
+        "background": "surface"
+      }
+    },
+    "char": {
+      "type": "character",
+      "priority": 100,
+      "symbol": {
+        "unicode": "❯",
+        "ascii": ">"
+      },
+      "success_style": {
+        "foreground": "ok",
+        "bold": true
+      },
+      "error_style": {
+        "foreground": "err",
+        "bold": true
+      }
+    },
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "style": {
+        "foreground": "yellow",
+        "background": "surface"
+      }
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "style": "powerline",
+        "separator": {
+          "nerd": "",
+          "ascii": ""
+        },
+        "subseparator": {
+          "nerd": "[](fg:fg_dim)",
+          "ascii": "[|](fg:fg_dim)"
+        },
+        "left": [
+          "os",
+          "cwd",
+          "git",
+          "changes"
+        ],
+        "right": [
+          "ok",
+          "status",
+          "elapsed",
+          "jobs",
+          "venv",
+          "context",
+          "time"
+        ]
+      },
+      {
+        "left": [
+          "char"
+        ]
+      }
+    ]
+  }
+}

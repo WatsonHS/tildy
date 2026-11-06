@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/terminal-width/v1",
+  "title": "Explicit measured terminal width profile",
+  "type": "object",
+  "required": [
+    "version",
+    "identity",
+    "entries"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "term",
+        "program",
+        "program_version",
+        "locale",
+        "font_revision"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "term": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]*$",
+          "minLength": 1
+        },
+        "program": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]*$"
+        },
+        "program_version": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]*$"
+        },
+        "locale": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]*$"
+        },
+        "font_revision": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]*$",
+          "minLength": 1
+        }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "required": [
+          "cluster",
+          "columns"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "cluster": {
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[^\\u0000-\\u001f\\u007f-\\u009f\\u200e\\u200f\\u202a-\\u202e\\u2066-\\u2069]*$",
+            "minLength": 1,
+            "description": "Exactly one Unicode grapheme cluster, at most 128 UTF-8 bytes; enforced by the Rust loader."
+          },
+          "columns": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "cluster": {
+                  "pattern": "^[ -~]$"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "columns": {
+                  "const": 1
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$comment": "Profile file capped at 64KiB; unique exact grapheme keys and UTF-8 byte caps are enforced by loader. Matching requires exact terminal/program/version/effective-locale/explicit-font-revision identity. Never execute or source this JSON."
+}

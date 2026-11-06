@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/shell-frame/v0",
+  "title": "Tildy Shell 协议帧（M0 草案）",
+  "description": "文档用途：描述 Zsh 与后端之间两种帧的字段、类型与取值范围。实际线路格式是制表符分隔的文本行（tab-separated text），Zsh 不解析 JSON，本 Schema 不规定线路编码，只供测试、文档与契约比对引用。帧有界：接收端必须完整收到一帧后再处理；半帧、EOF、超长帧与协议不兼容的处理见 PLAN.md \"Shell 协议\"。请求帧与结果帧通过 oneOf 区分，二者的字段集合互不重叠（均禁止额外字段）。",
+  "oneOf": [
+    { "$ref": "#/$defs/request" },
+    { "$ref": "#/$defs/result" }
+  ],
+  "$defs": {
+    "noControl": {
+      "type": "string",
+      "pattern": "^[^\\u0000-\\u001F\\u007F]*$"
+    },
+    "request": {
+      "type": "object",
+      "title": "请求帧",
+      "description": "Zsh 在每个提示符前发出。gen 在 Shell 切目录时立即递增；结果只有 gen 与当前代次一致时才被接受。",
+      "required": ["gen", "session_id", "cwd", "cols", "lines", "last_exit", "last_duration_ms"],
+      "additionalProperties": false,
+      "properties": {
+        "gen": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "代次，单调递增的整数。"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9._:-]+$",
+          "description": "会话标识，由 Zsh 启动时生成。"
+        },
+        "cwd": {
+          "allOf": [
+            { "$ref": "#/$defs/noControl" },
+            { "minLength": 1, "maxLength": 4096 }
+          ],
+          "description": "当前工作目录（原样文本，不做 Shell 展开）。非 UTF-8 路径的线路编码是待定契约问题，本 Schema 只接受 UTF-8 字符串。"
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "终端列数。"
+        },
+        "lines": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20,
+          "description": "提示符占用的固定行数（上限为 M0 草案值）。"
+        },
+        "last_exit": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
+          "description": "上一条命令的退出码，取自真实命令，不被 hooks 改写。"
+        },
+        "last_duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "上一条命令的耗时（毫秒）。"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "title": "结果帧",
+      "description": "后端返回的已完成 Zsh 转义的渲染行。left 的元素数量即固定行数；right 为可选的单行字符串。status 为 partial 表示仍有待更新模块（pending、stale 等），Zsh 不能把它当作完整结果。",
+      "required": ["gen", "status", "left"],
+      "additionalProperties": false,
+      "properties": {
+        "gen": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "对应请求的代次。"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["fresh", "partial"],
+          "description": "fresh：所有模块已更新；partial：仍有待更新模块。"
+        },
+        "left": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/noControl" },
+              { "maxLength": 4096 }
+            ]
+          },
+          "description": "左侧渲染行，每个元素是一行已转义文本。"
+        },
+        "right": {
+          "allOf": [
+            { "$ref": "#/$defs/noControl" },
+            { "maxLength": 4096 }
+          ],
+          "description": "右侧渲染内容，单行，可缺省。"
+        }
+      }
+    }
+  }
+}

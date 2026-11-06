@@ -1,0 +1,636 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/capabilities/v1",
+  "title": "tildy capabilities --json output (M3)",
+  "description": "文档用途：描述 `tildy capabilities --json` 的输出。输出是统一结果外壳（CliEnvelope）：顶层 api_version、ok、data、error。成功时 ok 为 true，data 为能力对象，error.code 为 \"ok\"、其余错误字段为 null；失败时 ok 为 false，data 为 null，error.code 为错误码（不为 \"ok\"）。data 的 api_version、schema_version、protocol_version 为本二进制支持的版本（M1 均为 1）；binary_version 为二进制版本字符串。枚举值与代码中的常量一致（src/config/mod.rs 的 MODULE_TYPES、OPERATORS、SYMBOL_TIERS、HISTORY_MODES、PRESET_INFO）。presets 列出内置预设，name 可用于配置的 preset 键。config.path 为 null 表示当前平台无法确定配置路径；valid 为 false 时 error 为错误文本、revision 为 null。",
+  "type": "object",
+  "required": [
+    "api_version",
+    "ok",
+    "data",
+    "error"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": 1,
+      "description": "接口版本（API_VERSION），M1 为 1。"
+    },
+    "ok": {
+      "type": "boolean",
+      "description": "是否成功。"
+    },
+    "data": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/data"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "能力对象；失败时为 null。"
+    },
+    "error": {
+      "$ref": "#/$defs/error"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "ok"
+        ],
+        "properties": {
+          "ok": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "data": {
+            "$ref": "#/$defs/data"
+          },
+          "error": {
+            "properties": {
+              "code": {
+                "const": "ok"
+              },
+              "path": {
+                "type": "null"
+              },
+              "message": {
+                "type": "null"
+              },
+              "hint": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "data": {
+            "type": "null"
+          },
+          "error": {
+            "properties": {
+              "code": {
+                "not": {
+                  "const": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "data": {
+      "type": "object",
+      "required": [
+        "api_version",
+        "schema_version",
+        "protocol_version",
+        "binary_version",
+        "shells",
+        "module_types",
+        "rule_operators",
+        "symbol_tiers",
+        "history_modes",
+        "presets",
+        "config"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "api_version": {
+          "const": 1,
+          "description": "与外壳的 api_version 相同。"
+        },
+        "schema_version": {
+          "const": 1,
+          "description": "本二进制支持的配置 Schema 版本（SCHEMA_VERSION），M1 为 1。"
+        },
+        "protocol_version": {
+          "const": 1,
+          "description": "Shell 协议版本（PROTOCOL_VERSION），M1 为 1。"
+        },
+        "binary_version": {
+          "type": "string",
+          "description": "tildy 二进制版本，例如 0.1.0-m1（来自 Cargo 包版本）。"
+        },
+        "shells": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "zsh"
+            ]
+          },
+          "description": "支持的 Shell。M1 只有 zsh。"
+        },
+        "module_types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "directory",
+              "git",
+              "exit_status",
+              "duration",
+              "hostname",
+              "agent_status",
+              "command",
+              "character",
+              "time",
+              "username",
+              "jobs",
+              "python",
+              "docker_context",
+              "language",
+              "starship",
+              "text",
+              "os",
+              "fill",
+              "env_var",
+              "package",
+              "git_commit",
+              "git_metrics",
+              "shlvl",
+              "localip",
+              "memory_usage",
+              "sudo",
+              "direnv",
+              "nix_shell",
+              "shell",
+              "changes"
+            ]
+          },
+          "description": "支持的模块类型（config::MODULE_TYPES）。"
+        },
+        "rule_operators": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "eq",
+              "ne",
+              "gt",
+              "lt",
+              "ge",
+              "le",
+              "in"
+            ]
+          },
+          "description": "规则操作符（config::OPERATORS）。"
+        },
+        "symbol_tiers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "unicode",
+              "nerd",
+              "ascii"
+            ]
+          },
+          "description": "符号档位（config::SYMBOL_TIERS）。"
+        },
+        "history_modes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "compact",
+              "full"
+            ]
+          },
+          "description": "历史显示模式（config::HISTORY_MODES）。"
+        },
+        "presets": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "内置预设（config::PRESET_INFO，顺序与 PRESETS 相同）。name 为配置 preset 键的合法值。",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "description",
+              "nerd_font",
+              "symbols",
+              "source"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "enum": [
+                  "plain",
+                  "pastel-powerline",
+                  "tokyo-night",
+                  "gruvbox-rainbow",
+                  "catppuccin-powerline",
+                  "catppuccin-latte",
+                  "catppuccin-frappe",
+                  "catppuccin-macchiato",
+                  "jetpack",
+                  "pure-preset",
+                  "bracketed-segments",
+                  "nerd-font-symbols",
+                  "no-empty-icons",
+                  "no-nerd-font",
+                  "no-runtime-versions",
+                  "plain-text-symbols",
+                  "powerline",
+                  "lean",
+                  "classic",
+                  "rainbow",
+                  "minimal"
+                ],
+                "description": "预设名。"
+              },
+              "description": {
+                "type": "string",
+                "description": "一行说明（中文，preset list 显示）。"
+              },
+              "nerd_font": {
+                "enum": [
+                  "required",
+                  "optional",
+                  "no"
+                ],
+                "description": "Nerd 字体要求：required 必需、optional 可选、no 不需要。"
+              },
+              "symbols": {
+                "enum": [
+                  "auto",
+                  "unicode",
+                  "nerd",
+                  "ascii"
+                ],
+                "description": "预设固定的符号档位；auto 表示不固定。"
+              },
+              "source": {
+                "type": "string",
+                "description": "预设来源说明（starship 版本与变体名，或 tildy）。"
+              },
+              "palette": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "按角色着色的预设的默认调色板（用 palette 换色）；固定配色的预设为 null。"
+              }
+            }
+          }
+        },
+        "palettes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "内置调色板（config::PALETTE_INFO）；name 为配置 palette 键的合法值（另可在 palettes 中自定义）。",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "description",
+              "variant",
+              "source"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "enum": [
+                  "dracula",
+                  "nord",
+                  "solarized-dark",
+                  "solarized-light",
+                  "one-dark",
+                  "rose-pine",
+                  "everforest",
+                  "kanagawa",
+                  "gruvbox-dark",
+                  "tokyo-night",
+                  "catppuccin-latte",
+                  "catppuccin-frappe",
+                  "catppuccin-macchiato",
+                  "catppuccin-mocha"
+                ],
+                "description": "调色板名。"
+              },
+              "description": {
+                "type": "string",
+                "description": "一行说明（中文，palette list 显示）。"
+              },
+              "variant": {
+                "enum": [
+                  "dark",
+                  "light"
+                ],
+                "description": "适用的终端背景：dark 深色、light 浅色。"
+              },
+              "source": {
+                "type": "string",
+                "description": "配色来源（官方调色板的 URL）。"
+              }
+            }
+          }
+        },
+        "palette_roles": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "bg1",
+              "bg2",
+              "bg3",
+              "bg4",
+              "bg5",
+              "bg6",
+              "fg",
+              "fg_dim",
+              "surface",
+              "accent",
+              "ok",
+              "warn",
+              "err",
+              "info"
+            ]
+          },
+          "description": "每个内置调色板都定义的角色色；按角色着色的预设只用这些名字（见 docs/palettes.md）。"
+        },
+        "config": {
+          "$ref": "#/$defs/configInfo"
+        },
+        "agent": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "states",
+            "kinds",
+            "scopes",
+            "wrap",
+            "programs"
+          ],
+          "description": "Agent 状态（docs/agent-status.md）：OSC 7501 词汇与生效配置的程序包装设置。可选字段，M2 起提供。",
+          "properties": {
+            "states": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "idle",
+                  "working",
+                  "done",
+                  "blocked",
+                  "error"
+                ]
+              },
+              "description": "记录的 state 取值（config::AGENT_STATES）。"
+            },
+            "kinds": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "permission",
+                  "question",
+                  "auth"
+                ]
+              },
+              "description": "blocked 记录的 kind 取值。"
+            },
+            "scopes": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "session",
+                  "worktree",
+                  "global"
+                ]
+              },
+              "description": "scope.kind 取值。"
+            },
+            "wrap": {
+              "type": "boolean",
+              "description": "生效配置的 agent.wrap：Zsh 适配层是否经 tildy agent wrap 运行 programs。"
+            },
+            "programs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "生效配置要包装的程序（wrap 为 false 时为空）。"
+            }
+          }
+        },
+        "diagnostics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "snapshot_schema_version",
+            "timing_history_limit",
+            "snapshot_schema",
+            "active_session_env"
+          ],
+          "properties": {
+            "snapshot_schema_version": {
+              "const": 1
+            },
+            "timing_history_limit": {
+              "const": 32
+            },
+            "snapshot_schema": {
+              "const": "schema/snapshot.schema.json"
+            },
+            "active_session_env": {
+              "const": "TILDY_SESSION_ID"
+            }
+          }
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "about",
+              "subcommands",
+              "json"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "about": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "subcommands": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "json": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "terminal_width": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "command",
+            "explicit_foreground",
+            "font_revision_required",
+            "max_samples",
+            "budget_ms",
+            "profile_schema"
+          ],
+          "properties": {
+            "command": {
+              "const": "calibrate"
+            },
+            "explicit_foreground": {
+              "const": true
+            },
+            "font_revision_required": {
+              "const": true
+            },
+            "max_samples": {
+              "const": 64
+            },
+            "budget_ms": {
+              "const": 5000
+            },
+            "profile_schema": {
+              "const": "schema/terminal-width.schema.json"
+            }
+          }
+        }
+      }
+    },
+    "configInfo": {
+      "type": "object",
+      "required": [
+        "path",
+        "exists",
+        "valid",
+        "error",
+        "revision"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "配置文件路径；无法确定时为 null。"
+        },
+        "exists": {
+          "type": "boolean",
+          "description": "配置文件是否存在；为 false 时使用内置配置。"
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "配置是否通过校验（缺省配置视为有效）。"
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "校验错误文本；valid 为 true 时为 null。"
+        },
+        "revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "生效配置的修订标识；内置配置为 \"builtin\"。valid 为 false 时为 null。"
+        }
+      },
+      "if": {
+        "required": [
+          "valid"
+        ],
+        "properties": {
+          "valid": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "error": {
+            "type": "null"
+          },
+          "revision": {
+            "type": "string"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "code",
+        "path",
+        "message",
+        "hint"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "ok",
+            "validation_failed",
+            "revision_conflict",
+            "environment_unavailable",
+            "backend_unavailable",
+            "internal_error"
+          ],
+          "description": "错误码，与进程退出码对应（ok 为 0）。"
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "出错的字段路径。"
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "错误描述。"
+        },
+        "hint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "修复建议。"
+        }
+      }
+    }
+  }
+}

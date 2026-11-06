@@ -1,0 +1,74 @@
+{
+  "symbols": "unicode",
+  "config": null,
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/code/tildy",
+      "cols": 120,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 0,
+      "env": "",
+      "jobs": 0
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "value": {
+        "in_repo": true,
+        "git_dir": "/Users/u/code/tildy/.git",
+        "worktree_root": "/Users/u/code/tildy",
+        "worktree_id": "x",
+        "branch": "main",
+        "detached": false,
+        "unborn": false,
+        "head_short": "abc1234",
+        "upstream": "origin/main",
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0,
+        "conflicted": 0,
+        "renamed": 0,
+        "deleted": 0,
+        "stashed": 0,
+        "incomplete": false,
+        "state": "clean"
+      },
+      "error": null
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {
+      "node": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "rust": {
+        "freshness": "timeout",
+        "age_ms": null,
+        "value": null,
+        "error": "timed out"
+      },
+      "py": {
+        "freshness": "error",
+        "age_ms": null,
+        "value": null,
+        "error": "boom"
+      },
+      "go": {
+        "freshness": "pending",
+        "age_ms": null,
+        "value": null,
+        "error": null
+      }
+    }
+  }
+}

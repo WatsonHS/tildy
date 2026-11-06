@@ -1,0 +1,120 @@
+{
+  "symbols": "nerd",
+  "config": "preset:powerline",
+  "palette": "catppuccin-mocha",
+  "now": "2026-10-19T14:05:09",
+  "data": {
+    "request": {
+      "gen": 1,
+      "session_id": "s",
+      "cwd": "/Users/u/code/tildy",
+      "cols": 100,
+      "lines": 40,
+      "last_exit": 0,
+      "last_duration_ms": 3200,
+      "env": "USER=u\u001fVIRTUAL_ENV=/Users/u/code/tildy/demo",
+      "jobs": 1
+    },
+    "home": "/Users/u",
+    "git": {
+      "freshness": "fresh",
+      "age_ms": 0,
+      "error": null,
+      "value": {
+        "in_repo": true,
+        "git_dir": "/Users/u/code/tildy/.git",
+        "worktree_root": "/Users/u/code/tildy",
+        "worktree_id": "x",
+        "branch": "main",
+        "detached": false,
+        "unborn": false,
+        "head_short": "abc1234",
+        "upstream": "origin/main",
+        "ahead": 0,
+        "behind": 0,
+        "staged": 0,
+        "unstaged": 2,
+        "untracked": 1,
+        "conflicted": 0,
+        "renamed": 0,
+        "deleted": 0,
+        "stashed": 0,
+        "incomplete": false,
+        "state": "dirty"
+      }
+    },
+    "ssh": false,
+    "hostname": "mbp",
+    "username": "u",
+    "modules": {
+      "node": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "22.3.0",
+          "fields": {
+            "version": "22.3.0"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "py": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "3.12.1",
+          "fields": {
+            "version": "3.12.1",
+            "env": "demo"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "venv": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": {
+          "text": "3.12.1",
+          "fields": {
+            "version": "3.12.1",
+            "env": "demo"
+          },
+          "prerendered": null
+        },
+        "error": null
+      },
+      "rust": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "go": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "c": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "java": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      },
+      "docker": {
+        "freshness": "fresh",
+        "age_ms": 0,
+        "value": null,
+        "error": null
+      }
+    }
+  }
+}

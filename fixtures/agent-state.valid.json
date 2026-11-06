@@ -1,0 +1,15 @@
+{
+  "protocol_version": 1,
+  "id": "wrap/claude/48213",
+  "app": "claude",
+  "state": "blocked",
+  "kind": "permission",
+  "title": "tildy",
+  "msg": "Bash: rm -rf target",
+  "scope": { "kind": "worktree", "id": "/Users/u/code/tildy/.git@/Users/u/code/tildy" },
+  "origin_session": "48190.2113027462",
+  "source": "osc",
+  "seq": 3,
+  "ttl_s": 7200,
+  "received_at_ms": 1792433770139
+}

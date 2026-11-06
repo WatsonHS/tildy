@@ -1,0 +1,471 @@
+{
+  "candidate": {
+    "add_newline": true,
+    "history": {
+      "mode": "compact"
+    },
+    "layout": {
+      "rows": [
+        {
+          "left": [
+            "user",
+            "host",
+            "cwd",
+            "git",
+            "git_commit",
+            "docker",
+            "package",
+            "c",
+            "elixir",
+            "go",
+            "haskell",
+            "java",
+            "kotlin",
+            "lua",
+            "node",
+            "php",
+            "py",
+            "ruby",
+            "rust",
+            "scala",
+            "swift",
+            "zig",
+            "deno",
+            "bun",
+            "nix_shell",
+            "conda",
+            "duration"
+          ],
+          "separator": ""
+        },
+        {
+          "left": [
+            "jobs",
+            "char"
+          ]
+        }
+      ]
+    },
+    "modules": {
+      "bun": {
+        "argv": [
+          "bun",
+          "--version"
+        ],
+        "detect_files": [
+          "bun.lockb",
+          "bun.lock",
+          "bunfig.toml"
+        ],
+        "format": "via [$symbol](bold fg:red)",
+        "regex": "(\\d+\\.\\d+\\.\\d+)",
+        "symbol": {
+          "ascii": "bun ",
+          "unicode": "🥟 "
+        },
+        "type": "command"
+      },
+      "c": {
+        "format": "via [$symbol](bold fg:149)",
+        "language": "c",
+        "symbol": "C ",
+        "type": "language"
+      },
+      "char": {
+        "error_style": {
+          "bold": true,
+          "foreground": "red"
+        },
+        "success_style": {
+          "bold": true,
+          "foreground": "green"
+        },
+        "symbol": {
+          "ascii": ">",
+          "unicode": "❯"
+        },
+        "type": "character"
+      },
+      "conda": {
+        "format": "via [$symbol$env_value](bold fg:green) ",
+        "show_when": {
+          "field": "env.CONDA_DEFAULT_ENV",
+          "op": "ne",
+          "value": "base"
+        },
+        "symbol": {
+          "ascii": "conda ",
+          "unicode": "🅒 "
+        },
+        "type": "env_var",
+        "variable": "CONDA_DEFAULT_ENV"
+      },
+      "cwd": {
+        "format": "[$path](bold fg:cyan)[$read_only](fg:red) ",
+        "truncation_length": 3,
+        "truncation_symbol": "",
+        "type": "directory"
+      },
+      "deno": {
+        "argv": [
+          "deno",
+          "-V"
+        ],
+        "detect_files": [
+          "deno.json",
+          "deno.jsonc",
+          "deno.lock",
+          "mod.ts",
+          "mod.js",
+          "deps.ts",
+          "deps.js"
+        ],
+        "format": "via [$symbol](bold fg:green)",
+        "regex": "deno (\\d+\\.\\d+\\.\\d+)",
+        "symbol": {
+          "ascii": "deno ",
+          "unicode": "🦕 "
+        },
+        "type": "command"
+      },
+      "docker": {
+        "format": "via [$symbol$context](bold fg:blue) ",
+        "symbol": {
+          "ascii": "docker ",
+          "unicode": "🐳 "
+        },
+        "type": "docker_context"
+      },
+      "duration": {
+        "format": "took [$human](bold fg:yellow) ",
+        "show_when": {
+          "field": "command.duration_ms",
+          "op": "ge",
+          "value": 2000
+        },
+        "type": "duration"
+      },
+      "elixir": {
+        "argv": [
+          "elixir",
+          "--version"
+        ],
+        "detect_files": [
+          "mix.exs"
+        ],
+        "format": "via [$symbol](bold fg:magenta)",
+        "regex": "Elixir (\\d+\\.\\d+\\.\\d+)",
+        "symbol": {
+          "ascii": "elixir ",
+          "unicode": "💧 "
+        },
+        "type": "command"
+      },
+      "git": {
+        "branch_symbol": {
+          "ascii": "git ",
+          "nerd": " ",
+          "unicode": "⎇ "
+        },
+        "format": "on [$branch_symbol$branch(:$remote_branch)](bold fg:magenta) ([\\[$all_status$ahead_behind\\]](bold fg:red) )",
+        "status_symbols": {
+          "ahead": "⇡",
+          "behind": "⇣",
+          "conflicted": "=",
+          "deleted": "✘",
+          "diverged": "⇕",
+          "modified": "!",
+          "renamed": "»",
+          "staged": "+",
+          "stashed": "$",
+          "untracked": "?"
+        },
+        "type": "git"
+      },
+      "git_commit": {
+        "format": "\\($hash$tag\\) ",
+        "style": {
+          "bold": true,
+          "foreground": "green"
+        },
+        "type": "git_commit"
+      },
+      "go": {
+        "format": "via [$symbol](bold fg:cyan)",
+        "language": "golang",
+        "symbol": {
+          "ascii": "go ",
+          "unicode": "🐹 "
+        },
+        "type": "language"
+      },
+      "haskell": {
+        "argv": [
+          "ghc",
+          "--numeric-version"
+        ],
+        "detect_extensions": [
+          "hs",
+          "cabal",
+          "hs-boot"
+        ],
+        "detect_files": [
+          "stack.yaml",
+          "cabal.project"
+        ],
+        "format": "via [$symbol](bold fg:magenta)",
+        "regex": "(\\d+(?:\\.\\d+)+)",
+        "symbol": {
+          "ascii": "haskell ",
+          "unicode": "λ "
+        },
+        "type": "command"
+      },
+      "host": {
+        "format": "[$ssh_symbol$host](bold dimmed fg:green) in ",
+        "show_when": {
+          "field": "session.ssh",
+          "op": "eq",
+          "value": true
+        },
+        "symbol": {
+          "ascii": "ssh ",
+          "unicode": "🌐 "
+        },
+        "type": "hostname"
+      },
+      "java": {
+        "format": "via [$symbol](dimmed fg:red)",
+        "language": "java",
+        "symbol": {
+          "ascii": "java ",
+          "unicode": "☕ "
+        },
+        "type": "language"
+      },
+      "jobs": {
+        "format": "$symbol$number ",
+        "number_threshold": 2,
+        "style": {
+          "bold": true,
+          "foreground": "blue"
+        },
+        "symbol": {
+          "ascii": "*",
+          "unicode": "✦"
+        },
+        "type": "jobs"
+      },
+      "kotlin": {
+        "argv": [
+          "kotlin",
+          "-version"
+        ],
+        "detect_extensions": [
+          "kt",
+          "kts"
+        ],
+        "format": "via [$symbol](bold fg:blue)",
+        "regex": "version (\\d+\\.\\d+\\.\\d+)",
+        "symbol": {
+          "ascii": "kotlin ",
+          "unicode": "🅺 "
+        },
+        "type": "command"
+      },
+      "lua": {
+        "argv": [
+          "lua",
+          "-v"
+        ],
+        "detect_extensions": [
+          "lua"
+        ],
+        "detect_files": [
+          ".lua-version"
+        ],
+        "detect_folders": [
+          "lua"
+        ],
+        "format": "via [$symbol](bold fg:blue)",
+        "regex": "Lua (\\d+\\.\\d+(?:\\.\\d+)?)",
+        "symbol": {
+          "ascii": "lua ",
+          "unicode": "🌙 "
+        },
+        "type": "command"
+      },
+      "nix_shell": {
+        "format": "via [$symbol$state( \\($name\\))](bold fg:blue) ",
+        "symbol": {
+          "ascii": "nix  ",
+          "unicode": "❄️  "
+        },
+        "type": "nix_shell"
+      },
+      "node": {
+        "format": "via [$symbol](bold fg:green)",
+        "language": "nodejs",
+        "symbol": {
+          "ascii": "node ",
+          "nerd": " ",
+          "unicode": "⬢ "
+        },
+        "type": "language"
+      },
+      "package": {
+        "format": "is [$symbol$version](bold fg:208) ",
+        "symbol": {
+          "ascii": "pkg ",
+          "unicode": "📦 "
+        },
+        "type": "package"
+      },
+      "php": {
+        "argv": [
+          "php",
+          "-nr",
+          "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;"
+        ],
+        "detect_extensions": [
+          "php"
+        ],
+        "detect_files": [
+          "composer.json",
+          ".php-version"
+        ],
+        "format": "via [$symbol](bold fg:147)",
+        "regex": "(\\d+\\.\\d+\\.\\d+)",
+        "symbol": {
+          "ascii": "php ",
+          "unicode": "🐘 "
+        },
+        "type": "command"
+      },
+      "py": {
+        "format": "via [$symbol](bold fg:yellow)",
+        "symbol": {
+          "ascii": "py ",
+          "unicode": "🐍 "
+        },
+        "type": "python"
+      },
+      "ruby": {
+        "argv": [
+          "ruby",
+          "-v"
+        ],
+        "detect_extensions": [
+          "rb"
+        ],
+        "detect_files": [
+          "Gemfile",
+          ".ruby-version"
+        ],
+        "format": "via [$symbol](bold fg:red)",
+        "regex": "ruby (\\d+\\.\\d+\\.\\d+)",
+        "symbol": {
+          "ascii": "rb ",
+          "unicode": "💎 "
+        },
+        "type": "command"
+      },
+      "rust": {
+        "format": "via [$symbol](bold fg:red)",
+        "language": "rust",
+        "symbol": {
+          "ascii": "rust ",
+          "unicode": "🦀 "
+        },
+        "type": "language"
+      },
+      "scala": {
+        "argv": [
+          "scalac",
+          "-version"
+        ],
+        "detect_extensions": [
+          "scala",
+          "sbt",
+          "sc"
+        ],
+        "detect_files": [
+          "build.sbt",
+          ".scalaenv",
+          ".sbtenv",
+          "build.sc"
+        ],
+        "detect_folders": [
+          ".metals"
+        ],
+        "format": "via [$symbol](bold fg:red)",
+        "regex": "version (\\d+\\.\\d+\\.\\d+)",
+        "symbol": {
+          "ascii": "scala ",
+          "unicode": "🆂 "
+        },
+        "type": "command"
+      },
+      "swift": {
+        "argv": [
+          "swift",
+          "--version"
+        ],
+        "detect_extensions": [
+          "swift"
+        ],
+        "detect_files": [
+          "Package.swift"
+        ],
+        "format": "via [$symbol](bold fg:202)",
+        "regex": "version (\\d+\\.\\d+(?:\\.\\d+)?)",
+        "symbol": {
+          "ascii": "swift ",
+          "unicode": "🐦 "
+        },
+        "type": "command"
+      },
+      "user": {
+        "format": "[$user](bold fg:yellow) in ",
+        "show_always": false,
+        "type": "username"
+      },
+      "zig": {
+        "argv": [
+          "zig",
+          "version"
+        ],
+        "detect_extensions": [
+          "zig"
+        ],
+        "format": "via [$symbol](bold fg:yellow)",
+        "regex": "(\\d+\\.\\d+\\.\\d+\\S*)",
+        "symbol": {
+          "ascii": "zig ",
+          "unicode": "↯ "
+        },
+        "type": "command"
+      }
+    },
+    "schema_version": 1,
+    "symbols": "auto"
+  },
+  "skipped": [
+    "localip",
+    "shlvl",
+    "git_metrics",
+    "cpp",
+    "memory_usage",
+    "direnv",
+    "sudo",
+    "time",
+    "status",
+    "shell"
+  ],
+  "unsupported": [
+    {
+      "item": "format",
+      "reason": "not set; using an approximation of Starship's default module order"
+    }
+  ]
+}

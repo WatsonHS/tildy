@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "modules": {
+    "changes": {
+      "type": "changes",
+      "priority": 95,
+      "icon_padding": 2
+    },
+    "git": {
+      "type": "git",
+      "status_symbols": {
+        "typechanged": "T"
+      }
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "left": [
+          "git",
+          "changes"
+        ]
+      }
+    ]
+  },
+  "history": {
+    "context_separator": true,
+    "summary": false
+  }
+}

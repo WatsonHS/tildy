@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "modules": {
+    "git": {
+      "type": "git",
+      "icon_padding": 5
+    }
+  },
+  "layout": {
+    "rows": [
+      {
+        "left": [
+          "git"
+        ]
+      }
+    ]
+  }
+}

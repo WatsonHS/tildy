@@ -1,0 +1,274 @@
+{
+  "candidate": {
+    "add_newline": true,
+    "history": {
+      "mode": "compact"
+    },
+    "layout": {
+      "rows": [
+        {
+          "left": [
+            "user",
+            "cwd",
+            "git",
+            "c",
+            "elixir",
+            "go",
+            "haskell",
+            "java",
+            "node",
+            "rust",
+            "scala",
+            "docker",
+            "time"
+          ],
+          "separator": {
+            "ascii": ">",
+            "nerd": ""
+          },
+          "start": {
+            "ascii": "",
+            "nerd": "",
+            "unicode": ""
+          },
+          "style": "powerline"
+        }
+      ]
+    },
+    "modules": {
+      "c": {
+        "language": "c",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "c",
+          "nerd": "",
+          "unicode": "c"
+        },
+        "type": "language"
+      },
+      "cwd": {
+        "style": {
+          "background": "#DA627D"
+        },
+        "substitutions": {
+          "Documents": {
+            "nerd": "󰈙 "
+          },
+          "Downloads": {
+            "nerd": " "
+          },
+          "Music": {
+            "nerd": " "
+          },
+          "Pictures": {
+            "nerd": " "
+          }
+        },
+        "truncation_length": 3,
+        "truncation_symbol": "…/",
+        "type": "directory"
+      },
+      "docker": {
+        "style": {
+          "background": "#06969A"
+        },
+        "symbol": {
+          "ascii": "docker",
+          "nerd": "",
+          "unicode": "docker"
+        },
+        "type": "docker_context"
+      },
+      "elixir": {
+        "argv": [
+          "elixir",
+          "--version"
+        ],
+        "detect_files": [
+          "mix.exs"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "Elixir (\\d+\\.\\d+\\.\\d+)",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "elixir",
+          "nerd": "",
+          "unicode": "elixir"
+        },
+        "type": "command"
+      },
+      "git": {
+        "branch_symbol": {
+          "ascii": "git",
+          "nerd": "",
+          "unicode": "⎇"
+        },
+        "status_symbols": {
+          "ahead": "⇡",
+          "behind": "⇣",
+          "conflicted": "=",
+          "deleted": "✘",
+          "diverged": "⇕",
+          "modified": "!",
+          "renamed": "»",
+          "staged": "+",
+          "stashed": "$",
+          "untracked": "?"
+        },
+        "style": {
+          "background": "#FCA17D"
+        },
+        "type": "git"
+      },
+      "go": {
+        "language": "golang",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "go",
+          "nerd": "",
+          "unicode": "go"
+        },
+        "type": "language"
+      },
+      "haskell": {
+        "argv": [
+          "ghc",
+          "--numeric-version"
+        ],
+        "detect_extensions": [
+          "hs",
+          "cabal",
+          "hs-boot"
+        ],
+        "detect_files": [
+          "stack.yaml",
+          "cabal.project"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "(\\d+(?:\\.\\d+)+)",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "haskell",
+          "nerd": "",
+          "unicode": "haskell"
+        },
+        "type": "command"
+      },
+      "java": {
+        "language": "java",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "java",
+          "nerd": "",
+          "unicode": "java"
+        },
+        "type": "language"
+      },
+      "node": {
+        "language": "nodejs",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "node",
+          "nerd": "",
+          "unicode": "⬢"
+        },
+        "type": "language"
+      },
+      "rust": {
+        "language": "rust",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "rust",
+          "nerd": "",
+          "unicode": "rust"
+        },
+        "type": "language"
+      },
+      "scala": {
+        "argv": [
+          "scalac",
+          "-version"
+        ],
+        "detect_extensions": [
+          "scala",
+          "sbt",
+          "sc"
+        ],
+        "detect_files": [
+          "build.sbt",
+          ".scalaenv",
+          ".sbtenv",
+          "build.sc"
+        ],
+        "detect_folders": [
+          ".metals"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "version (\\d+\\.\\d+\\.\\d+)",
+        "style": {
+          "background": "#86BBD8"
+        },
+        "symbol": {
+          "ascii": "scala",
+          "nerd": "",
+          "unicode": "scala"
+        },
+        "type": "command"
+      },
+      "time": {
+        "format": "♥ $time",
+        "style": {
+          "background": "#33658A"
+        },
+        "time_format": "%R",
+        "type": "time"
+      },
+      "user": {
+        "format": "$user ",
+        "padding": false,
+        "show_always": true,
+        "style": {
+          "background": "#9A348E"
+        },
+        "type": "username"
+      }
+    },
+    "schema_version": 1,
+    "symbols": "auto"
+  },
+  "skipped": [
+    "os"
+  ],
+  "unsupported": [
+    {
+      "item": "format: $elm",
+      "reason": "needs the Starship bridge; left out (commands mode)"
+    },
+    {
+      "item": "format: $gradle",
+      "reason": "needs the Starship bridge; left out (commands mode)"
+    },
+    {
+      "item": "format: $julia",
+      "reason": "needs the Starship bridge; left out (commands mode)"
+    },
+    {
+      "item": "format: $nim",
+      "reason": "needs the Starship bridge; left out (commands mode)"
+    }
+  ]
+}

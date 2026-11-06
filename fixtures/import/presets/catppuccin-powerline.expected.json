@@ -1,0 +1,515 @@
+{
+  "candidate": {
+    "add_newline": true,
+    "history": {
+      "mode": "compact"
+    },
+    "layout": {
+      "rows": [
+        {
+          "end": {
+            "ascii": "> ",
+            "nerd": " "
+          },
+          "left": [
+            "os",
+            "user",
+            "cwd",
+            "git",
+            "c",
+            "rust",
+            "go",
+            "node",
+            "php",
+            "java",
+            "kotlin",
+            "haskell",
+            "py",
+            "conda",
+            "time",
+            "duration",
+            "char"
+          ],
+          "separator": {
+            "ascii": ">",
+            "nerd": ""
+          },
+          "start": {
+            "ascii": "",
+            "nerd": "",
+            "unicode": ""
+          },
+          "style": "powerline"
+        }
+      ]
+    },
+    "modules": {
+      "c": {
+        "language": "c",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "c",
+          "nerd": "",
+          "unicode": "c"
+        },
+        "type": "language"
+      },
+      "char": {
+        "error_style": {
+          "bold": true,
+          "foreground": "red"
+        },
+        "padding": false,
+        "success_style": {
+          "bold": true,
+          "foreground": "green"
+        },
+        "symbol": {
+          "ascii": ">",
+          "unicode": "❯"
+        },
+        "type": "character"
+      },
+      "conda": {
+        "format": "$symbol$env_value ",
+        "padding": false,
+        "style": {
+          "background": "sapphire",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "conda ",
+          "nerd": "  ",
+          "unicode": "conda "
+        },
+        "type": "env_var",
+        "variable": "CONDA_DEFAULT_ENV"
+      },
+      "cwd": {
+        "style": {
+          "background": "peach",
+          "foreground": "crust"
+        },
+        "substitutions": {
+          "Developer": {
+            "nerd": "󰲋 "
+          },
+          "Documents": {
+            "nerd": "󰈙 "
+          },
+          "Downloads": {
+            "nerd": " "
+          },
+          "Music": {
+            "nerd": "󰝚 "
+          },
+          "Pictures": {
+            "nerd": " "
+          }
+        },
+        "truncation_length": 3,
+        "truncation_symbol": "…/",
+        "type": "directory"
+      },
+      "duration": {
+        "format": "($symbol )in $human_ms ",
+        "padding": false,
+        "show_when": {
+          "field": "command.duration_ms",
+          "op": "ge",
+          "value": 2000
+        },
+        "symbol": {
+          "ascii": "",
+          "nerd": "",
+          "unicode": ""
+        },
+        "type": "duration"
+      },
+      "git": {
+        "branch_symbol": {
+          "ascii": "git",
+          "nerd": "",
+          "unicode": "⎇"
+        },
+        "status_symbols": {
+          "ahead": "⇡",
+          "behind": "⇣",
+          "conflicted": "=",
+          "deleted": "✘",
+          "diverged": "⇕",
+          "modified": "!",
+          "renamed": "»",
+          "staged": "+",
+          "stashed": "$",
+          "untracked": "?"
+        },
+        "style": {
+          "background": "yellow",
+          "foreground": "crust"
+        },
+        "type": "git"
+      },
+      "go": {
+        "language": "golang",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "go",
+          "nerd": "",
+          "unicode": "go"
+        },
+        "type": "language"
+      },
+      "haskell": {
+        "argv": [
+          "ghc",
+          "--numeric-version"
+        ],
+        "detect_extensions": [
+          "hs",
+          "cabal",
+          "hs-boot"
+        ],
+        "detect_files": [
+          "stack.yaml",
+          "cabal.project"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "(\\d+(?:\\.\\d+)+)",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "haskell",
+          "nerd": "",
+          "unicode": "haskell"
+        },
+        "type": "command"
+      },
+      "java": {
+        "language": "java",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "java",
+          "nerd": "",
+          "unicode": "java"
+        },
+        "type": "language"
+      },
+      "kotlin": {
+        "argv": [
+          "kotlin",
+          "-version"
+        ],
+        "detect_extensions": [
+          "kt",
+          "kts"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "version (\\d+\\.\\d+\\.\\d+)",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "kotlin",
+          "nerd": "",
+          "unicode": "kotlin"
+        },
+        "type": "command"
+      },
+      "node": {
+        "language": "nodejs",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "node",
+          "nerd": "",
+          "unicode": "⬢"
+        },
+        "type": "language"
+      },
+      "os": {
+        "os_symbols": {
+          "android": {
+            "ascii": "",
+            "nerd": "",
+            "unicode": ""
+          },
+          "dragonfly": {
+            "ascii": "",
+            "unicode": "🐉"
+          },
+          "freebsd": {
+            "ascii": "",
+            "unicode": "😈"
+          },
+          "illumos": {
+            "ascii": "",
+            "unicode": "🐦"
+          },
+          "linux": {
+            "ascii": "",
+            "nerd": "󰌽",
+            "unicode": ""
+          },
+          "macos": {
+            "ascii": "",
+            "nerd": "󰀵",
+            "unicode": ""
+          },
+          "netbsd": {
+            "ascii": "",
+            "unicode": "🚩"
+          },
+          "openbsd": {
+            "ascii": "",
+            "unicode": "🐡"
+          },
+          "windows": {
+            "ascii": "",
+            "nerd": "",
+            "unicode": ""
+          }
+        },
+        "padding": false,
+        "style": {
+          "background": "red",
+          "foreground": "crust"
+        },
+        "type": "os"
+      },
+      "php": {
+        "argv": [
+          "php",
+          "-nr",
+          "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;"
+        ],
+        "detect_extensions": [
+          "php"
+        ],
+        "detect_files": [
+          "composer.json",
+          ".php-version"
+        ],
+        "format": "$symbol( $version)",
+        "regex": "(\\d+\\.\\d+\\.\\d+)",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "php",
+          "nerd": "",
+          "unicode": "php"
+        },
+        "type": "command"
+      },
+      "py": {
+        "format": "$symbol( $version)(\\(#$env\\))",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "py",
+          "nerd": "",
+          "unicode": "py"
+        },
+        "type": "python"
+      },
+      "rust": {
+        "language": "rust",
+        "style": {
+          "background": "green",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "rust",
+          "nerd": "",
+          "unicode": "rust"
+        },
+        "type": "language"
+      },
+      "time": {
+        "style": {
+          "background": "lavender",
+          "foreground": "crust"
+        },
+        "symbol": {
+          "ascii": "",
+          "nerd": "",
+          "unicode": ""
+        },
+        "time_format": "%R",
+        "type": "time"
+      },
+      "user": {
+        "format": " $user",
+        "padding": false,
+        "show_always": true,
+        "style": {
+          "background": "red",
+          "foreground": "crust"
+        },
+        "type": "username"
+      }
+    },
+    "palette": "catppuccin_mocha",
+    "palettes": {
+      "catppuccin_frappe": {
+        "base": "#303446",
+        "blue": "#8CAAEE",
+        "crust": "#232634",
+        "flamingo": "#EEBEBE",
+        "green": "#A6D189",
+        "lavender": "#BABBF1",
+        "mantle": "#292C3C",
+        "maroon": "#EA999C",
+        "mauve": "#CA9EE6",
+        "overlay0": "#737994",
+        "overlay1": "#838BA7",
+        "overlay2": "#949CBB",
+        "peach": "#EF9F76",
+        "pink": "#F4B8E4",
+        "red": "#E78284",
+        "rosewater": "#F2D5CF",
+        "sapphire": "#85C1DC",
+        "sky": "#99D1DB",
+        "subtext0": "#A5ADCE",
+        "subtext1": "#B5BFE2",
+        "surface0": "#414559",
+        "surface1": "#51576D",
+        "surface2": "#626880",
+        "teal": "#81C8BE",
+        "text": "#C6D0F5",
+        "yellow": "#E5C890"
+      },
+      "catppuccin_latte": {
+        "base": "#EFF1F5",
+        "blue": "#1E66F5",
+        "crust": "#DCE0E8",
+        "flamingo": "#DD7878",
+        "green": "#40A02B",
+        "lavender": "#7287FD",
+        "mantle": "#E6E9EF",
+        "maroon": "#E64553",
+        "mauve": "#8839EF",
+        "overlay0": "#9CA0B0",
+        "overlay1": "#8C8FA1",
+        "overlay2": "#7C7F93",
+        "peach": "#FE640B",
+        "pink": "#EA76CB",
+        "red": "#D20F39",
+        "rosewater": "#DC8A78",
+        "sapphire": "#209FB5",
+        "sky": "#04A5E5",
+        "subtext0": "#6C6F85",
+        "subtext1": "#5C5F77",
+        "surface0": "#CCD0DA",
+        "surface1": "#BCC0CC",
+        "surface2": "#ACB0BE",
+        "teal": "#179299",
+        "text": "#4C4F69",
+        "yellow": "#DF8E1D"
+      },
+      "catppuccin_macchiato": {
+        "base": "#24273A",
+        "blue": "#8AADF4",
+        "crust": "#181926",
+        "flamingo": "#F0C6C6",
+        "green": "#A6DA95",
+        "lavender": "#B7BDF8",
+        "mantle": "#1E2030",
+        "maroon": "#EE99A0",
+        "mauve": "#C6A0F6",
+        "overlay0": "#6E738D",
+        "overlay1": "#8087A2",
+        "overlay2": "#939AB7",
+        "peach": "#F5A97F",
+        "pink": "#F5BDE6",
+        "red": "#ED8796",
+        "rosewater": "#F4DBD6",
+        "sapphire": "#7DC4E4",
+        "sky": "#91D7E3",
+        "subtext0": "#A5ADCB",
+        "subtext1": "#B8C0E0",
+        "surface0": "#363A4F",
+        "surface1": "#494D64",
+        "surface2": "#5B6078",
+        "teal": "#8BD5CA",
+        "text": "#CAD3F5",
+        "yellow": "#EED49F"
+      },
+      "catppuccin_mocha": {
+        "base": "#1E1E2E",
+        "blue": "#89B4FA",
+        "crust": "#11111B",
+        "flamingo": "#F2CDCD",
+        "green": "#A6E3A1",
+        "lavender": "#B4BEFE",
+        "mantle": "#181825",
+        "maroon": "#EBA0AC",
+        "mauve": "#CBA6F7",
+        "overlay0": "#6C7086",
+        "overlay1": "#7F849C",
+        "overlay2": "#9399B2",
+        "peach": "#FAB387",
+        "pink": "#F5C2E7",
+        "red": "#F38BA8",
+        "rosewater": "#F5E0DC",
+        "sapphire": "#74C7EC",
+        "sky": "#89DCEB",
+        "subtext0": "#A6ADC8",
+        "subtext1": "#BAC2DE",
+        "surface0": "#313244",
+        "surface1": "#45475A",
+        "surface2": "#585B70",
+        "teal": "#94E2D5",
+        "text": "#CDD6F4",
+        "yellow": "#F9E2AF"
+      }
+    },
+    "schema_version": 1,
+    "symbols": "auto"
+  },
+  "skipped": [],
+  "unsupported": [
+    {
+      "item": "os.symbols",
+      "reason": "distribution symbols are not used (no distribution detection); Linux uses `Linux`"
+    },
+    {
+      "item": "cmd_duration.show_notifications",
+      "reason": "desktop notifications are not supported"
+    },
+    {
+      "item": "character.vimcmd_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    },
+    {
+      "item": "character.vimcmd_visual_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    },
+    {
+      "item": "character.vimcmd_replace_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    },
+    {
+      "item": "character.vimcmd_replace_one_symbol",
+      "reason": "needs the Zsh keymap, which the shell does not send yet; ignored"
+    }
+  ]
+}

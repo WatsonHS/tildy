@@ -1,0 +1,64 @@
+{
+  "columns": [
+    0,
+    19
+  ],
+  "prompt": {
+    "history": {
+      "context_key": "5b222f55736572732f752f636f64652f74696c6479222c226d61696e222c22225d",
+      "context_suffix": null,
+      "context_transient": "── tildy · main ──\n%B%F{#eb6f92}>%f%b ",
+      "summary": true,
+      "summary_threshold_ms": 3000
+    },
+    "left": [
+      "",
+      "%B%F{#c4a7e7}.../tildy%f%b %F{#6e6a86}main %F{#9ccfd8}^%F{#6e6a86}%f %B%F{#eb6f92}>%f%b "
+    ],
+    "right": null,
+    "status": "fresh",
+    "transient": "\n%B%F{#eb6f92}>%f%b "
+  },
+  "reports": [
+    {
+      "columns": 9,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "cwd",
+      "module_type": "directory",
+      "rules_hit": [],
+      "text": ".../tildy",
+      "visible": true
+    },
+    {
+      "columns": 6,
+      "freshness": "fresh",
+      "hidden_reason": null,
+      "id": "git",
+      "module_type": "git",
+      "rules_hit": [],
+      "text": "main ^",
+      "visible": true
+    },
+    {
+      "columns": 0,
+      "freshness": null,
+      "hidden_reason": "no_changes",
+      "id": "changes",
+      "module_type": "changes",
+      "rules_hit": [],
+      "text": "",
+      "visible": false
+    },
+    {
+      "columns": 1,
+      "freshness": null,
+      "hidden_reason": null,
+      "id": "char",
+      "module_type": "character",
+      "rules_hit": [],
+      "text": ">",
+      "visible": true
+    }
+  ]
+}

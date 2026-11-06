@@ -1,0 +1,11 @@
+{
+  "frame": "REQ",
+  "gen": 8,
+  "session_id": "s-7f3a",
+  "cwd": "/Users/example/tmp\tdir\\x",
+  "cols": 80,
+  "lines": 1,
+  "last_exit": 130,
+  "last_duration_ms": 0,
+  "env": "ssh-client 22 22\u001fpts/3\u001fexample\u001fmbp\u001ftildy-env"
+}

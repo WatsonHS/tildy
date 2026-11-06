@@ -1,0 +1,688 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tildy://schema/snapshot/v1",
+  "title": "Tildy stable session snapshot v1 (M3 additive fields)",
+  "description": "文档用途：描述 worker 写入的快照文件（src/diagnostics/mod.rs 的 Snapshot）。路径为 $XDG_STATE_HOME/tildy/sessions/<id>.json（未设置时 ~/.local/state/tildy/sessions/），--snapshot 可覆盖；目录 0700、文件 0600，因为内容含路径。这是 JSON 文件，不是制表符帧。worker 每次发送 RES 后原子覆盖写入（临时文件加 rename）；读取方（tildy inspect、诊断）只读。所有字段都会输出，可空字段为 null，不省略。kind 与 schema_version 为常量。epoch 低于 2^53，保证 JSON 读取方精确还原。freshness 取值为 pending、fresh、stale、timeout、error。age_ms 为结果距今的毫秒数，尚无值时为 null。degraded 是降级原因的字符串数组，空数组表示正常（不是布尔值）。时间戳均为 Unix 毫秒。",
+  "type": "object",
+  "required": [
+    "kind",
+    "schema_version",
+    "written_at_ms",
+    "worker",
+    "session_id",
+    "config_revision",
+    "request",
+    "request_received_at_ms",
+    "last_result",
+    "slots",
+    "providers",
+    "counters",
+    "degraded"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "tildy.session_snapshot",
+      "description": "文件类型标识，常量。"
+    },
+    "schema_version": {
+      "const": 1,
+      "description": "快照格式版本（SNAPSHOT_SCHEMA_VERSION），M1 为 1。"
+    },
+    "written_at_ms": {
+      "$ref": "#/$defs/unixMs",
+      "description": "本快照的写入时间。"
+    },
+    "worker": {
+      "$ref": "#/$defs/worker"
+    },
+    "session_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "会话标识，来自 REQ 的 session_id。第一个 REQ 之前为 null（实际上快照只在 RES 之后写，因此通常非空）。"
+    },
+    "config_revision": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "生效配置的修订标识（renderer.revision()）；内置配置为 \"builtin\"。"
+    },
+    "request": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/request"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "最近收到的 REQ（只有它会被服务）；没有请求时为 null。"
+    },
+    "request_received_at_ms": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/unixMs"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "收到该 REQ 的时间。"
+    },
+    "last_result": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/lastResult"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "最近一次发送的 RES 摘要；没有时为 null。"
+    },
+    "slots": {
+      "type": "array",
+      "description": "各 provider 槽位的当前状态。",
+      "items": {
+        "$ref": "#/$defs/slot"
+      }
+    },
+    "providers": {
+      "type": "array",
+      "description": "各 provider 的耗时与调度统计。",
+      "items": {
+        "$ref": "#/$defs/providerTiming"
+      }
+    },
+    "counters": {
+      "$ref": "#/$defs/counters"
+    },
+    "degraded": {
+      "type": "array",
+      "description": "worker 以降级模式运行的原因（如 config_invalid）。空数组表示未降级。取值集合未在代码中枚举。",
+      "items": {
+        "type": "string"
+      }
+    },
+    "watch": {
+      "$ref": "#/$defs/watch"
+    },
+    "module_reports": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/moduleReport"
+      }
+    },
+    "timing_history": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/timingCycle"
+      }
+    }
+  },
+  "$defs": {
+    "unixMs": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix 毫秒时间戳（u64）。"
+    },
+    "worker": {
+      "type": "object",
+      "description": "worker 进程信息（WorkerInfo）。",
+      "required": [
+        "binary_version",
+        "protocol_version",
+        "epoch",
+        "pid",
+        "parent_pid",
+        "started_at_ms"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "binary_version": {
+          "type": "string",
+          "description": "tildy 二进制版本字符串。"
+        },
+        "protocol_version": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "协议版本，M1 为 1。"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "description": "worker 随机代际号，低于 2^53。与 HELLO 与 RES 中的 worker_epoch 相同。"
+        },
+        "pid": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295,
+          "description": "worker 进程 pid（u32）。"
+        },
+        "parent_pid": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "父 shell 的 pid；未指定 --parent-pid 时为 null。父进程消失后 worker 退出，快照可能残留，读取方应结合 pid 判断是否存活。"
+        },
+        "started_at_ms": {
+          "$ref": "#/$defs/unixMs",
+          "description": "worker 启动时间。"
+        }
+      }
+    },
+    "request": {
+      "type": "object",
+      "description": "最近一次 REQ（PromptRequest）。cwd 与 env 为解码后的值。",
+      "required": [
+        "gen",
+        "session_id",
+        "cwd",
+        "cols",
+        "lines",
+        "last_exit",
+        "last_duration_ms",
+        "env"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "gen": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615,
+          "description": "代次（u64）。"
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "会话标识。"
+        },
+        "cwd": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^\\u0000]*$",
+          "description": "当前目录的解码路径（不含 NUL）。"
+        },
+        "cols": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "终端列数（u16）。"
+        },
+        "lines": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "基础提示符行数（u16）。"
+        },
+        "last_exit": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647,
+          "description": "上一条命令的退出码（i32）。"
+        },
+        "last_duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615,
+          "description": "上一条命令耗时（u64，毫秒）。"
+        },
+        "env": {
+          "type": "string",
+          "pattern": "^[^\\u0000]*$",
+          "description": "环境修订字符串，不透明，由 shell 从固定环境变量列表计算。"
+        },
+        "jobs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Background job count (${#jobstates}); optional 10th REQ field, 0 when absent."
+        }
+      }
+    },
+    "lastResult": {
+      "type": "object",
+      "description": "最近发送的 RES（ResultInfo）。",
+      "required": [
+        "gen",
+        "status",
+        "sent_at_ms",
+        "latency_ms",
+        "left_lines",
+        "bytes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "gen": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615,
+          "description": "该 RES 的代次。"
+        },
+        "status": {
+          "enum": [
+            "fresh",
+            "partial"
+          ],
+          "description": "RES 的 status（RenderStatus）。"
+        },
+        "sent_at_ms": {
+          "$ref": "#/$defs/unixMs",
+          "description": "发送时间。"
+        },
+        "latency_ms": {
+          "type": "number",
+          "minimum": 0,
+          "description": "从收到 REQ 到 flush 该 RES 的耗时（毫秒，保留三位小数）。"
+        },
+        "left_lines": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "左侧行数（L 行数）。"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "该 RES 的字节数。"
+        }
+      }
+    },
+    "freshness": {
+      "enum": [
+        "pending",
+        "fresh",
+        "stale",
+        "timeout",
+        "error"
+      ],
+      "description": "槽位新鲜度（Freshness）。"
+    },
+    "slot": {
+      "type": "object",
+      "description": "一个 provider 槽位（SlotInfo）。",
+      "required": [
+        "provider",
+        "freshness",
+        "age_ms",
+        "error",
+        "fetching",
+        "scope"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "provider 名，如 git、session/hostname。"
+        },
+        "freshness": {
+          "$ref": "#/$defs/freshness"
+        },
+        "age_ms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "结果距今毫秒数；尚无值时为 null。"
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "错误摘要；无错误时为 null。"
+        },
+        "fetching": {
+          "type": "boolean",
+          "description": "写快照时是否正在抓取。"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "description": "作用域：global，或 worktree:<git 目录>@<工作树根>。"
+        }
+      }
+    },
+    "providerTiming": {
+      "type": "object",
+      "description": "provider 耗时与调度统计（ProviderTiming）。耗时字段保留三位小数。",
+      "required": [
+        "key",
+        "runs",
+        "errors",
+        "last_ms",
+        "p50_ms",
+        "max_ms",
+        "stats"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "provider 键，如 git、session/ssh。"
+        },
+        "runs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "执行次数。"
+        },
+        "errors": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "错误次数。"
+        },
+        "last_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "最近一次耗时（毫秒）。"
+        },
+        "p50_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "近期窗口的中位耗时（毫秒）。"
+        },
+        "max_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "近期窗口的最大耗时（毫秒）。"
+        },
+        "stats": {
+          "$ref": "#/$defs/providerStats"
+        }
+      }
+    },
+    "providerStats": {
+      "type": "object",
+      "description": "调度器统计（ProviderStats），均为计数。",
+      "required": [
+        "started",
+        "completed",
+        "cache_hits",
+        "coalesced",
+        "timeouts",
+        "failed",
+        "late",
+        "dropped_queued",
+        "abandoned_running"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "started": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cache_hits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coalesced": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "同 key 合并到已在途抓取的次数。"
+        },
+        "timeouts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "late": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "超时后才返回的结果次数。"
+        },
+        "dropped_queued": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "排队中被丢弃的次数。"
+        },
+        "abandoned_running": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "运行中被放弃的次数。"
+        }
+      }
+    },
+    "counters": {
+      "type": "object",
+      "description": "worker 计数器（Counters）。",
+      "required": [
+        "requests",
+        "dropped_requests",
+        "protocol_errors",
+        "partial_sent",
+        "fresh_sent"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "requests": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "收到的 REQ 数。"
+        },
+        "dropped_requests": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "因已有更新的 REQ 排队而跳过的 REQ 数。"
+        },
+        "protocol_errors": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "协议错误数。"
+        },
+        "partial_sent": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "已发送的 partial RES 数。"
+        },
+        "fresh_sent": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "已发送的 fresh RES 数。"
+        }
+      }
+    },
+    "watch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "last_event_ms",
+        "coalesced_events",
+        "fallback_count"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string"
+        },
+        "last_event_ms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "coalesced_events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fallback_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "providerCycleTiming": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "duration_ms",
+        "cache_hit",
+        "executed",
+        "timed_out",
+        "coalesced"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cache_hit": {
+          "type": "boolean"
+        },
+        "executed": {
+          "type": "boolean"
+        },
+        "timed_out": {
+          "type": "boolean"
+        },
+        "coalesced": {
+          "type": "boolean"
+        },
+        "coalesced_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "A fetch result arrived for this cycle, including shared work started earlier."
+        }
+      }
+    },
+    "timingCycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gen",
+        "at_ms",
+        "providers"
+      ],
+      "properties": {
+        "gen": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "at_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/providerCycleTiming"
+          }
+        }
+      }
+    },
+    "moduleReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "module_type",
+        "visible",
+        "hidden_reason",
+        "text",
+        "columns",
+        "rules_hit",
+        "freshness"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "module_type": {
+          "type": "string"
+        },
+        "visible": {
+          "type": "boolean"
+        },
+        "hidden_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rules_hit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "freshness": {
+          "enum": [
+            "pending",
+            "fresh",
+            "stale",
+            "timeout",
+            "error",
+            null
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "age_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "style": {
+          "type": "string"
+        },
+        "row": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "side": {
+          "enum": [
+            "left",
+            "right"
+          ]
+        },
+        "additional_columns": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

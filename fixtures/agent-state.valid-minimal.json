@@ -1,0 +1,5 @@
+{
+  "protocol_version": 1,
+  "state": "working",
+  "scope": { "kind": "global", "id": "*" }
+}
